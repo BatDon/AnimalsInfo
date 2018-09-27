@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/animalBox">
+
+        <ImageButton
+            android:id="@+id/dogButton"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/dog" />
+
+        <ImageButton
+            android:id="@+id/catButton"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/cat" />
+
+        <ImageButton
+            android:id="@+id/frogButton"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/frog" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:autoLink="web"
+        android:gravity="bottom"
+        android:text="https://mydavidjerome.com/android-app/"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/somethingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="something"/>
+
+
+</LinearLayout>
