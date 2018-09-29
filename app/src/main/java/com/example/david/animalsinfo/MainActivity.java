@@ -12,6 +12,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     private int MAIN_THREAD_TASK_1 = 1;
@@ -101,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     // This child thread class has it's own Looper and Handler object.
     private class MyWorkerThread extends Thread{
-        Log.i("MyWorkerThread","MyWorkerThread created")
+        //Log.i("MyWorkerThread","MyWorkerThread created")
         // This is worker thread handler.
         public Handler workerThreadHandler;
 
@@ -110,6 +117,23 @@ public class MainActivity extends AppCompatActivity {
             // Prepare MyWorkerThread which is a child of Thread Looper object.
             //Prepares thread to add tasks in a loop
             Looper.prepare();
+
+            final StringBuilder builder = new StringBuilder();
+
+            try {
+                Document doc = Jsoup.connect("https://mydavidjerome.com/android-app/").get();
+                String title = doc.title();
+                Elements links = doc.select("a[href]");
+
+                builder.append(title).append("\n");
+
+                for (Element link : links) {
+                    builder.append("\n").append("Link : ").append(link.attr("href"))
+                            .append("\n").append("Text : ").append(link.text());
+                }
+            } catch (IOException e) {
+                builder.append("Error : ").append(e.getMessage()).append("\n");
+            }
 
             // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
             workerThreadHandler = new Handler(Looper.myLooper()){
