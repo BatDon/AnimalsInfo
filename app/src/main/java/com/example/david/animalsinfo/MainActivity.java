@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 String title = doc.title();
                 //gets links on html webpage
                 text = doc.body().text();
+                Log.i("JSoup", "Connected successfully!");
 
 
                 builder.append(title).append("\n").append(text);
