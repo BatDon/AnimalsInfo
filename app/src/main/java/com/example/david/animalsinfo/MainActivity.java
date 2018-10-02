@@ -128,7 +128,10 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect("https://mydavidjerome.com/android-app/").get();
                 String title = doc.title();
                 //gets links on html webpage
-                text = doc.body().text();
+                //returns list to app
+                text = doc.getElementsByTag("ol").text();
+                //for (String text : text)
+                //text = doc.body().text();
                 Log.i("JSoup", "Connected successfully!");
 
 
