@@ -16,6 +16,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView taskStatusTextView;
 
+    public String text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 if(msg.what == MAIN_THREAD_TASK_1)
                 {
                     // If task one button is clicked.
-                    taskStatusTextView.setText("Task one execute.");
+                    taskStatusTextView.setText(text);
                 }else if(msg.what == MAIN_THREAD_TASK_2)
                 {
                     // If task two button is clicked.
@@ -121,19 +124,29 @@ public class MainActivity extends AppCompatActivity {
             final StringBuilder builder = new StringBuilder();
 
             try {
+                //first connect to website then .get() downloads content
                 Document doc = Jsoup.connect("https://mydavidjerome.com/android-app/").get();
                 String title = doc.title();
-                Elements links = doc.select("a[href]");
+                //gets links on html webpage
+                text = doc.body().text();
 
-                builder.append(title).append("\n");
 
-                for (Element link : links) {
+                builder.append(title).append("\n").append(text);
+
+
+                //This builds the webpage by going through each link
+                //For loop may be unnecessary
+                /*for (String Element : text) {
                     builder.append("\n").append("Link : ").append(link.attr("href"))
                             .append("\n").append("Text : ").append(link.text());
-                }
+                }*/
             } catch (IOException e) {
                 builder.append("Error : ").append(e.getMessage()).append("\n");
+                Log.i("HTML ERROR","exception reading HTML");
             }
+
+            //STILL NEED TO UPDATE UI
+            //somethingText.setText(text);
 
             // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
             workerThreadHandler = new Handler(Looper.myLooper()){

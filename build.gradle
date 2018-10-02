@@ -7,12 +7,20 @@ buildscript {
     repositories {
         google()
         jcenter()
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.0'
+        // https://mvnrepository.com/artifact/org.jsoup/jsoup
+
+        //compile fileTree(include:['*.jar'],dir:'libs')
+        //implementation project(':jsoup-1.11.3')
         //<!-- jsoup HTML parser library @ https://jsoup.org/ -->
         //compile group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
-//        implementation 'org.jsoup:jsoup:1.11.3'
+        //compile 'org.jsoup:jsoup:1.11.3'
+        //implementation name: 'jsoup-1.11.3.jar'
+
+
 
 
         
