@@ -15,12 +15,15 @@ import android.widget.TextView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.Reader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView taskStatusTextView;
 
-    public String text;
+    public String dogTextHtml;
+    public String dogText;
+
+    public Reader reader;
 
 
     @Override
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 if(msg.what == MAIN_THREAD_TASK_1)
                 {
                     // If task one button is clicked.
-                    taskStatusTextView.setText(text);
+                    taskStatusTextView.setText(dogText);
                 }else if(msg.what == MAIN_THREAD_TASK_2)
                 {
                     // If task two button is clicked.
@@ -133,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
                 //String body2=body.toString();
                 //text=body2;
                 //.first().getElementsbyTag();
-                Document doc = Jsoup.connect("https://mydavidjerome.com/android-app/").get();
+                String url="https://mydavidjerome.com/android-app/";
+                Document doc = Jsoup.connect(url).get();
                 String title = doc.title();
                 //gets links on html webpage
                 //returns list to app
@@ -158,12 +165,48 @@ public class MainActivity extends AppCompatActivity {
                 //String w2 = dogsParagraph.body().text();
                 //text=w2;                                       //.get(1)
                 //ALTERED HERE
-                String dogsTitle="";
-                String dogsPar="";
+
+                /*public static String extractText(Reader reader) throws IOException {
+                    StringBuilder sb = new StringBuilder();
+                    BufferedReader br = new BufferedReader(reader);
+                    String line;
+                    while ((line=br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    String textOnly = Jsoup.parse(sb.toString()).text();
+                    return textOnly;*/
+                //CREATE NEW DOCUMENT WITH ***SELECTED HTML AS PARAMETER
+                    //STRIP NEW DOCUMENT OF HTML TAGS MAINTAINING FORMAT
+                //dogTextHtml=
+
+                    Element titleElement;
+                    Element parElement;
+                    String combinedString;
+
+
+                String dogTitle;
+                String dogsPar=null;
                 Element e2=doc.select("p:contains(Dogs)").get(0);
-                dogsTitle=e2.toString();
-                dogsPar=e2.nextElementSibling().toString();
-                text=dogsTitle+dogsPar;
+                //Still hast HTML tags
+                dogTitle=e2.toString();
+                String parString=e2.nextElementSibling().toString();
+                String dogTextHtml=dogTitle+parString;
+
+                Document doc2 = Jsoup.parse(dogTextHtml);
+
+                //Whitelist removeTags("p","ol","li");
+                //dogText=dogsTitle+parString;
+
+
+
+
+                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+                doc2.select("p").append("\\n");
+                doc2.select("li").prepend("\\n\\n");
+                String s = doc2.html().replaceAll("\\\\n", "\n");
+                dogText=Jsoup.clean(s,"", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+
+                //combinedString=e2+parElement;
 
                 Log.i("in Element","paragraph of dogs");
 
