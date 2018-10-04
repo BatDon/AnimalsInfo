@@ -19,6 +19,8 @@ import org.jsoup.select.Elements;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -125,17 +127,83 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 //first connect to website then .get() downloads content
+                //Document parse("<html><div><p>Dogs</p>","https://mydavidjerome.com/android-app/");
+                //Document doc = Jsoup.parse(html);
+                //Element body=doc.body();
+                //String body2=body.toString();
+                //text=body2;
+                //.first().getElementsbyTag();
                 Document doc = Jsoup.connect("https://mydavidjerome.com/android-app/").get();
                 String title = doc.title();
                 //gets links on html webpage
                 //returns list to app
-                text = doc.getElementsByTag("ol").text();
+                //String paragraphs=doc.getElementsByTag("p").toString();
+                //String paragraph="";
+               /* while(true){
+                    paragraphs.hasNext();
+                }*/
+
+               //String paragraphs=doc.getElementsByTag("p").toString();
+                //document.select("div#newscontent").select("div.l").select("span.s2").select("a");
+               /* Elements wholePar=doc.select("div.entry-content").select("p Dogs").select("ol li");
+                StringBuilder part0=new StringBuilder();
+                for(Element part: wholePar)
+                {
+                    Log.i("wholeParE",""+(part.toString()));
+                    part0.append(part.toString());
+
+                }*/
+                //text=part0;
+                //Element dogsParagraph=doc.select("p:contains(Dogs)").get(1);
+                //String w2 = dogsParagraph.body().text();
+                //text=w2;                                       //.get(1)
+                //ALTERED HERE
+                String dogsTitle="";
+                String dogsPar="";
+                Element e2=doc.select("p:contains(Dogs)").get(0);
+                dogsTitle=e2.toString();
+                dogsPar=e2.nextElementSibling().toString();
+                text=dogsTitle+dogsPar;
+
+                Log.i("in Element","paragraph of dogs");
+
+                //text=word;
+                //Log.i("word","Found Dogs Par");
+                //String[] splitted = paragraphs.split("\\s+");
+
+                /*for( int i = 0; i <= splitted.length - 1; i++)
+                {
+                    String paragraphTitle=splitted[i];
+                    if(paragraphTitle.contains("<p>Dogs</p>"))
+                    {
+                        text="found paragraph "+paragraphTitle;
+                        Log.i("String","Found paragraph");
+                        break;
+                    }
+                    else Log.i("no Par","No paragraph found");
+                        Log.i("Array",""+paragraphTitle);
+
+
+
+                }*/
+                //doc.body().children().select("*");
+                    /*for(String paragraphs=doc.getElementsByTag("p").toString();paraphraph=="Dogs";paragraphs.Next())
+
+
+                    Log.i("par","paragraphs");*/
+
+
+
+                /*Iterator iter=doc.getElementsByTag("p").iterator();
+                    for(Iterator<Element> iter = iter.iterator(); iter.hasNext(); )
+                    text = doc.getElementsByTag("p").text();
+                for text=text.hasNext();*/
                 //for (String text : text)
                 //text = doc.body().text();
                 Log.i("JSoup", "Connected successfully!");
 
 
-                builder.append(title).append("\n").append(text);
+                //builder.append(title).append("\n").append(text);
 
 
                 //This builds the webpage by going through each link

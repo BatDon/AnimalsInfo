@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AnimalsInfo</string>
+    <string name="boolt">True</string>
 </resources>
