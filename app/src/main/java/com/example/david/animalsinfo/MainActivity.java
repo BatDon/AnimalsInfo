@@ -1,5 +1,6 @@
 package com.example.david.animalsinfo;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -52,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
     public String frogTextHtml;
     public String frogText;
 
-    public Reader reader;
+    public static final String EXTRA_MESSAGE = "com.example.david.animalsinfo.MESSAGE";
+
+
+
 
 
     @Override
@@ -72,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MAIN_THREAD", "Receive message from child thread.");
                 taskStatusTextView = findViewById(R.id.somethingText);
                 if (msg.what == MAIN_THREAD_TASK_1) {
-                    taskStatusTextView.setText(dogText);}
+                    taskStatusTextView.setText(dogText);
+                    sendActivity(dogText);}
                     else if (msg.what == MAIN_THREAD_TASK_2) {
                         // If task two button is clicked.
                         taskStatusTextView.setText(catText);}
@@ -81,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
                         taskStatusTextView.setText(frogText);
                     }
                 }
-            }
+            };
 
-            ;
+
 
             // Get run task buttons.
             runTaskOneButton =findViewById(R.id.dogButton);
@@ -144,6 +150,22 @@ public class MainActivity extends AppCompatActivity {
             }
             });*/
         }
+
+        public void sendActivity(String dogText)
+        {
+            Intent intent = new Intent(this, DogsActivity.class);
+            //Text editText =findViewById(R.id.somethingText);
+            //String message = editText.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, dogText);
+            startActivity(intent);
+        }
+
+
+
+
+
+
+
 
         // This child thread class has it's own Looper and Handler object.
         private class MyWorkerThread extends Thread {
