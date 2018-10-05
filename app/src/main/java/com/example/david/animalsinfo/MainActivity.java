@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageButton runTaskTwoButton;
 
-    private TextView taskStatusTextView;
+    public TextView taskStatusTextView;
 
     public String dogTextHtml;
     public String dogText;
@@ -52,239 +52,224 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // Create and start the worker thread.
         workerThread = new MyWorkerThread();
         workerThread.start();
 
         // Handle message from main thread message queue.
-        mainThreadHandler = new Handler(Looper.getMainLooper()){
+        mainThreadHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
                 Log.i("MAIN_THREAD", "Receive message from child thread.");
-                if(msg.what == MAIN_THREAD_TASK_1)
-                {
-                    // If task one button is clicked.
-                    taskStatusTextView.setText(dogText);
-                }else if(msg.what == MAIN_THREAD_TASK_2)
-                {
-                    // If task two button is clicked.
-                    taskStatusTextView.setText("Task two execute.");
-                }else if(msg.what == CHILD_THREAD_QUIT_LOOPER)
-                {
-                    // If quit child thread looper button is clicked.
-                    taskStatusTextView.setText("Quit child thread looper.");
+                taskStatusTextView = findViewById(R.id.somethingText);
+                if (msg.what == MAIN_THREAD_TASK_1) {
+                    taskStatusTextView.setText(dogText);}
+                    else if (msg.what == MAIN_THREAD_TASK_2) {
+                        // If task two button is clicked.
+                        taskStatusTextView.setText("Task two execute.");}
+                        else if (msg.what == CHILD_THREAD_QUIT_LOOPER) {
+                        // If quit child thread looper button is clicked.
+                        taskStatusTextView.setText("Quit child thread looper.");
+                    }
                 }
             }
-        };
 
-        // Get run task buttons.
-        runTaskOneButton = findViewById(R.id.dogButton);
-        runTaskTwoButton = findViewById(R.id.catButton);
+            ;
 
-        // Set on click listener to each button.
-        runTaskOneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            // Get run task buttons.
+            runTaskOneButton =findViewById(R.id.dogButton);
+
+            runTaskTwoButton =findViewById(R.id.catButton);
+
+            // Set on click listener to each button.
+        runTaskOneButton.setOnClickListener(new View.OnClickListener()
+
+            {
+                @Override
+                public void onClick (View view){
                 // When click this button, create a message object.
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_1;
                 // Use worker thread message Handler to put message into worker thread message queue.
                 workerThread.workerThreadHandler.sendMessage(msg);
             }
-        });
+            });
 
-        // Please see comments for runTaskOneButton.
-        runTaskTwoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            // Please see comments for runTaskOneButton.
+        runTaskTwoButton.setOnClickListener(new View.OnClickListener()
+
+            {
+                @Override
+                public void onClick (View view){
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_2;
                 workerThread.workerThreadHandler.sendMessage(msg);
             }
-        });
+            });
 
-        // Get status info TextView object.
-        taskStatusTextView = findViewById(R.id.somethingText);
 
-        // Get the quit child thread looper button.
-        ImageButton quitChildThreadLooperButton = findViewById(R.id.frogButton);
-        quitChildThreadLooperButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            // Get status info TextView object.
+            taskStatusTextView =findViewById(R.id.somethingText);
+
+            // Get the quit child thread looper button.
+            ImageButton quitChildThreadLooperButton = findViewById(R.id.frogButton);
+        quitChildThreadLooperButton.setOnClickListener(new View.OnClickListener()
+
+            {
+                @Override
+                public void onClick (View view){
                 // Click this button will quit child thread looper.
                 workerThread.workerThreadHandler.getLooper().quit();
             }
-        });
-    }
+            });
+        }
 
-    // This child thread class has it's own Looper and Handler object.
-    private class MyWorkerThread extends Thread{
-        //Log.i("MyWorkerThread","MyWorkerThread created")
-        // This is worker thread handler.
-        public Handler workerThreadHandler;
+        // This child thread class has it's own Looper and Handler object.
+        private class MyWorkerThread extends Thread {
+            //Log.i("MyWorkerThread","MyWorkerThread created")
+            // This is worker thread handler.
+            public Handler workerThreadHandler;
 
-        @Override
-        public void run() {
-            // Prepare MyWorkerThread which is a child of Thread Looper object.
-            //Prepares thread to add tasks in a loop
-            Looper.prepare();
+            @Override
+            public void run() {
+                // Prepare MyWorkerThread which is a child of Thread Looper object.
+                //Prepares thread to add tasks in a loop
+                Looper.prepare();
+                FormatDocument formattedDoc=new FormatDocument();
+                dogText=formattedDoc.returnString();
 
-            final StringBuilder builder = new StringBuilder();
+                //final StringBuilder builder = new StringBuilder();
+                //String dogText = formatted.returnString();
 
-            try {
-                //first connect to website then .get() downloads content
-                //Document parse("<html><div><p>Dogs</p>","https://mydavidjerome.com/android-app/");
-                //Document doc = Jsoup.parse(html);
-                //Element body=doc.body();
-                //String body2=body.toString();
-                //text=body2;
-                //.first().getElementsbyTag();
-                String url="https://mydavidjerome.com/android-app/";
-                Document doc = Jsoup.connect(url).get();
-                String title = doc.title();
-                //gets links on html webpage
-                //returns list to app
-                //String paragraphs=doc.getElementsByTag("p").toString();
-                //String paragraph="";
-               /* while(true){
-                    paragraphs.hasNext();
-                }*/
+                //FormatDocument formattedString=new FormatDocument();
 
-               //String paragraphs=doc.getElementsByTag("p").toString();
-                //document.select("div#newscontent").select("div.l").select("span.s2").select("a");
-               /* Elements wholePar=doc.select("div.entry-content").select("p Dogs").select("ol li");
-                StringBuilder part0=new StringBuilder();
-                for(Element part: wholePar)
-                {
-                    Log.i("wholeParE",""+(part.toString()));
-                    part0.append(part.toString());
+            /*public class FormatDocument {
+                public static String returnString() {
 
-                }*/
-                //text=part0;
-                //Element dogsParagraph=doc.select("p:contains(Dogs)").get(1);
-                //String w2 = dogsParagraph.body().text();
-                //text=w2;                                       //.get(1)
-                //ALTERED HERE
 
-                /*public static String extractText(Reader reader) throws IOException {
-                    StringBuilder sb = new StringBuilder();
-                    BufferedReader br = new BufferedReader(reader);
-                    String line;
-                    while ((line=br.readLine()) != null) {
-                        sb.append(line);
+                    try {
+                        String url = "https://mydavidjerome.com/android-app/";
+                        Document doc = Jsoup.connect(url).get();
+                        String title = doc.title();
+
+
+                        Element titleElement;
+                        Element parElement;
+                        String combinedString;
+
+
+                        String dogTitle;
+                        String dogsPar = null;
+                        Element e2 = doc.select("p:contains(Dogs)").get(0);
+                        //Still hast HTML tags
+                        dogTitle = e2.toString();
+                        String parString = e2.nextElementSibling().toString();
+                        String dogTextHtml = dogTitle + parString;
+
+                        Document doc2 = Jsoup.parse(dogTextHtml);
+
+
+                        doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+                        doc2.select("p").append("\\n");
+                        doc2.select("li").prepend("\\n\\n");
+                        String s = doc2.html().replaceAll("\\\\n", "\n");
+                        dogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+
+                        //combinedString=e2+parElement;
+
+                        Log.i("in Element", "paragraph of dogs");
+
+
+                        Log.i("JSoup", "Connected successfully!");
+
+
+                    } catch (IOException e) {
+                        builder.append("Error : ").append(e.getMessage()).append("\n");
+                        Log.i("HTML ERROR", "exception reading HTML");
                     }
-                    String textOnly = Jsoup.parse(sb.toString()).text();
-                    return textOnly;*/
-                //CREATE NEW DOCUMENT WITH ***SELECTED HTML AS PARAMETER
-                    //STRIP NEW DOCUMENT OF HTML TAGS MAINTAINING FORMAT
-                //dogTextHtml=
+                }
+            }*/
+
+                //STILL NEED TO UPDATE UI
+                //somethingText.setText(text);
+
+                // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
+                workerThreadHandler = new Handler(Looper.myLooper()) {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        // When child thread handler get message from child thread message queue.
+                        Log.i("CHILD_THREAD", "Receive message from main thread.");
+                        Message message = new Message();
+                        message.what = msg.what;
+                        Log.i("AFtermsg.what", "msg.what;");
+
+                        // Send the message back to main thread message queue use main thread message Handler.
+                        mainThreadHandler.sendMessage(message);
+                    }
+                };
+                // Loop the child thread message queue.
+                Looper.loop();
+
+                // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
+                Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
+                // Send a message to main thread.
+                Message msg = new Message();
+                msg.what = CHILD_THREAD_QUIT_LOOPER;
+                mainThreadHandler.sendMessage(msg);
+            }
+        }
+
+
+
+
+        public class FormatDocument {
+            public String returnString() {
+
+
+                try {
+                    String url = "https://mydavidjerome.com/android-app/";
+                    Document doc = Jsoup.connect(url).get();
+                    String title = doc.title();
+
 
                     Element titleElement;
                     Element parElement;
                     String combinedString;
 
 
-                String dogTitle;
-                String dogsPar=null;
-                Element e2=doc.select("p:contains(Dogs)").get(0);
-                //Still hast HTML tags
-                dogTitle=e2.toString();
-                String parString=e2.nextElementSibling().toString();
-                String dogTextHtml=dogTitle+parString;
+                    String dogTitle;
+                    String dogsPar = null;
+                    Element e2 = doc.select("p:contains(Dogs)").get(0);
+                    //Still hast HTML tags
+                    dogTitle = e2.toString();
+                    String parString = e2.nextElementSibling().toString();
+                    String dogTextHtml = dogTitle + parString;
 
-                Document doc2 = Jsoup.parse(dogTextHtml);
-
-                //Whitelist removeTags("p","ol","li");
-                //dogText=dogsTitle+parString;
+                    Document doc2 = Jsoup.parse(dogTextHtml);
 
 
+                    doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+                    doc2.select("p").append("\\n");
+                    doc2.select("li").prepend("\\n\\n");
+                    String s = doc2.html().replaceAll("\\\\n", "\n");
+                    dogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+
+                    //combinedString=e2+parElement;
+
+                    Log.i("in Element", "paragraph of dogs");
 
 
-                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
-                doc2.select("p").append("\\n");
-                doc2.select("li").prepend("\\n\\n");
-                String s = doc2.html().replaceAll("\\\\n", "\n");
-                dogText=Jsoup.clean(s,"", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+                    Log.i("JSoup", "Connected successfully!");
 
-                //combinedString=e2+parElement;
-
-                Log.i("in Element","paragraph of dogs");
-
-                //text=word;
-                //Log.i("word","Found Dogs Par");
-                //String[] splitted = paragraphs.split("\\s+");
-
-                /*for( int i = 0; i <= splitted.length - 1; i++)
-                {
-                    String paragraphTitle=splitted[i];
-                    if(paragraphTitle.contains("<p>Dogs</p>"))
-                    {
-                        text="found paragraph "+paragraphTitle;
-                        Log.i("String","Found paragraph");
-                        break;
-                    }
-                    else Log.i("no Par","No paragraph found");
-                        Log.i("Array",""+paragraphTitle);
-
-
-
-                }*/
-                //doc.body().children().select("*");
-                    /*for(String paragraphs=doc.getElementsByTag("p").toString();paraphraph=="Dogs";paragraphs.Next())
-
-
-                    Log.i("par","paragraphs");*/
-
-
-
-                /*Iterator iter=doc.getElementsByTag("p").iterator();
-                    for(Iterator<Element> iter = iter.iterator(); iter.hasNext(); )
-                    text = doc.getElementsByTag("p").text();
-                for text=text.hasNext();*/
-                //for (String text : text)
-                //text = doc.body().text();
-                Log.i("JSoup", "Connected successfully!");
-
-
-                //builder.append(title).append("\n").append(text);
-
-
-                //This builds the webpage by going through each link
-                //For loop may be unnecessary
-                /*for (String Element : text) {
-                    builder.append("\n").append("Link : ").append(link.attr("href"))
-                            .append("\n").append("Text : ").append(link.text());
-                }*/
-            } catch (IOException e) {
-                builder.append("Error : ").append(e.getMessage()).append("\n");
-                Log.i("HTML ERROR","exception reading HTML");
-            }
-
-            //STILL NEED TO UPDATE UI
-            //somethingText.setText(text);
-
-            // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
-            workerThreadHandler = new Handler(Looper.myLooper()){
-                @Override
-                public void handleMessage(Message msg) {
-                    // When child thread handler get message from child thread message queue.
-                    Log.i("CHILD_THREAD", "Receive message from main thread.");
-                    Message message = new Message();
-                    message.what = msg.what;
-                    Log.i("AFtermsg.what","msg.what;");
-                    // Send the message back to main thread message queue use main thread message Handler.
-                    mainThreadHandler.sendMessage(message);
                 }
-            };
-            // Loop the child thread message queue.
-            Looper.loop();
 
-            // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
-            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
-            // Send a message to main thread.
-            Message msg = new Message();
-            msg.what = CHILD_THREAD_QUIT_LOOPER;
-            mainThreadHandler.sendMessage(msg);
+                 catch (IOException e) {
+                    final StringBuilder builder = new StringBuilder();
+                    builder.append("Error : ").append(e.getMessage()).append("\n");
+                    Log.i("HTML ERROR", "exception reading HTML");
+                }
+                return dogText;
+            }
         }
     }
-}
