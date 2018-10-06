@@ -1,7 +1,10 @@
 package com.example.david.animalsinfo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -64,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final MediaPlayer mp =MediaPlayer.create(this,R.raw.barking2);
+        final MediaPlayer mp2 =MediaPlayer.create(this,R.raw.meowing);
+        final MediaPlayer mp3 =MediaPlayer.create(this,R.raw.frog);
 
 
         // Create and start the worker thread.
@@ -77,13 +83,19 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MAIN_THREAD", "Receive message from child thread.");
                 taskStatusTextView = findViewById(R.id.somethingText);
                 if (msg.what == MAIN_THREAD_TASK_1) {
+                    mp.start();
                     taskStatusTextView.setText(dogText);
-                    sendActivity(dogText);}
+                    sendActivity(dogText);
+                    }
                     else if (msg.what == MAIN_THREAD_TASK_2) {
                         // If task two button is clicked.
-                        taskStatusTextView.setText(catText);}
+                        mp2.start();
+                        taskStatusTextView.setText(catText);
+                        sendActivity2(catText);}
                         else if (msg.what == MAIN_THREAD_TASK_3) {
                         // If quit child thread looper button is clicked.
+                        mp3.start();
+                        sendActivity3(frogText);
                         taskStatusTextView.setText(frogText);
                     }
                 }
@@ -104,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 @Override
                 public void onClick (View view){
-                // When click this button, create a message object.
+                // When click this button, create a message object
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_1;
                 // Use worker thread message Handler to put message into worker thread message queue.
@@ -118,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 @Override
                 public void onClick (View view){
+
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_2;
                 workerThread.workerThreadHandler.sendMessage(msg);
@@ -159,6 +172,22 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_MESSAGE, dogText);
             startActivity(intent);
         }
+        public void sendActivity2(String catText)
+        {
+            Intent intent = new Intent(this, CatsActivity.class);
+            //Text editText =findViewById(R.id.somethingText);
+            //String message = editText.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, catText);
+            startActivity(intent);
+        }
+        public void sendActivity3(String frogText)
+        {
+            Intent intent = new Intent(this, FrogsActivity.class);
+            //Text editText =findViewById(R.id.somethingText);
+            //String message = editText.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, frogText);
+            startActivity(intent);
+        }
 
 
 
@@ -178,6 +207,10 @@ public class MainActivity extends AppCompatActivity {
                 // Prepare MyWorkerThread which is a child of Thread Looper object.
                 //Prepares thread to add tasks in a loop
                 Looper.prepare();
+
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
+
                 FormatDocument formattedDoc=new FormatDocument();
                 dogText=formattedDoc.returnString();
 
@@ -188,60 +221,8 @@ public class MainActivity extends AppCompatActivity {
                 frogText=formattedDoc3.returnString3();
 
 
-                //final StringBuilder builder = new StringBuilder();
-                //String dogText = formatted.returnString();
-
-                //FormatDocument formattedString=new FormatDocument();
-
-            /*public class FormatDocument {
-                public static String returnString() {
 
 
-                    try {
-                        String url = "https://mydavidjerome.com/android-app/";
-                        Document doc = Jsoup.connect(url).get();
-                        String title = doc.title();
-
-
-                        Element titleElement;
-                        Element parElement;
-                        String combinedString;
-
-
-                        String dogTitle;
-                        String dogsPar = null;
-                        Element e2 = doc.select("p:contains(Dogs)").get(0);
-                        //Still hast HTML tags
-                        dogTitle = e2.toString();
-                        String parString = e2.nextElementSibling().toString();
-                        String dogTextHtml = dogTitle + parString;
-
-                        Document doc2 = Jsoup.parse(dogTextHtml);
-
-
-                        doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
-                        doc2.select("p").append("\\n");
-                        doc2.select("li").prepend("\\n\\n");
-                        String s = doc2.html().replaceAll("\\\\n", "\n");
-                        dogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
-
-                        //combinedString=e2+parElement;
-
-                        Log.i("in Element", "paragraph of dogs");
-
-
-                        Log.i("JSoup", "Connected successfully!");
-
-
-                    } catch (IOException e) {
-                        builder.append("Error : ").append(e.getMessage()).append("\n");
-                        Log.i("HTML ERROR", "exception reading HTML");
-                    }
-                }
-            }*/
-
-                //STILL NEED TO UPDATE UI
-                //somethingText.setText(text);
 
                 // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
                 workerThreadHandler = new Handler(Looper.myLooper()) {
