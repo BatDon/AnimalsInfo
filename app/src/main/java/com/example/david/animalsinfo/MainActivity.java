@@ -3,7 +3,6 @@ package com.example.david.animalsinfo;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,8 +11,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,14 +18,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.safety.Whitelist;
-import org.jsoup.select.Elements;
-import org.w3c.dom.Text;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.io.Reader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,35 +32,24 @@ public class MainActivity extends AppCompatActivity {
 
     private MyWorkerThread workerThread = null;
 
-    private ImageButton runTaskOneButton;
-
-    private ImageButton runTaskTwoButton;
-
-    private ImageButton runTaskThreeButton;
-    public TextView taskStatusTextView;
-
-    public String dogTextHtml;
     public String dogText;
 
-    public String catTextHtml;
     public String catText;
 
-    public String frogTextHtml;
     public String frogText;
 
-    public static final String EXTRA_MESSAGE = "com.example.david.animalsinfo.MESSAGE";
-
-
-
+    //Website where information will be pulled from
+    public static final String EXTRA_MESSAGE = "@string/website";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final MediaPlayer mp =MediaPlayer.create(this,R.raw.barking2);
-        final MediaPlayer mp2 =MediaPlayer.create(this,R.raw.meowing);
-        final MediaPlayer mp3 =MediaPlayer.create(this,R.raw.frog);
+        //Animal sounds are created here
+        final MediaPlayer barking = MediaPlayer.create(this, R.raw.barking2);
+        final MediaPlayer meowing = MediaPlayer.create(this, R.raw.meowing);
+        final MediaPlayer ribbiting = MediaPlayer.create(this, R.raw.frog);
 
 
         // Create and start the worker thread.
@@ -77,70 +57,71 @@ public class MainActivity extends AppCompatActivity {
         workerThread.start();
 
         // Handle message from main thread message queue.
+        // Animal information connection is created when msg.what is set
+        //Animal sounds are started here when the message is received from the button click
         mainThreadHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
                 Log.i("MAIN_THREAD", "Receive message from child thread.");
-                taskStatusTextView = findViewById(R.id.somethingText);
+                //taskStatusTextView = findViewById(R.id.somethingText);
                 if (msg.what == MAIN_THREAD_TASK_1) {
-                    mp.start();
-                    taskStatusTextView.setText(dogText);
+                    barking.start();
+                    //taskStatusTextView.setText(dogText);
                     sendActivity(dogText);
-                    }
-                    else if (msg.what == MAIN_THREAD_TASK_2) {
-                        // If task two button is clicked.
-                        mp2.start();
-                        taskStatusTextView.setText(catText);
-                        sendActivity2(catText);}
-                        else if (msg.what == MAIN_THREAD_TASK_3) {
-                        // If quit child thread looper button is clicked.
-                        mp3.start();
-                        sendActivity3(frogText);
-                        taskStatusTextView.setText(frogText);
-                    }
+                } else if (msg.what == MAIN_THREAD_TASK_2) {
+                    // If task two button is clicked.
+                    meowing.start();
+                    //taskStatusTextView.setText(catText);
+                    sendActivity2(catText);
+                } else if (msg.what == MAIN_THREAD_TASK_3) {
+                    // If quit child thread looper button is clicked.
+                    ribbiting.start();
+                    sendActivity3(frogText);
+                    //taskStatusTextView.setText(frogText);
                 }
-            };
+            }
+        };
 
 
+        // Get run task buttons.
+        ImageButton runTaskOneButton = findViewById(R.id.dogButton);
 
-            // Get run task buttons.
-            runTaskOneButton =findViewById(R.id.dogButton);
+        ImageButton runTaskTwoButton = findViewById(R.id.catButton);
 
-            runTaskTwoButton =findViewById(R.id.catButton);
+        ImageButton runTaskThreeButton = findViewById(R.id.frogButton);
 
-            runTaskThreeButton=findViewById(R.id.frogButton);
-
-            // Set on click listener to each button.
+        // Set on click listener to each button.
         runTaskOneButton.setOnClickListener(new View.OnClickListener()
 
-            {
-                @Override
-                public void onClick (View view){
+                //When button is clicked the msg.what is given a value
+        {
+            @Override
+            public void onClick(View view) {
                 // When click this button, create a message object
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_1;
                 // Use worker thread message Handler to put message into worker thread message queue.
                 workerThread.workerThreadHandler.sendMessage(msg);
             }
-            });
+        });
 
-            // Please see comments for runTaskOneButton.
+        // Please see comments for runTaskOneButton.
         runTaskTwoButton.setOnClickListener(new View.OnClickListener()
 
-            {
-                @Override
-                public void onClick (View view){
+        {
+            @Override
+            public void onClick(View view) {
 
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_2;
                 workerThread.workerThreadHandler.sendMessage(msg);
             }
-            });
+        });
         runTaskThreeButton.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
-            public void onClick (View view){
+            public void onClick(View view) {
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_3;
                 workerThread.workerThreadHandler.sendMessage(msg);
@@ -148,177 +129,142 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-            // Get status info TextView object.
-            taskStatusTextView =findViewById(R.id.somethingText);
+    }
 
-            // Get the quit child thread looper button.
-           /* ImageButton quitChildThreadLooperButton = findViewById(R.id.frogButton);
-        quitChildThreadLooperButton.setOnClickListener(new View.OnClickListener()*/
+    //This sends the information to the Activity to be viewed
+    public void sendActivity(String dogText) {
+        Intent intent = new Intent(this, DogsActivity.class);
+        //Text editText =findViewById(R.id.somethingText);
+        //String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, dogText);
+        startActivity(intent);
+    }
 
-            /*{
+    public void sendActivity2(String catText) {
+        Intent intent = new Intent(this, CatsActivity.class);
+        //Text editText =findViewById(R.id.somethingText);
+        //String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, catText);
+        startActivity(intent);
+    }
+
+    public void sendActivity3(String frogText) {
+        Intent intent = new Intent(this, FrogsActivity.class);
+        //Text editText =findViewById(R.id.somethingText);
+        //String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, frogText);
+        startActivity(intent);
+    }
+
+
+    // This child thread class has it's own Looper and Handler object.
+    private class MyWorkerThread extends Thread {
+        //Log.i("MyWorkerThread","MyWorkerThread created")
+        // This is worker thread handler.
+        public Handler workerThreadHandler;
+
+        @Override
+        public void run() {
+            // Prepare MyWorkerThread which is a child of Thread Looper object.
+            //Prepares thread to add tasks in a loop
+
+            Looper.prepare();
+
+            //Allows Media Player to have volume
+            AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
+
+            //Creates a readable HTML document by calling FormatDocument()
+            FormatDocument formattedDoc = new FormatDocument();
+            dogText = formattedDoc.returnString();
+
+            FormatDocument2 formattedDoc2 = new FormatDocument2();
+            catText = formattedDoc2.returnString2();
+
+            FormatDocument3 formattedDoc3 = new FormatDocument3();
+            frogText = formattedDoc3.returnString3();
+
+
+            // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
+            workerThreadHandler = new Handler(Looper.myLooper()) {
                 @Override
-                public void onClick (View view){
-                // Click this button will quit child thread looper.
-                workerThread.workerThreadHandler.getLooper().quit();
-            }
-            });*/
-        }
+                public void handleMessage(Message msg) {
+                    // When child thread handler get message from child thread message queue.
+                    Log.i("CHILD_THREAD", "Receive message from main thread.");
+                    Message message = new Message();
+                    message.what = msg.what;
+                    Log.i("AFtermsg.what", "msg.what;");
 
-        public void sendActivity(String dogText)
-        {
-            Intent intent = new Intent(this, DogsActivity.class);
-            //Text editText =findViewById(R.id.somethingText);
-            //String message = editText.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, dogText);
-            startActivity(intent);
-        }
-        public void sendActivity2(String catText)
-        {
-            Intent intent = new Intent(this, CatsActivity.class);
-            //Text editText =findViewById(R.id.somethingText);
-            //String message = editText.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, catText);
-            startActivity(intent);
-        }
-        public void sendActivity3(String frogText)
-        {
-            Intent intent = new Intent(this, FrogsActivity.class);
-            //Text editText =findViewById(R.id.somethingText);
-            //String message = editText.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, frogText);
-            startActivity(intent);
-        }
-
-
-
-
-
-
-
-
-        // This child thread class has it's own Looper and Handler object.
-        private class MyWorkerThread extends Thread {
-            //Log.i("MyWorkerThread","MyWorkerThread created")
-            // This is worker thread handler.
-            public Handler workerThreadHandler;
-
-            @Override
-            public void run() {
-                // Prepare MyWorkerThread which is a child of Thread Looper object.
-                //Prepares thread to add tasks in a loop
-                Looper.prepare();
-
-                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
-
-                FormatDocument formattedDoc=new FormatDocument();
-                dogText=formattedDoc.returnString();
-
-                FormatDocument2 formattedDoc2=new FormatDocument2();
-                catText=formattedDoc2.returnString2();
-
-                FormatDocument3 formattedDoc3=new FormatDocument3();
-                frogText=formattedDoc3.returnString3();
-
-
-
-
-
-                // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
-                workerThreadHandler = new Handler(Looper.myLooper()) {
-                    @Override
-                    public void handleMessage(Message msg) {
-                        // When child thread handler get message from child thread message queue.
-                        Log.i("CHILD_THREAD", "Receive message from main thread.");
-                        Message message = new Message();
-                        message.what = msg.what;
-                        Log.i("AFtermsg.what", "msg.what;");
-
-                        // Send the message back to main thread message queue use main thread message Handler.
-                        mainThreadHandler.sendMessage(message);
-                    }
-                };
-                // Loop the child thread message queue.
-                Looper.loop();
-
-                // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
-                Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
-                // Send a message to main thread.
-                Message msg = new Message();
-                msg.what = CHILD_THREAD_QUIT_LOOPER;
-                mainThreadHandler.sendMessage(msg);
-            }
-        }
-
-
-
-
-        public class FormatDocument {
-            public String returnString() {
-
-
-                try {
-                    String url = "https://mydavidjerome.com/android-app/";
-                    Document doc = Jsoup.connect(url).get();
-                    String title = doc.title();
-
-
-                    Element titleElement;
-                    Element parElement;
-                    String combinedString;
-
-
-                    String dogTitle;
-                    String dogsPar = null;
-                    Element e2 = doc.select("p:contains(Dogs)").get(0);
-                    //Still hast HTML tags
-                    dogTitle = e2.toString();
-                    String parString = e2.nextElementSibling().toString();
-                    String dogTextHtml = dogTitle + parString;
-
-                    Document doc2 = Jsoup.parse(dogTextHtml);
-
-
-                    doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
-                    doc2.select("p").append("\\n");
-                    doc2.select("li").prepend("\\n\\n");
-                    String s = doc2.html().replaceAll("\\\\n", "\n");
-                    dogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
-
-                    //combinedString=e2+parElement;
-
-                    Log.i("in Element", "paragraph of dogs");
-
-
-                    Log.i("JSoup", "Connected successfully!");
-
+                    // Send the message back to main thread message queue use main thread message Handler.
+                    mainThreadHandler.sendMessage(message);
                 }
+            };
+            // Loop the child thread message queue.
+            Looper.loop();
 
-                 catch (IOException e) {
-                    final StringBuilder builder = new StringBuilder();
-                    builder.append("Error : ").append(e.getMessage()).append("\n");
-                    Log.i("HTML ERROR", "exception reading HTML");
-                }
-                return dogText;
-            }
+            // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
+            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
+            // Send a message to main thread.
+            Message msg = new Message();
+            msg.what = CHILD_THREAD_QUIT_LOOPER;
+            mainThreadHandler.sendMessage(msg);
         }
-    public class FormatDocument2 {
-        public String returnString2() {
+    }
+
+
+    private class FormatDocument {
+        private String returnString() {
 
 
             try {
                 String url = "https://mydavidjerome.com/android-app/";
                 Document doc = Jsoup.connect(url).get();
-                String title = doc.title();
 
-
-                Element titleElement;
-                Element parElement;
-                String combinedString;
 
 
                 String dogTitle;
-                String dogsPar = null;
+                Element e2 = doc.select("p:contains(Dogs)").get(0);
+                //Still hast HTML tags
+                dogTitle = e2.toString();
+                String parString = e2.nextElementSibling().toString();
+                String dogTextHtml = dogTitle + parString;
+
+                Document doc2 = Jsoup.parse(dogTextHtml);
+
+
+                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+                doc2.select("p").append("\\n");
+                doc2.select("li").prepend("\\n\\n");
+                String s = doc2.html().replaceAll("\\\\n", "\n");
+                dogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+
+                //combinedString=e2+parElement;
+
+                Log.i("in Element", "paragraph of dogs");
+
+
+                Log.i("JSoup", "Connected successfully!");
+
+            } catch (IOException e) {
+                final StringBuilder builder = new StringBuilder();
+                builder.append("Error : ").append(e.getMessage()).append("\n");
+                Log.i("HTML ERROR", "exception reading HTML");
+            }
+            return dogText;
+        }
+    }
+
+    private class FormatDocument2 {
+        private String returnString2() {
+
+
+            try {
+                String url = "https://mydavidjerome.com/android-app/";
+                Document doc = Jsoup.connect(url).get();
+
+
+                String dogTitle;
+
                 Element e2 = doc.select("p:contains(Cats)").get(0);
                 //Still hast HTML tags
                 dogTitle = e2.toString();
@@ -341,9 +287,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i("JSoup", "Connected successfully!");
 
-            }
-
-            catch (IOException e) {
+            } catch (IOException e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
                 Log.i("HTML ERROR", "exception reading HTML");
@@ -351,23 +295,18 @@ public class MainActivity extends AppCompatActivity {
             return catText;
         }
     }
-    public class FormatDocument3 {
-        public String returnString3() {
+
+    private class FormatDocument3 {
+        private String returnString3() {
 
 
             try {
                 String url = "https://mydavidjerome.com/android-app/";
                 Document doc = Jsoup.connect(url).get();
-                String title = doc.title();
 
-
-                Element titleElement;
-                Element parElement;
-                String combinedString;
 
 
                 String dogTitle;
-                String dogsPar = null;
                 Element e2 = doc.select("p:contains(Frogs)").get(0);
                 //Still hast HTML tags
                 dogTitle = e2.toString();
@@ -390,9 +329,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i("JSoup", "Connected successfully!");
 
-            }
-
-            catch (IOException e) {
+            } catch (IOException e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
                 Log.i("HTML ERROR", "exception reading HTML");
@@ -400,4 +337,4 @@ public class MainActivity extends AppCompatActivity {
             return frogText;
         }
     }
-    }
+}

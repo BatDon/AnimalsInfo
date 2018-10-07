@@ -3,16 +3,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
-    android:background="@drawable/frog2"
-    android:alpha="0.4">
+    android:background="@drawable/frog2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#57ffffff">
 
     <TextView
         android:id="@+id/frogsTextBox"
-        android:textSize="30dp"
-        android:textColor="#ee7900"
+        android:paddingTop="10sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#1c7900"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Frogs" />
+        android:layout_gravity="center"
+        android:hint="@string/frogs"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

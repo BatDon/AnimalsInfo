@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">AnimalsInfo</string>
     <string name="boolt">True</string>
+    <string name="cats">Cats Information</string>
+    <string name="frogs">Frogs Information</string>
+    <string name="dogs">Dogs Information</string>
+    <string name="animalChoice">Choose an Animal</string>
+    <string name="website">com.example.david.animalsinfo.MESSAGE</string>
 </resources>
