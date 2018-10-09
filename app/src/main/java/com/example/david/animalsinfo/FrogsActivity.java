@@ -3,6 +3,7 @@ package com.example.david.animalsinfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 public class FrogsActivity extends AppCompatActivity{
@@ -14,9 +15,14 @@ public class FrogsActivity extends AppCompatActivity{
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String message2 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_TWO);
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.frogsTextBox);
+        TextView textView = findViewById(R.id.frogTitle);
         textView.setText(message);
+        Log.i("textView","= "+textView);
+        TextView textView2 = findViewById(R.id.frogsTextBox);
+        textView2.setText(message2);
+
     }
 }

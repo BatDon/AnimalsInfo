@@ -16,32 +16,51 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/animalBox">
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <ImageButton
-            android:layout_weight="1"
-            android:id="@+id/dogButton"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/dogButton"
+            android:scaleType="centerCrop"
             android:src="@drawable/dog" />
+        <!--android:scaleType="centerCrop"-->
+    </FrameLayout>
+        <!--android:scaleType="centerCrop"-->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">>
 
         <ImageButton
-            android:layout_weight="1"
+
             android:id="@+id/catButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/cat" />
+        </FrameLayout>
 
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
         <ImageButton
-            android:layout_weight="1"
+
             android:id="@+id/frogButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/frog" />
+        </FrameLayout>
     </LinearLayout>
 
 

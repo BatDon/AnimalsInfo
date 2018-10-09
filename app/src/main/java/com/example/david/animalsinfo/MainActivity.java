@@ -32,14 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
     private MyWorkerThread workerThread = null;
 
+    public String dogTitle;
     public String dogText;
 
+    public String catTitle;
     public String catText;
 
+    public String frogTitle;
     public String frogText;
 
     //Website where information will be pulled from
-    public static final String EXTRA_MESSAGE = "@string/website";
+    public static final String EXTRA_MESSAGE = "@string/myPackage";
+    public static final String EXTRA_MESSAGE_TWO = "@string/myPackage2";
 
 
     @Override
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Handle message from main thread message queue.
         // Animal information connection is created when msg.what is set
-        //Animal sounds are started here when the message is received from the button click
+        // Animal sounds are started here when the message is received from the button click
         mainThreadHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
@@ -67,16 +71,16 @@ public class MainActivity extends AppCompatActivity {
                 if (msg.what == MAIN_THREAD_TASK_1) {
                     barking.start();
                     //taskStatusTextView.setText(dogText);
-                    sendActivity(dogText);
+                    sendActivity(dogTitle,dogText);
                 } else if (msg.what == MAIN_THREAD_TASK_2) {
                     // If task two button is clicked.
                     meowing.start();
                     //taskStatusTextView.setText(catText);
-                    sendActivity2(catText);
+                    sendActivity2(catTitle,catText);
                 } else if (msg.what == MAIN_THREAD_TASK_3) {
                     // If quit child thread looper button is clicked.
                     ribbiting.start();
-                    sendActivity3(frogText);
+                    sendActivity3(frogTitle,frogText);
                     //taskStatusTextView.setText(frogText);
                 }
             }
@@ -132,27 +136,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //This sends the information to the Activity to be viewed
-    public void sendActivity(String dogText) {
+    public void sendActivity(String dogTitle,String dogText) {
         Intent intent = new Intent(this, DogsActivity.class);
         //Text editText =findViewById(R.id.somethingText);
         //String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, dogText);
+        intent.putExtra(EXTRA_MESSAGE, dogTitle);
+        intent.putExtra(EXTRA_MESSAGE_TWO, dogText);
         startActivity(intent);
     }
 
-    public void sendActivity2(String catText) {
+    public void sendActivity2(String catTitle, String catText) {
         Intent intent = new Intent(this, CatsActivity.class);
         //Text editText =findViewById(R.id.somethingText);
         //String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, catText);
+        intent.putExtra(EXTRA_MESSAGE, catTitle);
+        intent.putExtra(EXTRA_MESSAGE_TWO, catText);
         startActivity(intent);
     }
 
-    public void sendActivity3(String frogText) {
+    public void sendActivity3(String frogTitle, String frogText) {
         Intent intent = new Intent(this, FrogsActivity.class);
         //Text editText =findViewById(R.id.somethingText);
         //String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, frogText);
+        intent.putExtra(EXTRA_MESSAGE, frogTitle);
+        intent.putExtra(EXTRA_MESSAGE_TWO, frogText);
         startActivity(intent);
     }
 
@@ -214,24 +221,21 @@ public class MainActivity extends AppCompatActivity {
 
     private class FormatDocument {
         private String returnString() {
-
-
             try {
-                String url = "https://mydavidjerome.com/android-app/";
+                String url = getResources().getString(R.string.url);
+                //String url = "@string/url";
                 Document doc = Jsoup.connect(url).get();
 
-
-
-                String dogTitle;
                 Element e2 = doc.select("p:contains(Dogs)").get(0);
+                String dogHeader=e2.toString();
                 //Still hast HTML tags
-                dogTitle = e2.toString();
+                dogTitle = Jsoup.parse(dogHeader).text();
+                Log.i("dogTitle:",""+dogTitle);
                 String parString = e2.nextElementSibling().toString();
                 String dogTextHtml = dogTitle + parString;
 
-                Document doc2 = Jsoup.parse(dogTextHtml);
-
-
+                //Document doc2 = Jsoup.parse(dogTextHtml);
+                Document doc2 = Jsoup.parse(parString);
                 doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
                 doc2.select("p").append("\\n");
                 doc2.select("li").prepend("\\n\\n");
@@ -259,20 +263,23 @@ public class MainActivity extends AppCompatActivity {
 
 
             try {
-                String url = "https://mydavidjerome.com/android-app/";
+                String url = getResources().getString(R.string.url);
+                //String url = "@string/url";
                 Document doc = Jsoup.connect(url).get();
 
 
-                String dogTitle;
+
+                String catHeader;
 
                 Element e2 = doc.select("p:contains(Cats)").get(0);
                 //Still hast HTML tags
-                dogTitle = e2.toString();
+                catHeader = e2.toString();
+                catTitle = Jsoup.parse(catHeader).text();
                 String parString = e2.nextElementSibling().toString();
-                String dogTextHtml = dogTitle + parString;
+                //String dogTextHtml = catTitle + parString;
 
-                Document doc2 = Jsoup.parse(dogTextHtml);
-
+                //Document doc2 = Jsoup.parse(dogTextHtml);
+                Document doc2 = Jsoup.parse(parString);
 
                 doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
                 doc2.select("p").append("\\n");
@@ -301,20 +308,24 @@ public class MainActivity extends AppCompatActivity {
 
 
             try {
-                String url = "https://mydavidjerome.com/android-app/";
+                String url = getResources().getString(R.string.url);
+                //String url = "@string/url";
                 Document doc = Jsoup.connect(url).get();
 
 
 
-                String dogTitle;
+                String frogHeader;
+
                 Element e2 = doc.select("p:contains(Frogs)").get(0);
                 //Still hast HTML tags
-                dogTitle = e2.toString();
+
+                frogHeader = e2.toString();
+                frogTitle = Jsoup.parse(frogHeader).text();
                 String parString = e2.nextElementSibling().toString();
-                String dogTextHtml = dogTitle + parString;
+                String dogTextHtml = frogHeader + parString;
 
-                Document doc2 = Jsoup.parse(dogTextHtml);
-
+                //Document doc2 = Jsoup.parse(dogTextHtml);
+                Document doc2 = Jsoup.parse(parString);
 
                 doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
                 doc2.select("p").append("\\n");

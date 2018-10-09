@@ -24,9 +24,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DogsActivity"/>
-        <activity android:name=".CatsActivity" />
-        <activity android:name=".FrogsActivity" />
+        <activity android:name=".DogsActivity"
+        android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".FrogsActivity"
+            android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".CatsActivity"
+            android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+
+
+        <!--<activity android:name=".DogsActivity"/>-->
+        <!--<activity android:name=".CatsActivity" />
+        <activity android:name=".FrogsActivity" />-->
     </application>
 
 </manifest>

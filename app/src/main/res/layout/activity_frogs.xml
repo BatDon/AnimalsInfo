@@ -9,18 +9,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#57ffffff">
+        android:background="#60ffffff">
+
+        <TextView
+            android:id="@+id/frogTitle"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/frogTitle" />
 
     <TextView
         android:id="@+id/frogsTextBox"
-        android:paddingTop="10sp"
-        android:textSize="30sp"
+
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#1c7900"
+        android:textColor="#145800"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+
         android:hint="@string/frogs"/>
+        <!--android:paddingTop="10sp"-->
+        <!--android:layout_gravity="center"-->
 
     </LinearLayout>
 

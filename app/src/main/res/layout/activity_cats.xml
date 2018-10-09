@@ -12,15 +12,27 @@
         android:background="#4affffff">
 
         <TextView
-            android:id="@+id/catsTextBox"
-            android:paddingTop="10sp"
+            android:id="@+id/catsTitle"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#5e0a4c"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:hint="@string/catTitle" />
+
+        <TextView
+            android:id="@+id/catsTextBox"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
             android:hint="@string/cats"
-            android:textColor="#740c5e"
-            android:textSize="30sp"
+            android:textColor="#5e0a4c"
+            android:textSize="20sp"
             android:textStyle="bold" />
+        <!--android:paddingTop="10dp"-->
+        <!--android:layout_gravity="center"-->
     </LinearLayout>
 
 
