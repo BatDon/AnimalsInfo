@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,29 +62,54 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainx720);
-        ImageView v = (ImageView) findViewById(R.id.dogButton);
-        Integer x = v.getWidth();
-        Integer y = v.getHeight();
-        final ImageView dogButton = (ImageView) findViewById(R.id.dogButton);
-        Bitmap dogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
-        Bitmap dogIcon2 = Bitmap.createScaledBitmap(dogIcon, x, y, true);
-//        Bitmap digIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
-        dogButton.setImageBitmap(dogIcon2);
-        final ImageView catButton = (ImageView) findViewById(R.id.catButton);
-        Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
-        Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, 774, 348, true);
-//        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
-        catButton.setImageBitmap(catIcon2);
 
-        final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
-        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
-        Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, 774, 348, true);
-//        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
-        frogButton.setImageBitmap(frogIcon2);
-        //Animal sounds are created here
-//        final MediaPlayer barking = MediaPlayer.create(this, R.raw.barking2);
-//        final MediaPlayer meowing = MediaPlayer.create(this, R.raw.meowing);
-//        final MediaPlayer ribbiting = MediaPlayer.create(this, R.raw.frog);
+//        View vf=(View)findViewById(R.id.frogButton);
+//        Integer x2 = vf.getWidth();
+//        Integer y2 = vf.getHeight();
+//        Log.i("Forg image","Width= "+(x2.toString())+" Height= "+(y2.toString());
+//        final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
+//        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
+//        Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, x2, y2, true);
+//        frogButton.setImageBitmap(frogIcon2);
+
+
+
+        ImageView v = (ImageView) findViewById(R.id.dogButton);
+
+        v.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalListenerClass());
+
+//        ImageView v2=(ImageView) findViewById(R.id.catButton);
+//        v2.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalListenerClass());
+//
+//        ImageView v3=(ImageView) findViewById(R.id.frogButton);
+//        v3.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalListenerClass());
+
+
+//        ImageView v = (ImageView) findViewById(R.id.dogButton);
+//        Integer x = v.getWidth();
+//        Integer y = v.getHeight();
+//        final ImageView dogButton = (ImageView) findViewById(R.id.dogButton);
+//        Bitmap dogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
+//        Bitmap dogIcon2 = Bitmap.createScaledBitmap(dogIcon, x, y, true);
+////        Bitmap digIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
+//        dogButton.setImageBitmap(dogIcon2);
+//
+//        final ImageView catButton = (ImageView) findViewById(R.id.catButton);
+//        Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
+//        Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, 774, 348, true);
+////        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
+//        catButton.setImageBitmap(catIcon2);
+//
+//        final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
+//        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
+//        Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, 774, 348, true);
+////        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
+//        frogButton.setImageBitmap(frogIcon2);
+
+
+
+
+
 
 
         // Create and start the worker thread.
@@ -409,12 +435,12 @@ public class MainActivity extends AppCompatActivity {
                 for(int p=dogsLeft+1;p>dogsLeft&& p<=limitCenterLoop;p++){
                     dogsCenterBuild.append(dogArray[p]);
                     dogsCenterBuild.append((System.getProperty("line.separator")));
-                    Log.i("Times ifn centerD loop","lets see "+p);
+                    //Log.i("Times ifn centerD loop","lets see "+p);
                     //leftDogs=dogArray[i];
                     //leftDogs=leftDogs+("\n");
                 }
                 centerDogs=dogsCenterBuild.toString();
-                Log.i("DogsCenter Column=  ", ""+centerDogs);
+                //Log.i("DogsCenter Column=  ", ""+centerDogs);
                 dogTextCenter=centerDogs;
 
                 //dogTextCenter="something";
@@ -427,12 +453,12 @@ public class MainActivity extends AppCompatActivity {
                 for(int p=limitCenterLoop+1;p<=numberOfDogs;p++){
                     dogsRightBuild.append(dogArray[p]);
                     dogsRightBuild.append((System.getProperty("line.separator")));
-                    Log.i("Times ifn right loop","lets see "+p);
+                    //Log.i("Times ifn right loop","lets see "+p);
                     //leftDogs=dogArray[i];
                     //leftDogs=leftDogs+("\n");
                 }
                 rightDogs=dogsRightBuild.toString();
-                Log.i("DogsRight Column=  ", ""+rightDogs);
+                //Log.i("DogsRight Column=  ", ""+rightDogs);
                 dogTextRight=rightDogs;
 
 
@@ -637,4 +663,60 @@ public class MainActivity extends AppCompatActivity {
             return frogText;
         }
     }
+
+
+
+
+    class MyGlobalListenerClass implements ViewTreeObserver.OnGlobalLayoutListener {
+        @Override
+        public void onGlobalLayout() {
+            View v = (View) findViewById(R.id.dogButton);
+            Integer x = v.getWidth();
+            Integer y = v.getHeight();
+            //show ImageView width and height
+            final ImageView dogButton = (ImageView) findViewById(R.id.dogButton);
+            Bitmap dogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
+            Bitmap dogIcon2 = Bitmap.createScaledBitmap(dogIcon, x, y, true);
+            dogButton.setImageBitmap(dogIcon2);
+
+
+            View vc=(View)findViewById(R.id.catButton);
+            Integer x1 = vc.getWidth();
+            Integer y1 = vc.getHeight();
+            final ImageView catButton = (ImageView) findViewById(R.id.catButton);
+            Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
+            Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, x1, y1, true);
+            catButton.setImageBitmap(catIcon2);
+
+            View vf=(View)findViewById(R.id.frogButton);
+            Integer x2 = vf.getWidth();
+            Integer y2 = vf.getHeight();
+            Log.i("Forg image","Width= "+x2.toString()+" Height= "+y2.toString());
+            final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
+            Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
+            Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, x2, y2, true);
+            //Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, x2, y2, true);
+            frogButton.setImageBitmap(frogIcon2);
+          }
+    }
+
+
+
+
+            //final ImageView catButton = (ImageView) findViewById(R.id.catButton);
+
+//        Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
+//        Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, 774, 348, true);
+////        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
+//        catButton.setImageBitmap(catIcon2);
+
+//        final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
+//        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
+//        Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, 774, 348, true);
+////        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
+//        frogButton.setImageBitmap(frogI
+
+
+
+
 }
