@@ -15,6 +15,7 @@
             android:id="@+id/frogTitle"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:textColor="#145800"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

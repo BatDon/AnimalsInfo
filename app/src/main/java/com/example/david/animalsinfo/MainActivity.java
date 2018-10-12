@@ -12,12 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.safety.Whitelist;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -33,10 +33,13 @@ public class MainActivity extends AppCompatActivity {
     private MyWorkerThread workerThread = null;
 
     public String dogTitle;
-    public String dogText;
+    public String dogTextRight;
+    public String dogTextLeft;
+    public String dogTextCenter;
 
     public String catTitle;
     public String catText;
+    public Integer catWords;
 
     public String frogTitle;
     public String frogText;
@@ -44,12 +47,14 @@ public class MainActivity extends AppCompatActivity {
     //Website where information will be pulled from
     public static final String EXTRA_MESSAGE = "@string/myPackage";
     public static final String EXTRA_MESSAGE_TWO = "@string/myPackage2";
+    public static final String EXTRA_MESSAGE_THREE = "@string/myPackage3";
+    public static final String EXTRA_MESSAGE_FOUR = "@string/myPackage4";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mainx720);
         //Animal sounds are created here
         final MediaPlayer barking = MediaPlayer.create(this, R.raw.barking2);
         final MediaPlayer meowing = MediaPlayer.create(this, R.raw.meowing);
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 if (msg.what == MAIN_THREAD_TASK_1) {
                     barking.start();
                     //taskStatusTextView.setText(dogText);
-                    sendActivity(dogTitle,dogText);
+                    sendActivity(dogTitle,dogTextLeft,dogTextCenter,dogTextRight);
                 } else if (msg.what == MAIN_THREAD_TASK_2) {
                     // If task two button is clicked.
                     meowing.start();
@@ -136,12 +141,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //This sends the information to the Activity to be viewed
-    public void sendActivity(String dogTitle,String dogText) {
+    public void sendActivity(String dogTitle,String dogTextLeft,String dogTextCenter,String dogTextRight) {
         Intent intent = new Intent(this, DogsActivity.class);
         //Text editText =findViewById(R.id.somethingText);
         //String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, dogTitle);
-        intent.putExtra(EXTRA_MESSAGE_TWO, dogText);
+        intent.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
+        intent.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
+        intent.putExtra(EXTRA_MESSAGE_FOUR,dogTextRight);
         startActivity(intent);
     }
 
@@ -183,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
             //Creates a readable HTML document by calling FormatDocument()
             FormatDocument formattedDoc = new FormatDocument();
-            dogText = formattedDoc.returnString();
+            dogTextLeft = formattedDoc.returnString();
 
             FormatDocument2 formattedDoc2 = new FormatDocument2();
             catText = formattedDoc2.returnString2();
@@ -225,24 +232,203 @@ public class MainActivity extends AppCompatActivity {
                 String url = getResources().getString(R.string.url);
                 //String url = "@string/url";
                 Document doc = Jsoup.connect(url).get();
+                Elements elements = doc.body().select("*");
+//                Elements e5=elements.select("p:contains(Dogs)");
+                Element masthead = doc.select("div.masthead").first();
+
+
+                //This selects the class that all the animals are in
+                Element e5 = doc.select("div.entry-content").first();
+
+                Element e6 = e5.child(1);
+                Elements e9 = e6.children();
+                Element e7 = e5.child(2);
+                Element e8 = e5.child(3);
+
+
+//                MAKE AN ARRAY HERE
+                int numberOfDogs = 0;
+                String[] dogArray = new String[100];
+                //ArrayList<Element> arrayElements = new ArrayList<>();
+                for (Element e : e9) {
+                    numberOfDogs += 1;
+                    dogArray[numberOfDogs] = (e.text());
+
+                    Log.i("eachDogHere: ", "" + (dogArray[numberOfDogs]));
+                }
+                String halfWords = dogArray[1];
+
+                Log.i("Dogs/2=", "" + (numberOfDogs / 2));
+
+                //If an odd number of dogs add one more to left column
+                int remDog = numberOfDogs % 3;
+                int dogsInList=numberOfDogs/3;
+
+                int dogsRem=0;
+                int dogsRem2=0;
+
+                int dogsLeft=0;
+                int dogsCenter=0;
+                int dogsRight=0;
+                if (remDog > 0 && remDog<2){
+
+                     dogsRem+=1;
+                    dogsLeft+=1;
+                }
+                else if (remDog>0){
+                    dogsRem2=2;
+                    dogsLeft+=1;
+                    dogsCenter+=1;
+                }
+
+
+                dogsLeft=dogsLeft+dogsInList;
+                dogsCenter=dogsCenter+dogsInList;
+                dogsRight=dogsInList;
+
+
+                //Builds list for left side of Dogs
+                StringBuilder dogsLeftBuild=new StringBuilder();
+                String leftDogs="";
+                for(int i=1;i<=dogsLeft;i++){
+                    dogsLeftBuild.append(dogArray[i]);
+                    dogsLeftBuild.append((System.getProperty("line.separator")));
+                    Log.i("Times ifn leftDogs loop","lets see "+i);
+                    //leftDogs=dogArray[i];
+                    //leftDogs=leftDogs+("\n");
+                }
+                //String dogsLeftColumn=dogsLeftBuild.toString();
+                leftDogs=dogsLeftBuild.toString();
+                Log.i("DogsLEft Column=  ", ""+leftDogs);
+                dogTextLeft=leftDogs;
+
+                int limitCenterLoop=dogsLeft+dogsCenter;
+
+                StringBuilder dogsCenterBuild=new StringBuilder();
+                String centerDogs="";
+                for(int p=dogsLeft+1;p>dogsLeft&& p<=limitCenterLoop;p++){
+                    dogsCenterBuild.append(dogArray[p]);
+                    dogsCenterBuild.append((System.getProperty("line.separator")));
+                    Log.i("Times ifn centerD loop","lets see "+p);
+                    //leftDogs=dogArray[i];
+                    //leftDogs=leftDogs+("\n");
+                }
+                centerDogs=dogsCenterBuild.toString();
+                Log.i("DogsCenter Column=  ", ""+centerDogs);
+                dogTextCenter=centerDogs;
+
+                //dogTextCenter="something";
+
+                int limitRightLoop=dogsCenter+dogsRight;
+
+                //Creates right side list for Dogs
+                StringBuilder dogsRightBuild=new StringBuilder();
+                String rightDogs="";
+                for(int p=limitCenterLoop+1;p<=numberOfDogs;p++){
+                    dogsRightBuild.append(dogArray[p]);
+                    dogsRightBuild.append((System.getProperty("line.separator")));
+                    Log.i("Times ifn right loop","lets see "+p);
+                    //leftDogs=dogArray[i];
+                    //leftDogs=leftDogs+("\n");
+                }
+                rightDogs=dogsRightBuild.toString();
+                Log.i("DogsRight Column=  ", ""+rightDogs);
+                dogTextRight=rightDogs;
+
+
+                String dogsOnLeft=dogsLeft+"";
+                String dogsOnRight=dogsRight+"";
+
+
+
+
+
+                //Element[] elementArr = arrayElements.toArray(new Element[]{});
+                Log.i("numberOfDogs =",""+numberOfDogs);
+
+
+                //Element e6=e5.select("p.Dogs").first();
+                //Element e5=doc.tagName("<p>Dogs</p>");
+//                Element e6=doc.getElementById("Dogs");
+//                Element e7=e6.tagName("<li>");
+                //Elements e7=elements.select("p:contains(Dogs)").tagName("<li>");
 
                 Element e2 = doc.select("p:contains(Dogs)").get(0);
-                String dogHeader=e2.toString();
-                //Still hast HTML tags
-                dogTitle = Jsoup.parse(dogHeader).text();
-                Log.i("dogTitle:",""+dogTitle);
-                String parString = e2.nextElementSibling().toString();
-                String dogTextHtml = dogTitle + parString;
+                dogTitle=e2.text();
+                //String idString=e2.id();
+                //Log.i("idSTring= ",""+idString);
+                //String dogHeader=e2.toString();
+//                String dogHeader2=dogHeader;
+//                //Still hast HTML tags
+//                dogTitle = Jsoup.parse(dogHeader).text();
+//                Log.i("dogTitle:",""+dogTitle);
+//                //added here for test
+                //Element befParStr=e2.nextElementSibling();
+                //Elements befParStr=Element.after(dogHeader2);
+                //String parString = e2.nextElementSibling().toString();
+                //String dogTextHtml = dogTitle + parString;
 
                 //Document doc2 = Jsoup.parse(dogTextHtml);
-                Document doc2 = Jsoup.parse(parString);
-                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
-                doc2.select("p").append("\\n");
-                doc2.select("li").prepend("\\n\\n");
-                String s = doc2.html().replaceAll("\\\\n", "\n");
-                dogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+                //Document doc2 = Jsoup.parse(parString);
+//                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+//                doc2.select("p").append("\\n");
+//                doc2.select("li").prepend("\\n\\n");
+//                String s = doc2.html().replaceAll("\\\\n", "\n");
+//                dogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
 
                 //combinedString=e2+parElement;
+                catWords=0;
+                String cattt;
+//                for(Element element : elements.tagName("<ol>")) {
+//                    catWords += 1;
+//                    Log.i("numberOfWords=    ", "" + catWords);
+//                    cattt=element.toString();
+//                    Log.i("Word=   ",""+cattt);
+//
+//                }
+                //Log.i("E5= ",""+e5);
+               // Log.i("E6= ",""+e6);
+                //Log.i("E7= ",""+e7);
+               // Log.i("E8= ",""+e8);
+                Log.i("E9   Should Dogs",""+e9);
+                Element cattEle=null;
+//                for(Element element : e6){
+//                    catWords += 1;
+//                    Log.i("numberOfWords=    ", "" + catWords);
+//                    cattEle=element;
+//                    cattt=element.toString();
+//                    Log.i("Word=   ",""+cattt);
+//                    if(cattt.equals("Dogs") ){
+//                        Log.i("DOGS FOUND", "0000000000000000000000000000000000000000000");
+//                    }
+//                }
+                //This reads the amount of items there are in the list
+                //This will be used to create the layout
+//                int n=-1;
+//                for (Node child : cattEle.childNodes()) {
+//                    if (child instanceof TextNode) {
+//                        Log.i("NOde of e6 ",""+child);
+//                        n+=1;
+//                        Log.i("Number of childn nodes", ""+n);
+//                        //System.out.println(((TextNode) child).text());
+//                    }
+//                }
+
+
+                //NEED TO MAKE A STRING ARRAY THAT CAN BE PUT INTO TWO DIFFERENT TEXT VIEWS SIDE BY SIDE
+                //TO GET EACH SEPERATE ELEMENT DELIMITED BY /N
+                //public class TestConsole {
+                //   public static void main(String[] args) {
+                //      String nixSampleLine = "Line 1 \n Line 2 \n Line 3";
+                //      String[] lines = nixSampleLine.split("\\r?\\n");
+                //      for (String line : lines) {
+                //         System.out.println(line);
+                //      }
+                //   }
+                //}
+
+
+
 
                 Log.i("in Element", "paragraph of dogs");
 
@@ -254,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.append("Error : ").append(e.getMessage()).append("\n");
                 Log.i("HTML ERROR", "exception reading HTML");
             }
-            return dogText;
+            return dogTextLeft;
         }
     }
 
@@ -279,7 +465,9 @@ public class MainActivity extends AppCompatActivity {
                 //String dogTextHtml = catTitle + parString;
 
                 //Document doc2 = Jsoup.parse(dogTextHtml);
+                String catTextBefore;
                 Document doc2 = Jsoup.parse(parString);
+
 
                 doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
                 doc2.select("p").append("\\n");
@@ -288,6 +476,7 @@ public class MainActivity extends AppCompatActivity {
                 catText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
 
                 //combinedString=e2+parElement;
+
 
                 Log.i("in Element", "paragraph of dogs");
 

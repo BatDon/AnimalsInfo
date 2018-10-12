@@ -16,6 +16,8 @@ protected void onCreate(Bundle savedInstanceState) {
     Intent intent = getIntent();
     String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
     String message2 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_TWO);
+    String message3 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_THREE);
+    String message4 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_FOUR);
 
     // Capture the layout's TextView and set the string as its text
     TextView textView = findViewById(R.id.dogTitle);
@@ -23,6 +25,10 @@ protected void onCreate(Bundle savedInstanceState) {
     Log.i("textView","= "+textView);
     TextView textView2 = findViewById(R.id.dogsTextBox);
     textView2.setText(message2);
+    TextView textView3 = findViewById(R.id.dogsTextBox2);
+    textView3.setText(message3);
+    TextView textView4 = findViewById(R.id.dogsTextBox3);
+    textView4.setText(message4);
 
 }
 }

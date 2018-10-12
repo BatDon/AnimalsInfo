@@ -3,26 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#020ffd"
     android:orientation="vertical">
+
+
     <TextView
         android:id="@+id/somethingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="#c139c6"
         android:textSize="30sp"
         android:textStyle="bold"
         android:text="@string/animalChoice"/>
+    <!--<TextView-->
+        <!--android:id="@+id/RightCorner"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="30sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:text="@string/animalChoice"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/rightCorner"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="30sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:text="@string/animalChoice"/>-->
+    <!--android:layout_gravity="center"-->
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="#020ffd"
         android:id="@+id/animalBox">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#020ffd"
         android:layout_weight="1">
 
         <ImageButton
@@ -32,6 +54,7 @@
             android:id="@+id/dogButton"
             android:scaleType="centerCrop"
             android:src="@drawable/dog" />
+
         <!--android:scaleType="centerCrop"-->
     </FrameLayout>
         <!--android:scaleType="centerCrop"-->
@@ -39,7 +62,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">>
+            android:background="#020ffd"
+            android:layout_weight="1">
 
         <ImageButton
 
@@ -53,6 +77,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#020ffd"
             android:layout_weight="1">
         <ImageButton
 
@@ -62,7 +87,6 @@
             android:src="@drawable/frog" />
         </FrameLayout>
     </LinearLayout>
-
 
     <!--<TextView
         android:layout_width="wrap_content"

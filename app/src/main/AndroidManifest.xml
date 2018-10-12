@@ -24,12 +24,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DogsActivity"
-        android:parentActivityName=".MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
+        <activity
+            android:name="com.example.david.animalsinfo.DogsActivity"
+            android:label="activity_dogs"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+            <intent-filter android:label="@string/dogs">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data android:scheme="http"
+                    android:host="www.example.com"
+                    android:pathPrefix="/animalsInfo" />
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
+            <intent-filter android:label="@string/dogs">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "example://gizmos” -->
+                <data android:scheme="example"
+                    android:host="animalsinfo" />
+            </intent-filter>
         </activity>
+        <!--<activity android:name=".DogsActivity"-->
+        <!--android:parentActivityName=".MainActivity">-->
+        <!--<meta-data-->
+            <!--android:name="android.support.PARENT_ACTIVITY"-->
+            <!--android:value=".MainActivity" />-->
+        <!--</activity>-->
         <activity android:name=".FrogsActivity"
             android:parentActivityName=".MainActivity">
         <meta-data
@@ -42,6 +68,15 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" />
         </activity>
+        <!--<activity-->
+            <!--android:name=".CatLayout"-->
+            <!--android:parentActivityName=".MainActivity">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value=".MainActivity" />-->
+        <!--</activity>-->
+
+
 
 
         <!--<activity android:name=".DogsActivity"/>-->

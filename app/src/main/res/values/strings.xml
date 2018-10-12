@@ -8,6 +8,8 @@
     <string name="url">https://mydavidjerome.com/android-app/</string>
     <string name="myPackage">com.example.david.animalsinfo.MESSAGE</string>
     <string name="myPackage2">com.example.david.animalsinfo.MESSAGE_TWO</string>
+    <string name="myPackage3">com.example.david.animalsinfo.MESSAGE_THREE</string>
+    <string name="myPackage4">com.example.david.animalsinfo.MESSAGE_FOUR</string>
     <string name="dogTitle">Dog Title</string>
     <string name="catTitle">Cat Title</string>
     <string name="frogTitle">Frog Title</string>

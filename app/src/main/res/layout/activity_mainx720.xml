@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#020ffd"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/somethingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="@string/animalChoice"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#020ffd"
+        android:id="@+id/animalBox">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#020ffd"
+        android:layout_weight="1">
+
+        <ImageButton
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/dogButton"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dog" />
+        <!--android:scaleType="centerCrop"-->
+    </FrameLayout>
+        <!--android:scaleType="centerCrop"-->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#020ffd"
+            android:layout_weight="1">
+
+        <ImageButton
+
+            android:id="@+id/catButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/cat" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#020ffd"
+            android:layout_weight="1">
+        <ImageButton
+
+            android:id="@+id/frogButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/frog" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:autoLink="web"
+        android:gravity="bottom"
+        &lt;!&ndash;android:text="https://mydavidjerome.com/android-app/"&ndash;&gt;
+        android:textStyle="bold" />-->
+
+
+</LinearLayout>
