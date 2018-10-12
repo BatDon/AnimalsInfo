@@ -2,6 +2,8 @@ package com.example.david.animalsinfo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,7 +13,10 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler mainThreadHandler;
 
     private MyWorkerThread workerThread = null;
+    //private MyWorkerThread2 workerThread2 = null;
 
     public String dogTitle;
     public String dogTextRight;
@@ -55,41 +61,63 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainx720);
+        ImageView v = (ImageView) findViewById(R.id.dogButton);
+        Integer x = v.getWidth();
+        Integer y = v.getHeight();
+        final ImageView dogButton = (ImageView) findViewById(R.id.dogButton);
+        Bitmap dogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
+        Bitmap dogIcon2 = Bitmap.createScaledBitmap(dogIcon, x, y, true);
+//        Bitmap digIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
+        dogButton.setImageBitmap(dogIcon2);
+        final ImageView catButton = (ImageView) findViewById(R.id.catButton);
+        Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
+        Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, 774, 348, true);
+//        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
+        catButton.setImageBitmap(catIcon2);
+
+        final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
+        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
+        Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, 774, 348, true);
+//        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
+        frogButton.setImageBitmap(frogIcon2);
         //Animal sounds are created here
-        final MediaPlayer barking = MediaPlayer.create(this, R.raw.barking2);
-        final MediaPlayer meowing = MediaPlayer.create(this, R.raw.meowing);
-        final MediaPlayer ribbiting = MediaPlayer.create(this, R.raw.frog);
+//        final MediaPlayer barking = MediaPlayer.create(this, R.raw.barking2);
+//        final MediaPlayer meowing = MediaPlayer.create(this, R.raw.meowing);
+//        final MediaPlayer ribbiting = MediaPlayer.create(this, R.raw.frog);
 
 
         // Create and start the worker thread.
         workerThread = new MyWorkerThread();
         workerThread.start();
 
+//        workerThread2= new MyWorkerThread2();
+//        workerThread2.start();
+
         // Handle message from main thread message queue.
         // Animal information connection is created when msg.what is set
         // Animal sounds are started here when the message is received from the button click
-        mainThreadHandler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-                Log.i("MAIN_THREAD", "Receive message from child thread.");
-                //taskStatusTextView = findViewById(R.id.somethingText);
-                if (msg.what == MAIN_THREAD_TASK_1) {
-                    barking.start();
-                    //taskStatusTextView.setText(dogText);
-                    sendActivity(dogTitle,dogTextLeft,dogTextCenter,dogTextRight);
-                } else if (msg.what == MAIN_THREAD_TASK_2) {
-                    // If task two button is clicked.
-                    meowing.start();
-                    //taskStatusTextView.setText(catText);
-                    sendActivity2(catTitle,catText);
-                } else if (msg.what == MAIN_THREAD_TASK_3) {
-                    // If quit child thread looper button is clicked.
-                    ribbiting.start();
-                    sendActivity3(frogTitle,frogText);
-                    //taskStatusTextView.setText(frogText);
-                }
-            }
-        };
+//        mainThreadHandler = new Handler(Looper.getMainLooper()) {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                Log.i("MAIN_THREAD", "Receive message from child thread.");
+//                //taskStatusTextView = findViewById(R.id.somethingText);
+//                if (msg.what == MAIN_THREAD_TASK_1) {
+//                    barking.start();
+//                    //taskStatusTextView.setText(dogText);
+//                    sendActivity(dogTitle,dogTextLeft,dogTextCenter,dogTextRight);
+//                } else if (msg.what == MAIN_THREAD_TASK_2) {
+//                    // If task two button is clicked.
+//                    meowing.start();
+//                    //taskStatusTextView.setText(catText);
+//                    sendActivity2(catTitle,catText);
+//                } else if (msg.what == MAIN_THREAD_TASK_3) {
+//                    // If quit child thread looper button is clicked.
+//                    ribbiting.start();
+//                    sendActivity3(frogTitle,frogText);
+//                    //taskStatusTextView.setText(frogText);
+//                }
+//            }
+//        };
 
 
         // Get run task buttons.
@@ -184,7 +212,19 @@ public class MainActivity extends AppCompatActivity {
 
             Looper.prepare();
 
+            //Get Screen size to format images
+
+                    //show ImageView width and height
+                    //((TextView)findViewById(R.id.textXY)).setText(x+","+y);
+
+
+
+
             //Allows Media Player to have volume
+            final MediaPlayer barking = MediaPlayer.create(MainActivity.this, R.raw.barking2);
+            final MediaPlayer meowing = MediaPlayer.create(MainActivity.this, R.raw.meowing);
+            final MediaPlayer ribbiting = MediaPlayer.create(MainActivity.this, R.raw.frog);
+
             AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
 
@@ -207,11 +247,35 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("CHILD_THREAD", "Receive message from main thread.");
                     Message message = new Message();
                     message.what = msg.what;
-                    Log.i("AFtermsg.what", "msg.what;");
+                    Log.i("AFtermsg.what", ""+msg.what);
+                    if (msg.what == MAIN_THREAD_TASK_1) {
+                        barking.start();
+                        //taskStatusTextView.setText(dogText);
+                        sendActivity(dogTitle,dogTextLeft,dogTextCenter,dogTextRight);
+                    } else if (msg.what == MAIN_THREAD_TASK_2) {
+                        // If task two button is clicked.
+                        meowing.start();
+                        //taskStatusTextView.setText(catText);
+                        sendActivity2(catTitle,catText);
+                        ImageView v = (ImageView) findViewById(R.id.catButton);
+                        String x = Integer.toString(v.getWidth());
+                        String y = Integer.toString(v.getHeight());
+                        Log.i("cat x and y","x= "+x+" y= "+y);
+                    } else if (msg.what == MAIN_THREAD_TASK_3) {
+                        // If quit child thread looper button is clicked.
+                        ribbiting.start();
+                        sendActivity3(frogTitle,frogText);
+                        ImageView v = (ImageView) findViewById(R.id.frogButton);
+                        String x = Integer.toString(v.getWidth());
+                        String y = Integer.toString(v.getHeight());
+                        Log.i("frog x and y","x= "+x+" y= "+y);
+                        //taskStatusTextView.setText(frogText);
+                    }
 
                     // Send the message back to main thread message queue use main thread message Handler.
-                    mainThreadHandler.sendMessage(message);
+//                    mainThreadHandler.sendMessage(message);
                 }
+
             };
             // Loop the child thread message queue.
             Looper.loop();
@@ -224,6 +288,42 @@ public class MainActivity extends AppCompatActivity {
             mainThreadHandler.sendMessage(msg);
         }
     }
+//    private class MyWorkerThread2 extends Thread {
+//        //Log.i("MyWorkerThread","MyWorkerThread created")
+//        // This is worker thread handler.
+//        public Handler workerThreadHandler2;
+//
+//        @Override
+//        public void run() {
+//            // Prepare MyWorkerThread which is a child of Thread Looper object.
+//            //Prepares thread to add tasks in a loop
+//
+//            Looper.prepare();
+//
+//            workerThreadHandler2 = new Handler(Looper.myLooper()) {
+//                @Override
+//                public void handleMessage(Message msg) {
+//                    // When child thread handler gets message from child thread message queue.
+//                    Log.i("CHILD_THREAD", "Receive message from main thread.");
+//                    Message message = new Message();
+//                    message.what = msg.what;
+//                    Log.i("AFtermsg.what", ""+msg.what);
+//
+//                    // Send the message back to main thread message queue use main thread message Handler.
+//                    mainThreadHandler.sendMessage(message);
+//                }
+//            };
+//            // Loop the child thread message queue.
+//            Looper.loop();
+//
+//            // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
+//            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
+//            // Send a message to main thread.
+//            Message msg = new Message();
+//            msg.what = CHILD_THREAD_QUIT_LOOPER;
+//            mainThreadHandler.sendMessage(msg);
+//        }
+//    }
 
 
     private class FormatDocument {

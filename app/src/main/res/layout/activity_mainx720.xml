@@ -27,16 +27,16 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#020ffd"
         android:layout_weight="1">
+        <!--android:background="#020ffd"-->
 
         <ImageButton
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/dogButton"
-            android:scaleType="centerCrop"
-            android:src="@drawable/dog" />
+             />
+        <!--android:src="@drawable/dog"-->
         <!--android:scaleType="centerCrop"-->
     </FrameLayout>
         <!--android:scaleType="centerCrop"-->
@@ -44,8 +44,9 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#020ffd"
+
             android:layout_weight="1">
+            <!--android:background="#020ffd"-->
 
         <ImageButton
 
@@ -59,8 +60,9 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#020ffd"
+
             android:layout_weight="1">
+            <!--android:background="#020ffd"-->
         <ImageButton
 
             android:id="@+id/frogButton"
