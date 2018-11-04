@@ -32,17 +32,22 @@ public class MainActivity extends AppCompatActivity {
     private int MAIN_THREAD_TASK_1 = 1;
     private int MAIN_THREAD_TASK_2 = 2;
     private int MAIN_THREAD_TASK_3 = 3;
-    private int CHILD_THREAD_QUIT_LOOPER = 4;
+    private int MAIN_THREAD_TASK_4 = 4;
+    private int CHILD_THREAD_QUIT_LOOPER = 5;
+
+    Intent intent1;
 
     private Handler mainThreadHandler;
 
     private MyWorkerThread workerThread = null;
-    //private MyWorkerThread2 workerThread2 = null;
+    private MyWorkerThread2 workerThread2 = null;
 
     public String dogTitle;
-    public String dogTextRight;
-    public String dogTextLeft;
-    public String dogTextCenter;
+    //public String dogTextRight;
+    //public String dogTextLeft;
+    //public String dogTextCenter;
+    String[]dogFormatted=new String[10];
+    String[]dogTable=new String[10];
 
     public String catTitle;
     public String catText;
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainx720);
+        Log.i("onCreateMethod","0000000000000000000000");
 
 //        View vf=(View)findViewById(R.id.frogButton);
 //        Integer x2 = vf.getWidth();
@@ -78,73 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
         v.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalListenerClass());
 
-//        ImageView v2=(ImageView) findViewById(R.id.catButton);
-//        v2.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalListenerClass());
-//
-//        ImageView v3=(ImageView) findViewById(R.id.frogButton);
-//        v3.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalListenerClass());
-
-
-//        ImageView v = (ImageView) findViewById(R.id.dogButton);
-//        Integer x = v.getWidth();
-//        Integer y = v.getHeight();
-//        final ImageView dogButton = (ImageView) findViewById(R.id.dogButton);
-//        Bitmap dogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
-//        Bitmap dogIcon2 = Bitmap.createScaledBitmap(dogIcon, x, y, true);
-////        Bitmap digIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
-//        dogButton.setImageBitmap(dogIcon2);
-//
-//        final ImageView catButton = (ImageView) findViewById(R.id.catButton);
-//        Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
-//        Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, 774, 348, true);
-////        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
-//        catButton.setImageBitmap(catIcon2);
-//
-//        final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
-//        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
-//        Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, 774, 348, true);
-////        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
-//        frogButton.setImageBitmap(frogIcon2);
-
-
-
-
-
-
-
         // Create and start the worker thread.
         workerThread = new MyWorkerThread();
         workerThread.start();
 
-//        workerThread2= new MyWorkerThread2();
-//        workerThread2.start();
-
-        // Handle message from main thread message queue.
-        // Animal information connection is created when msg.what is set
-        // Animal sounds are started here when the message is received from the button click
-//        mainThreadHandler = new Handler(Looper.getMainLooper()) {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                Log.i("MAIN_THREAD", "Receive message from child thread.");
-//                //taskStatusTextView = findViewById(R.id.somethingText);
-//                if (msg.what == MAIN_THREAD_TASK_1) {
-//                    barking.start();
-//                    //taskStatusTextView.setText(dogText);
-//                    sendActivity(dogTitle,dogTextLeft,dogTextCenter,dogTextRight);
-//                } else if (msg.what == MAIN_THREAD_TASK_2) {
-//                    // If task two button is clicked.
-//                    meowing.start();
-//                    //taskStatusTextView.setText(catText);
-//                    sendActivity2(catTitle,catText);
-//                } else if (msg.what == MAIN_THREAD_TASK_3) {
-//                    // If quit child thread looper button is clicked.
-//                    ribbiting.start();
-//                    sendActivity3(frogTitle,frogText);
-//                    //taskStatusTextView.setText(frogText);
-//                }
-//            }
-//        };
-
+        workerThread2=new MyWorkerThread2();
+        workerThread2.start();
 
         // Get run task buttons.
         ImageButton runTaskOneButton = findViewById(R.id.dogButton);
@@ -162,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // When click this button, create a message object
                 Message msg = new Message();
+                Log.i("runTaskOneButton","11111111111111111111111111");
                 msg.what = MAIN_THREAD_TASK_1;
                 // Use worker thread message Handler to put message into worker thread message queue.
                 workerThread.workerThreadHandler.sendMessage(msg);
@@ -195,14 +141,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //This sends the information to the Activity to be viewed
-    public void sendActivity(String dogTitle,String dogTextLeft,String dogTextCenter,String dogTextRight) {
-        Intent intent = new Intent(this, DogsActivity.class);
-        //Text editText =findViewById(R.id.somethingText);
-        //String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, dogTitle);
-        intent.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
-        intent.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
-        intent.putExtra(EXTRA_MESSAGE_FOUR,dogTextRight);
+    //public void sendActivity(String dogTitle,String dogTextLeft,String dogTextCenter,String dogTextRight) {
+//    public void sendActivity(String dogTitle,String dogTextLeft,String dogTextCenter,String dogTextRight){
+    public void sendActivity(Intent intent){
+//        Intent intent = new Intent(this, DogsActivity.class);
+//        //Text editText =findViewById(R.id.somethingText);
+//        //String message = editText.getText().toString();
+//        Log.i("sendActivity","222222222222222222222222");
+//        intent.putExtra(EXTRA_MESSAGE, dogTitle);
+//        intent.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
+//        intent.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
+//        intent.putExtra(EXTRA_MESSAGE_FOUR,dogTextRight);
         startActivity(intent);
     }
 
@@ -237,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
             //Prepares thread to add tasks in a loop
 
             Looper.prepare();
+            Log.i("run","3333333333333333333333");
 
             //Get Screen size to format images
 
@@ -256,7 +206,9 @@ public class MainActivity extends AppCompatActivity {
 
             //Creates a readable HTML document by calling FormatDocument()
             FormatDocument formattedDoc = new FormatDocument();
-            dogTextLeft = formattedDoc.returnString();
+//            dogTextLeft = formattedDoc.returnString();
+            Log.i("runTaskOneButton","4444444444444444444444444");
+            dogFormatted = formattedDoc.returnStringArray();
 
             FormatDocument2 formattedDoc2 = new FormatDocument2();
             catText = formattedDoc2.returnString2();
@@ -269,15 +221,18 @@ public class MainActivity extends AppCompatActivity {
             workerThreadHandler = new Handler(Looper.myLooper()) {
                 @Override
                 public void handleMessage(Message msg) {
+                    Log.i("handleMessage","55555555555555555555555");
                     // When child thread handler get message from child thread message queue.
                     Log.i("CHILD_THREAD", "Receive message from main thread.");
                     Message message = new Message();
                     message.what = msg.what;
                     Log.i("AFtermsg.what", ""+msg.what);
                     if (msg.what == MAIN_THREAD_TASK_1) {
+                        Log.i("if msg.what==Main","6666666666666666666666666");
                         barking.start();
                         //taskStatusTextView.setText(dogText);
-                        sendActivity(dogTitle,dogTextLeft,dogTextCenter,dogTextRight);
+                        sendActivity(intent1);
+                        //sendActivity(dogTitle,dogTextLeft,dogTextCenter,dogTextRight);
                     } else if (msg.what == MAIN_THREAD_TASK_2) {
                         // If task two button is clicked.
                         meowing.start();
@@ -314,47 +269,60 @@ public class MainActivity extends AppCompatActivity {
             mainThreadHandler.sendMessage(msg);
         }
     }
-//    private class MyWorkerThread2 extends Thread {
-//        //Log.i("MyWorkerThread","MyWorkerThread created")
-//        // This is worker thread handler.
-//        public Handler workerThreadHandler2;
-//
-//        @Override
-//        public void run() {
-//            // Prepare MyWorkerThread which is a child of Thread Looper object.
-//            //Prepares thread to add tasks in a loop
-//
-//            Looper.prepare();
-//
-//            workerThreadHandler2 = new Handler(Looper.myLooper()) {
-//                @Override
-//                public void handleMessage(Message msg) {
-//                    // When child thread handler gets message from child thread message queue.
-//                    Log.i("CHILD_THREAD", "Receive message from main thread.");
-//                    Message message = new Message();
-//                    message.what = msg.what;
-//                    Log.i("AFtermsg.what", ""+msg.what);
-//
-//                    // Send the message back to main thread message queue use main thread message Handler.
+
+    //WorkerThread for Database from MySQL and PHP
+    private class MyWorkerThread2 extends Thread {
+        //Log.i("MyWorkerThread","MyWorkerThread created")
+        // This is worker thread handler.
+        public Handler workerThreadHandler2;
+
+        @Override
+        public void run() {
+            // Prepare MyWorkerThread which is a child of Thread Looper object.
+            //Prepares thread to add tasks in a loop
+            Log.i("handleMessage","###################");
+            Looper.prepare();
+            //Gets database from website
+            FormatDatabase formatDatabase=new FormatDatabase();
+            dogTable = formatDatabase.returnStringArray2();
+
+
+            // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
+            workerThreadHandler2 = new Handler(Looper.myLooper()) {
+                @Override
+                public void handleMessage(Message msg) {
+                    Log.i("handleMessage","$$$$$$$$$$$$$$$$$$$");
+                    // When child thread handler get message from child thread message queue.
+                    Log.i("CHILD_THREAD", "Receive message from main thread.");
+                    Message message = new Message();
+                    message.what = msg.what;
+                    Log.i("AFtermsg.what", ""+msg.what);
+
+
+                    // Send the message back to main thread message queue use main thread message Handler.
 //                    mainThreadHandler.sendMessage(message);
-//                }
-//            };
-//            // Loop the child thread message queue.
-//            Looper.loop();
-//
-//            // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
-//            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
-//            // Send a message to main thread.
-//            Message msg = new Message();
-//            msg.what = CHILD_THREAD_QUIT_LOOPER;
-//            mainThreadHandler.sendMessage(msg);
-//        }
-//    }
+                }
+
+            };
+            // Loop the child thread message queue.
+            Looper.loop();
+
+            // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
+            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
+            // Send a message to main thread.
+            //Message msg = new Message();
+            //msg.what = CHILD_THREAD_QUIT_LOOPER;
+            //mainThreadHandler.sendMessage(msg);
+        }
+    }
+
 
 
     private class FormatDocument {
-        private String returnString() {
+        private String[] dogFormattedArray=new String[3];
+        private String[] returnStringArray() {
             try {
+                Log.i("runTaskOneButton","777777777777777777777777");
                 String url = getResources().getString(R.string.url);
                 //String url = "@string/url";
                 Document doc = Jsoup.connect(url).get();
@@ -368,8 +336,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Element e6 = e5.child(1);
                 Elements e9 = e6.children();
-                Element e7 = e5.child(2);
-                Element e8 = e5.child(3);
+                //Element e7 = e5.child(2);
+                //Element e8 = e5.child(3);
 
 
 //                MAKE AN ARRAY HERE
@@ -426,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
                 //String dogsLeftColumn=dogsLeftBuild.toString();
                 leftDogs=dogsLeftBuild.toString();
                 Log.i("DogsLEft Column=  ", ""+leftDogs);
-                dogTextLeft=leftDogs;
+                String dogTextLeft=leftDogs;
 
                 int limitCenterLoop=dogsLeft+dogsCenter;
 
@@ -441,7 +409,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 centerDogs=dogsCenterBuild.toString();
                 //Log.i("DogsCenter Column=  ", ""+centerDogs);
-                dogTextCenter=centerDogs;
+                String dogTextCenter=centerDogs;
 
                 //dogTextCenter="something";
 
@@ -459,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 rightDogs=dogsRightBuild.toString();
                 //Log.i("DogsRight Column=  ", ""+rightDogs);
-                dogTextRight=rightDogs;
+                String dogTextRight=rightDogs;
 
 
                 String dogsOnLeft=dogsLeft+"";
@@ -473,72 +441,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("numberOfDogs =",""+numberOfDogs);
 
 
-                //Element e6=e5.select("p.Dogs").first();
-                //Element e5=doc.tagName("<p>Dogs</p>");
-//                Element e6=doc.getElementById("Dogs");
-//                Element e7=e6.tagName("<li>");
-                //Elements e7=elements.select("p:contains(Dogs)").tagName("<li>");
+
 
                 Element e2 = doc.select("p:contains(Dogs)").get(0);
                 dogTitle=e2.text();
-                //String idString=e2.id();
-                //Log.i("idSTring= ",""+idString);
-                //String dogHeader=e2.toString();
-//                String dogHeader2=dogHeader;
-//                //Still hast HTML tags
-//                dogTitle = Jsoup.parse(dogHeader).text();
-//                Log.i("dogTitle:",""+dogTitle);
-//                //added here for test
-                //Element befParStr=e2.nextElementSibling();
-                //Elements befParStr=Element.after(dogHeader2);
-                //String parString = e2.nextElementSibling().toString();
-                //String dogTextHtml = dogTitle + parString;
 
-                //Document doc2 = Jsoup.parse(dogTextHtml);
-                //Document doc2 = Jsoup.parse(parString);
-//                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
-//                doc2.select("p").append("\\n");
-//                doc2.select("li").prepend("\\n\\n");
-//                String s = doc2.html().replaceAll("\\\\n", "\n");
-//                dogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
-
-                //combinedString=e2+parElement;
                 catWords=0;
                 String cattt;
-//                for(Element element : elements.tagName("<ol>")) {
-//                    catWords += 1;
-//                    Log.i("numberOfWords=    ", "" + catWords);
-//                    cattt=element.toString();
-//                    Log.i("Word=   ",""+cattt);
-//
-//                }
-                //Log.i("E5= ",""+e5);
-               // Log.i("E6= ",""+e6);
-                //Log.i("E7= ",""+e7);
-               // Log.i("E8= ",""+e8);
+
                 Log.i("E9   Should Dogs",""+e9);
                 Element cattEle=null;
-//                for(Element element : e6){
-//                    catWords += 1;
-//                    Log.i("numberOfWords=    ", "" + catWords);
-//                    cattEle=element;
-//                    cattt=element.toString();
-//                    Log.i("Word=   ",""+cattt);
-//                    if(cattt.equals("Dogs") ){
-//                        Log.i("DOGS FOUND", "0000000000000000000000000000000000000000000");
-//                    }
-//                }
-                //This reads the amount of items there are in the list
-                //This will be used to create the layout
-//                int n=-1;
-//                for (Node child : cattEle.childNodes()) {
-//                    if (child instanceof TextNode) {
-//                        Log.i("NOde of e6 ",""+child);
-//                        n+=1;
-//                        Log.i("Number of childn nodes", ""+n);
-//                        //System.out.println(((TextNode) child).text());
-//                    }
-//                }
+
 
 
                 //NEED TO MAKE A STRING ARRAY THAT CAN BE PUT INTO TWO DIFFERENT TEXT VIEWS SIDE BY SIDE
@@ -554,6 +467,18 @@ public class MainActivity extends AppCompatActivity {
                 //}
 
 
+                dogFormattedArray[0]=dogTextLeft;
+                dogFormattedArray[1]=dogTextCenter;
+                dogFormattedArray[2]=dogTextRight;
+
+                intent1 = new Intent(MainActivity.this, DogsActivity.class);
+                //Text editText =findViewById(R.id.somethingText);
+                //String message = editText.getText().toString();
+                Log.i("sendActivity","222222222222222222222222");
+                intent1.putExtra(EXTRA_MESSAGE, dogTitle);
+                intent1.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
+                intent1.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
+                intent1.putExtra(EXTRA_MESSAGE_FOUR,dogTextRight);
 
 
                 Log.i("in Element", "paragraph of dogs");
@@ -566,7 +491,187 @@ public class MainActivity extends AppCompatActivity {
                 builder.append("Error : ").append(e.getMessage()).append("\n");
                 Log.i("HTML ERROR", "exception reading HTML");
             }
-            return dogTextLeft;
+            //return dogTextLeft;
+            return dogFormattedArray;
+        }
+    }
+    private class FormatDatabase {
+        private String[] dogFormattedArray2=new String[3];
+        private String[] returnStringArray2() {
+            try {
+                String url = getResources().getString(R.string.url2);
+                //String url = "@string/url";
+                Document doc = Jsoup.connect(url).get();
+                Elements elements = doc.body().select("*");
+                Log.i("FormatDatabase"," "+elements);
+//                Elements e5=elements.select("p:contains(Dogs)");
+                //Element masthead = doc.select("div.masthead").first();
+                //Log.i("inFormatDatabase"," "+masthead);
+
+
+                //This selects the class that all the animals are in
+                //Element e5 = doc.select("div.entry-content").first();
+
+                //Element e6 = e5.child(1);
+                //Elements e9 = e6.children();
+                //Element e7 = e5.child(2);
+                //Element e8 = e5.child(3);
+
+
+//                MAKE AN ARRAY HERE
+//                int numberOfDogs = 0;
+//                String[] dogArray = new String[100];
+//                //ArrayList<Element> arrayElements = new ArrayList<>();
+//                for (Element e : e9) {
+//                    numberOfDogs += 1;
+//                    dogArray[numberOfDogs] = (e.text());
+//
+//                    Log.i("eachDogHere: ", "" + (dogArray[numberOfDogs]));
+//                }
+                //String halfWords = dogArray[1];
+
+                //Log.i("Dogs/2=", "" + (numberOfDogs / 2));
+
+                //If an odd number of dogs add one more to left column
+//                int remDog = numberOfDogs % 3;
+//                int dogsInList=numberOfDogs/3;
+//
+//                int dogsRem=0;
+//                int dogsRem2=0;
+//
+//                int dogsLeft=0;
+//                int dogsCenter=0;
+//                int dogsRight=0;
+//                if (remDog > 0 && remDog<2){
+//
+//                    dogsRem+=1;
+//                    dogsLeft+=1;
+//                }
+//                else if (remDog>0){
+//                    dogsRem2=2;
+//                    dogsLeft+=1;
+//                    dogsCenter+=1;
+//                }
+
+
+//                dogsLeft=dogsLeft+dogsInList;
+//                dogsCenter=dogsCenter+dogsInList;
+//                dogsRight=dogsInList;
+
+
+                //Builds list for left side of Dogs
+                //StringBuilder dogsLeftBuild=new StringBuilder();
+//                String leftDogs="";
+//                for(int i=1;i<=dogsLeft;i++){
+//                    dogsLeftBuild.append(dogArray[i]);
+//                    dogsLeftBuild.append((System.getProperty("line.separator")));
+//                    Log.i("Times ifn leftDogs loop","lets see "+i);
+//                    //leftDogs=dogArray[i];
+//                    //leftDogs=leftDogs+("\n");
+//                }
+//                //String dogsLeftColumn=dogsLeftBuild.toString();
+//                leftDogs=dogsLeftBuild.toString();
+//                Log.i("DogsLEft Column=  ", ""+leftDogs);
+//                String dogTextLeft=leftDogs;
+//
+//                int limitCenterLoop=dogsLeft+dogsCenter;
+//
+//                StringBuilder dogsCenterBuild=new StringBuilder();
+//                String centerDogs="";
+//                for(int p=dogsLeft+1;p>dogsLeft&& p<=limitCenterLoop;p++){
+//                    dogsCenterBuild.append(dogArray[p]);
+//                    dogsCenterBuild.append((System.getProperty("line.separator")));
+//                    //Log.i("Times ifn centerD loop","lets see "+p);
+//                    //leftDogs=dogArray[i];
+//                    //leftDogs=leftDogs+("\n");
+//                }
+//                centerDogs=dogsCenterBuild.toString();
+//                //Log.i("DogsCenter Column=  ", ""+centerDogs);
+//                String dogTextCenter=centerDogs;
+//
+//                //dogTextCenter="something";
+//
+//                int limitRightLoop=dogsCenter+dogsRight;
+//
+//                //Creates right side list for Dogs
+//                StringBuilder dogsRightBuild=new StringBuilder();
+//                String rightDogs="";
+//                for(int p=limitCenterLoop+1;p<=numberOfDogs;p++){
+//                    dogsRightBuild.append(dogArray[p]);
+//                    dogsRightBuild.append((System.getProperty("line.separator")));
+//                    //Log.i("Times ifn right loop","lets see "+p);
+//                    //leftDogs=dogArray[i];
+//                    //leftDogs=leftDogs+("\n");
+//                }
+//                rightDogs=dogsRightBuild.toString();
+//                //Log.i("DogsRight Column=  ", ""+rightDogs);
+//                String dogTextRight=rightDogs;
+//
+//
+//                String dogsOnLeft=dogsLeft+"";
+//                String dogsOnRight=dogsRight+"";
+
+
+
+
+
+                //Element[] elementArr = arrayElements.toArray(new Element[]{});
+                //Log.i("numberOfDogs =",""+numberOfDogs);
+
+
+
+
+//                Element e2 = doc.select("p:contains(Dogs)").get(0);
+//                dogTitle=e2.text();
+//
+//                catWords=0;
+//                String cattt;
+//
+//                //Log.i("E9   Should Dogs",""+e9);
+//                Element cattEle=null;
+
+
+
+                //NEED TO MAKE A STRING ARRAY THAT CAN BE PUT INTO TWO DIFFERENT TEXT VIEWS SIDE BY SIDE
+                //TO GET EACH SEPERATE ELEMENT DELIMITED BY /N
+                //public class TestConsole {
+                //   public static void main(String[] args) {
+                //      String nixSampleLine = "Line 1 \n Line 2 \n Line 3";
+                //      String[] lines = nixSampleLine.split("\\r?\\n");
+                //      for (String line : lines) {
+                //         System.out.println(line);
+                //      }
+                //   }
+                //}
+
+
+//                dogFormattedArray[0]=dogTextLeft;
+//                dogFormattedArray[1]=dogTextCenter;
+//                dogFormattedArray[2]=dogTextRight;
+//
+//                intent1 = new Intent(MainActivity.this, DogsActivity.class);
+//                //Text editText =findViewById(R.id.somethingText);
+//                //String message = editText.getText().toString();
+//                Log.i("sendActivity","222222222222222222222222");
+//                intent1.putExtra(EXTRA_MESSAGE, dogTitle);
+//                intent1.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
+//                intent1.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
+//                intent1.putExtra(EXTRA_MESSAGE_FOUR,dogTextRight);
+
+
+                Log.i("in Element", "paragraph of dogs");
+
+
+                Log.i("JSoup", "Connected successfully!");
+
+
+            } catch (IOException e) {
+                final StringBuilder builder = new StringBuilder();
+                builder.append("Error : ").append(e.getMessage()).append("\n");
+                Log.i("HTML ERROR", "exception reading HTML");
+            }
+            //return dogTextLeft;
+            return dogFormattedArray2;
         }
     }
 
