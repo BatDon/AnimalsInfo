@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
     Intent intent1;
     Intent intent2;
+    Intent intent3;
+
+    Document doc;
 
     private Handler mainThreadHandler;
 
@@ -74,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
     public String frogTitle;
     public String frogText;
+    public Integer frogWords;
+    String[]frogFormatted=new String[10];
+    String[]frogTable=new String[10];
 
     //Website where information will be pulled from
     public static final String EXTRA_MESSAGE = "@string/myPackage";
@@ -85,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE_ELEVEN = "@string/myPackage11";
     public static final String EXTRA_MESSAGE_TWELVE = "@string/myPackage12";
     public static final String EXTRA_MESSAGE_THIRTEEN = "@string/myPackage13";
+
+    public static final String EXTRA_MESSAGE_SIXTEEN = "@string/myPackage16";
+    public static final String EXTRA_MESSAGE_SEVENTEEN = "@string/myPackage17";
+    public static final String EXTRA_MESSAGE_EIGHTEEN = "@string/myPackage18";
+    public static final String EXTRA_MESSAGE_NINETEEN = "@string/myPackage19";
 
     //THIS VARIABLE IS FOR THE DOG TABLE
     public static final String EXTRA_MESSAGE_FIVE = "@string/myPackage5";
@@ -196,13 +207,9 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(intent);
  //   }
 
-    public void sendActivity3(String frogTitle, String frogText) {
-        Intent intent = new Intent(this, FrogsActivity.class);
-        //Text editText =findViewById(R.id.somethingText);
-        //String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, frogTitle);
-        intent.putExtra(EXTRA_MESSAGE_TWO, frogText);
-        startActivity(intent);
+    public void sendActivity3(Intent intent3) {
+
+        startActivity(intent3);
     }
 
 
@@ -237,16 +244,20 @@ public class MainActivity extends AppCompatActivity {
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
 
             //Creates a readable HTML document by calling FormatDocument()
+            ConnectionClass connection=new ConnectionClass();
+            connection.getDoc();
+
             FormatDocument formattedDoc = new FormatDocument();
 //            dogTextLeft = formattedDoc.returnString();
             Log.i("runTaskOneButton","4444444444444444444444444");
             dogFormatted = formattedDoc.returnStringArray();
 
+
             FormatDocument2 formattedDoc2 = new FormatDocument2();
             catFormatted = formattedDoc2.returnCatStringArray();
 
             FormatDocument3 formattedDoc3 = new FormatDocument3();
-            frogText = formattedDoc3.returnString3();
+            frogFormatted = formattedDoc3.returnFrogStringArray();
 
 
             // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
@@ -282,11 +293,12 @@ public class MainActivity extends AppCompatActivity {
                     } else if (msg.what == MAIN_THREAD_TASK_3) {
                         // If quit child thread looper button is clicked.
                         ribbiting.start();
-                        sendActivity3(frogTitle,frogText);
-                        ImageView v = (ImageView) findViewById(R.id.frogButton);
-                        String x = Integer.toString(v.getWidth());
-                        String y = Integer.toString(v.getHeight());
-                        Log.i("frog x and y","x= "+x+" y= "+y);
+                        sendActivity3(intent3);
+//                        sendActivity3(frogTitle,frogText);
+//                        ImageView v = (ImageView) findViewById(R.id.frogButton);
+//                        String x = Integer.toString(v.getWidth());
+//                        String y = Integer.toString(v.getHeight());
+//                        Log.i("frog x and y","x= "+x+" y= "+y);
                         //taskStatusTextView.setText(frogText);
                     }
 
@@ -665,127 +677,26 @@ public void dataIntoTable(){
 
 
 }
-    //MyObjects Parcelable class
+    private class ConnectionClass {
 
-//import java.util.ArrayList;
-//
-//import android.os.Parcel;
-//import android.os.Parcelable;
-//
-//    public class MyObjects implements Parcelable {
-//
-//        private int age;
-//        private String name;
-//
-//        private ArrayList<String> address;
-//
-//        public MyObjects(String name, int age, ArrayList<String> address) {
-//            this.name = name;
-//            this.age = age;
-//            this.address = address;
-//        }
-//
-//        public MyObjects(Parcel source) {
-//            age = source.readInt();
-//            name = source.readString();
-//            address = source.createStringArrayList();
-//        }
-//
-//        @Override
-//        public int describeContents() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public void writeToParcel(Parcel dest, int flags) {
-//            dest.writeInt(age);
-//            dest.writeString(name);
-//            dest.writeStringList(address);
-//        }
-//
-//        public int getAge() {
-//            return age;
-//        }
-//
-//        public String getName() {
-//            return name;
-//        }
-//
-//        public ArrayList<String> getAddress() {
-//            if (!(address == null))
-//                return address;
-//            else
-//                return new ArrayList<String>();
-//        }
-//
-//        public static final Creator<MyObjects> CREATOR = new Creator<MyObjects>() {
-//            @Override
-//            public MyObjects[] newArray(int size) {
-//                return new MyObjects[size];
-//            }
-//
-//            @Override
-//            public MyObjects createFromParcel(Parcel source) {
-//                return new MyObjects(source);
-//            }
-//        };
-//
-//    }
+        private Document getDoc() {
+            try {
 
 
+                String url = getResources().getString(R.string.url);
+                //String url = "@string/url";
+                doc = Jsoup.connect(url).get();
 
+            } catch (IOException e) {
+                final StringBuilder builder = new StringBuilder();
+                builder.append("Error : ").append(e.getMessage()).append("\n");
+                Log.i("HTML ERROR", "exception reading HTML");
+            }
+            return doc;
 
+        }
 
-
-
-
-//    MyObjects mObjects = new MyObjects("name","age","Address array here");
-//
-//    //Passing MyOjects instance
-//    Intent mIntent = new Intent(FromActivity.this, ToActivity.class);
-//mIntent.putExtra("UniqueKey", mObjects);
-//    startActivity(mIntent);
-//
-//
-//    //Getting MyObjects instance
-//    Intent mIntent = getIntent();
-//    MyObjects workorder = (MyObjects) mIntent.getParcelableExtra("UniqueKey");
-//
-//
-//
-//
-////You can pass Arraylist of Parceble obect as below
-//
-//    //Array of MyObjects
-//    ArrayList<MyObjects> mUsers;
-//
-//    //Passing MyOjects instance
-//    Intent mIntent = new Intent(FromActivity.this, ToActivity.class);
-//mIntent.putParcelableArrayListExtra("UniqueKey", mUsers);
-//    startActivity(mIntent);
-//
-//
-//    //Getting MyObjects instance
-//    Intent mIntent = getIntent();
-//    ArrayList<MyObjects> mUsers = mIntent.getParcelableArrayList("UniqueKey");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 
@@ -804,9 +715,9 @@ public void dataIntoTable(){
         private String[] returnStringArray() {
             try {
                 Log.i("runTaskOneButton","777777777777777777777777");
-                String url = getResources().getString(R.string.url);
-                //String url = "@string/url";
-                Document doc = Jsoup.connect(url).get();
+//                String url = getResources().getString(R.string.url);
+//                //String url = "@string/url";
+//                Document doc = Jsoup.connect(url).get();
                 Elements elements = doc.body().select("*");
 //                Elements e5=elements.select("p:contains(Dogs)");
                 Element masthead = doc.select("div.masthead").first();
@@ -975,7 +886,7 @@ public void dataIntoTable(){
 
                 Log.i("JSoup", "Connected successfully!");
 
-            } catch (IOException e) {
+            } catch(Throwable e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
                 Log.i("HTML ERROR", "exception reading HTML");
@@ -1154,7 +1065,11 @@ public void dataIntoTable(){
                 Log.i("JSoup", "Connected successfully!");
 
 
-            } catch (IOException e) {
+            }
+
+
+
+            catch (IOException e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
                 Log.i("HTML ERROR", "exception reading HTML");
@@ -1164,61 +1079,17 @@ public void dataIntoTable(){
         }
     }
 
-//    private class FormatDocument2 {
-//        private String returnString2() {
-//
-//
-//            try {
+
+
+    private class FormatDocument2 {
+        private String[] catFormattedArray = new String[3];
+
+        private String[] returnCatStringArray() {
+            try {
+                Log.i("runTaskOneButton", "777777777777777777777777");
 //                String url = getResources().getString(R.string.url);
 //                //String url = "@string/url";
 //                Document doc = Jsoup.connect(url).get();
-//
-//
-//
-//                String catHeader;
-//
-//                Element e2 = doc.select("p:contains(Cats)").get(0);
-//                //Still hast HTML tags
-//                catHeader = e2.toString();
-//                catTitle = Jsoup.parse(catHeader).text();
-//                String parString = e2.nextElementSibling().toString();
-//                //String dogTextHtml = catTitle + parString;
-//
-//                //Document doc2 = Jsoup.parse(dogTextHtml);
-//                String catTextBefore;
-//                Document doc2 = Jsoup.parse(parString);
-//
-//
-//                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
-//                doc2.select("p").append("\\n");
-//                doc2.select("li").prepend("\\n\\n");
-//                String s = doc2.html().replaceAll("\\\\n", "\n");
-//                catText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
-//
-//                //combinedString=e2+parElement;
-//
-//
-//                Log.i("in Element", "paragraph of dogs");
-//
-//
-//                Log.i("JSoup", "Connected successfully!");
-//
-//            } catch (IOException e) {
-//                final StringBuilder builder = new StringBuilder();
-//                builder.append("Error : ").append(e.getMessage()).append("\n");
-//                Log.i("HTML ERROR", "exception reading HTML");
-//            }
-//            return catText;
-//        }
-//    }
-    private class FormatDocument2 {
-        private String[] catFormattedArray=new String[3];
-        private String[] returnCatStringArray() {
-            try {
-                Log.i("runTaskOneButton","777777777777777777777777");
-                String url = getResources().getString(R.string.url);
-                //String url = "@string/url";
-                Document doc = Jsoup.connect(url).get();
                 Element e5 = doc.select("div.entry-content").first();
                 Elements elements = doc.body().select("*");
 //                Elements e5=elements.select("p:contains(Dogs)");
@@ -1226,45 +1097,45 @@ public void dataIntoTable(){
 //                Element e5 = doc.select("div.entry-content").first();
 //                  <p>Dogs</p>
                 //e6 has all the paragraphs
-               //Element e6 = e5.child(1);
-                Elements e11=e5.getElementsByTag("ol");
+                //Element e6 = e5.child(1);
+                Elements e11 = e5.getElementsByTag("ol");
                 //Elements e7 = e5.getElementsByTag("p");
-                Element epar1=null;
-                Element epar2=null;
+                Element epar1 = null;
+                Element epar2 = null;
                 //Element e12=e11.getAllElements​();
 
-                for (Element epar:e11){
-                    epar1=epar;
+                for (Element epar : e11) {
+                    epar1 = epar;
                     break;
 
                     //Element epar3=epar;
                     //Log.i("epars","epar1 "+epar+" epar2 "+epar2+" epar3 "+epar3);
                 }
-                int ep=0;
-                for (Element epar:e11){
-                    epar2=epar;
-                    if (ep==1){
+                int ep = 0;
+                for (Element epar : e11) {
+                    epar2 = epar;
+                    if (ep == 1) {
                         break;
+                    } else {
+                        ep++;
+                        continue;
                     }
-                    else
-                        {ep++;
-                        continue;}
                 }
-                Elements e10=epar1.getAllElements();
-                Element e12=epar2.child(1);
+                Elements e10 = epar1.getAllElements();
+                Element e12 = epar2.child(1);
                 //Elements e9=epar2.getAllElements();
                 //Elements e9=e12.getAllElements();
-                Elements e9=epar2.getElementsByTag("li");
+                Elements e9 = epar2.getElementsByTag("li");
                 //Elements e9=epar2.getAllElements();
                 //Elements e9=epar2.getAllElements();
                 //Element e9=epar2.firstElementSibling();
-                Log.i("Cate11= "," "+e11);
-                Log.i("Cate9= "," "+e9);
-                Log.i("Cate10= "," "+e10);
+                Log.i("Cate11= ", " " + e11);
+                Log.i("Cate9= ", " " + e9);
+                Log.i("Cate10= ", " " + e10);
 
-                Log.i("epars","epar1 "+epar1+" epar2 "+epar2);
+                Log.i("epars", "epar1 " + epar1 + " epar2 " + epar2);
 
-               //Elements e9=e6.getElementsByIndexEquals(2);
+                //Elements e9=e6.getElementsByIndexEquals(2);
 //                for (Element e:e7) {
 //                    Element child = e6.get( i );
 //                    if (child instanceof TextNode) {
@@ -1319,11 +1190,11 @@ public void dataIntoTable(){
 //                    numberOfCats += 1;}
                     //if (numberOfCats >= 1) {
 
-                        catArray[numberOfCats] = (e.text());
+                    catArray[numberOfCats] = (e.text());
 
-                        Log.i("eachCatHere: ", "" + (catArray[numberOfCats]));
-                        numberOfCats+=1;
-                   // }
+                    Log.i("eachCatHere: ", "" + (catArray[numberOfCats]));
+                    numberOfCats += 1;
+                    // }
                 }
 
                 String halfWords = catArray[1];
@@ -1332,14 +1203,14 @@ public void dataIntoTable(){
 
                 //If an odd number of dogs add one more to left column
                 int remCat = numberOfCats % 3;
-                int catsInList=numberOfCats/3;
+                int catsInList = numberOfCats / 3;
 
-                int catsRem=0;
-                int catsRem2=0;
+                int catsRem = 0;
+                int catsRem2 = 0;
 
-                int catsLeft=0;
-                int catsCenter=0;
-                int catsRight=0;
+                int catsLeft = 0;
+                int catsCenter = 0;
+                int catsRight = 0;
 //                if (remCat >= 0 && remCat<=2){
 ////                if (remCat > 0 && remCat<2){
 //
@@ -1351,99 +1222,91 @@ public void dataIntoTable(){
 //                    catsLeft+=1;
 //                    catsCenter+=1;
 //                }
-                if (remCat == 2){
+                if (remCat == 2) {
 //                if (remCat > 0 && remCat<2){
 
                     //catsRem+=1;
-                    catsCenter+=1;
-                    catsLeft+=1;
-                }
-                else if (remCat == 1){
+                    catsCenter += 1;
+                    catsLeft += 1;
+                } else if (remCat == 1) {
                     //catsRem2=2;
-                    catsLeft+=1;
+                    catsLeft += 1;
 
                 }
 
 
-
-                catsLeft=catsLeft+catsInList;
-                catsCenter=catsCenter+catsInList;
-                catsRight=catsInList;
+                catsLeft = catsLeft + catsInList;
+                catsCenter = catsCenter + catsInList;
+                catsRight = catsInList;
 
 
                 //Builds list for left side of Dogs
-                StringBuilder catsLeftBuild=new StringBuilder();
-                String leftCats="";
-                for(int i=0;i<catsLeft;i++){
+                StringBuilder catsLeftBuild = new StringBuilder();
+                String leftCats = "";
+                for (int i = 0; i < catsLeft; i++) {
                     catsLeftBuild.append(catArray[i]);
                     catsLeftBuild.append(System.getProperty("line.separator"));
-                    Log.i("Times ifn leftCats loop","lets see "+i);
+                    Log.i("Times ifn leftCats loop", "lets see " + i);
                     //leftDogs=dogArray[i];
                     //leftDogs=leftDogs+("\n");
                 }
                 //String dogsLeftColumn=dogsLeftBuild.toString();
-                leftCats=catsLeftBuild.toString();
-                Log.i("CatsLEft Column=  ", ""+leftCats);
-                String catTextLeft=leftCats;
+                leftCats = catsLeftBuild.toString();
+                Log.i("CatsLEft Column=  ", "" + leftCats);
+                String catTextLeft = leftCats;
 
-                int limitCenterLoop=catsLeft+catsCenter;
+                int limitCenterLoop = catsLeft + catsCenter;
 
-                StringBuilder catsCenterBuild=new StringBuilder();
-                String centerCats="";
-                for(int p=catsLeft+1;p>=catsLeft&& p<=limitCenterLoop;p++){
+                StringBuilder catsCenterBuild = new StringBuilder();
+                String centerCats = "";
+                for (int p = catsLeft + 1; p >= catsLeft && p <= limitCenterLoop; p++) {
                     catsCenterBuild.append(catArray[p]);
                     catsCenterBuild.append((System.getProperty("line.separator")));
                     //Log.i("Times ifn centerD loop","lets see "+p);
                     //leftDogs=dogArray[i];
                     //leftDogs=leftDogs+("\n");
                 }
-                centerCats=catsCenterBuild.toString();
+                centerCats = catsCenterBuild.toString();
                 //Log.i("DogsCenter Column=  ", ""+centerDogs);
-                String catTextCenter=centerCats;
-                Log.i("catsCenter", " "+ catTextCenter);
+                String catTextCenter = centerCats;
+                Log.i("catsCenter", " " + catTextCenter);
 
                 //dogTextCenter="something";
 
-                int limitRightLoop=catsCenter+catsRight;
+                int limitRightLoop = catsCenter + catsRight;
 
                 //Creates right side list for Dogs
-                StringBuilder catsRightBuild=new StringBuilder();
-                String rightCats="";
-                for(int p=limitCenterLoop;p<=numberOfCats-1;p++){
+                StringBuilder catsRightBuild = new StringBuilder();
+                String rightCats = "";
+                for (int p = limitCenterLoop; p <= numberOfCats - 1; p++) {
                     catsRightBuild.append(catArray[p]);
                     catsRightBuild.append((System.getProperty("line.separator")));
                     //Log.i("Times ifn right loop","lets see "+p);
                     //leftDogs=dogArray[i];
                     //leftDogs=leftDogs+("\n");
                 }
-                rightCats=catsRightBuild.toString();
+                rightCats = catsRightBuild.toString();
                 //Log.i("DogsRight Column=  ", ""+rightDogs);
-                String catTextRight=rightCats;
-                Log.i("catsRight", " "+ catTextRight);
+                String catTextRight = rightCats;
+                Log.i("catsRight", " " + catTextRight);
 
 
-                String catsOnLeft=catsLeft+"";
-                String catsOnRight=catsRight+"";
-
-
-
+                String catsOnLeft = catsLeft + "";
+                String catsOnRight = catsRight + "";
 
 
                 //Element[] elementArr = arrayElements.toArray(new Element[]{});
-                Log.i("numberOfCats =",""+numberOfCats);
+                Log.i("numberOfCats =", "" + numberOfCats);
 
 
+                Element e2 = doc.select("p:contains(Cats)").get(0);
+                catTitle = e2.text();
 
-
-                Element e2 = doc.select("p:contains(Dogs)").get(0);
-                catTitle=e2.text();
-
-                catWords=0;
+                catWords = 0;
                 String cattt;
 
-                Log.i("E9   Should Cats",""+e9);
-                Element cattEle=null;
-
+                Log.i("E9   Should Cats", "" + e9);
+                Element cattEle = null;
 
 
                 //NEED TO MAKE A STRING ARRAY THAT CAN BE PUT INTO TWO DIFFERENT TEXT VIEWS SIDE BY SIDE
@@ -1459,18 +1322,18 @@ public void dataIntoTable(){
                 //}
 
 
-                catFormattedArray[0]=catTextLeft;
-                catFormattedArray[1]=catTextCenter;
-                catFormattedArray[2]=catTextRight;
+                catFormattedArray[0] = catTextLeft;
+                catFormattedArray[1] = catTextCenter;
+                catFormattedArray[2] = catTextRight;
 
                 intent2 = new Intent(MainActivity.this, CatsActivity.class);
                 //Text editText =findViewById(R.id.somethingText);
                 //String message = editText.getText().toString();
-                Log.i("sendActivity","222222222222222222222222");
+                Log.i("sendActivity", "222222222222222222222222");
                 intent2.putExtra(EXTRA_MESSAGE_TEN, catTitle);
                 intent2.putExtra(EXTRA_MESSAGE_ELEVEN, catTextLeft);
-                intent2.putExtra(EXTRA_MESSAGE_TWELVE,catTextCenter);
-                intent2.putExtra(EXTRA_MESSAGE_THIRTEEN,catTextRight);
+                intent2.putExtra(EXTRA_MESSAGE_TWELVE, catTextCenter);
+                intent2.putExtra(EXTRA_MESSAGE_THIRTEEN, catTextRight);
 
                 //This intent message is for the table
 
@@ -1485,61 +1348,359 @@ public void dataIntoTable(){
 
                 Log.i("JSoup", "Connected successfully!");
 
-            } catch (IOException e) {
+            } catch (Throwable e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
                 Log.i("HTML ERROR", "exception reading HTML");
+//                catch (IOException e) {
+//                final StringBuilder builder = new StringBuilder();
+//                builder.append("Error : ").append(e.getMessage()).append("\n");
+//                Log.i("HTML ERROR", "exception reading HTML");
+//            }
+                //return dogTextLeft;
+
             }
-            //return dogTextLeft;
             return catFormattedArray;
         }
     }
 
     private class FormatDocument3 {
-        private String returnString3() {
-
-
+        private String[] frogFormattedArray = new String[3];
+        private String[] returnFrogStringArray() {
             try {
-                String url = getResources().getString(R.string.url);
-                //String url = "@string/url";
-                Document doc = Jsoup.connect(url).get();
+                Log.i("runTaskOneButton", "777777777777777777777777");
+//                String url = getResources().getString(R.string.url);
+//                //String url = "@string/url";
+//                Document doc = Jsoup.connect(url).get();
+                Element e5 = doc.select("div.entry-content").first();
+                Elements elements = doc.body().select("*");
+//                Elements e5=elements.select("p:contains(Frogs)");
+                Element masthead = doc.select("div.masthead").first();
+//                Element e5 = doc.select("div.entry-content").first();
+//                  <p>Frogs</p>
+                //e6 has all the paragraphs
+                //Element e6 = e5.child(1);
+                Elements e11 = e5.getElementsByTag("ol");
+                //Elements e7 = e5.getElementsByTag("p");
+                Element epar1 = null;
+                Element epar2 = null;
+                Element epar3 = null;
+                //Element e12=e11.getAllElements​();
+                int ep = 0;
+//                for (Element epar : e11) {
+//                    epar1 = epar;
+//                    break;
+//
+//                    //Element epar3=epar;
+//                    //Log.i("epars","epar1 "+epar+" epar2 "+epar2+" epar3 "+epar3);
+//                }
+//
+//                for (Element epar : e11) {
+//                    epar2 = epar;
+//                    if (ep == 1) {
+//                        break;
+//                    } else {
+//                        ep++;
+//                        continue;
+//                    }
+//                }
+                for (Element epar : e11) {
+                    epar3 = epar;
+                    if (ep == 2) {
+                        break;
+                    } else {
+                        ep++;
+                        continue;
+                    }
+                }
+                Elements e10 = epar3.getAllElements();
+                Element e12 = epar3.child(1);
+                //Elements e9=epar2.getAllElements();
+                //Elements e9=e12.getAllElements();
+                Elements e9 = epar3.getElementsByTag("li");
+                //Elements e9=epar2.getAllElements();
+                //Elements e9=epar2.getAllElements();
+                //Element e9=epar2.firstElementSibling();
+                Log.i("Cate11= ", " " + e11);
+                Log.i("Cate9= ", " " + e9);
+                Log.i("Cate10= ", " " + e10);
+
+                Log.i("epars", "epar1 " + epar1 + " epar2 " + epar2 + "epar3 "+epar3);
+
+                //Elements e9=e6.getElementsByIndexEquals(2);
+//                for (Element e:e7) {
+//                    Element child = e6.get( i );
+//                    if (child instanceof TextNode) {
+//                        if(brFound){
+//                            working += ((TextNode) child).text();
+//                        }
+//                    }
+//                    if (child instanceof Element) {
+//                        Element childElement = (Element)child;
+//                        if(brFound){
+//                            working += childElement.text();
+//                        }
+//                        if(childElement.tagName().equals( "br" )){
+//                            brFound = true;
+//                        }
+//                    }
 
 
+//                Elements e9 = e6.children();
 
-                String frogHeader;
+                //This selects the class that all the animals are in
+                //Element e5 = doc.select("div.entry-content").first();
+//                Element e4 = doc.select("paragraph").first();
+//                Element e5 = doc.select("paragraph").first();
+                //Elements e6=e5.getElementsByAttribute("p");
+                //Elements e6=e5.children();
+                //Elements e7=e6.eq(2);
+//                Elements e6=e5.children();
+//                for (Element par : e6) {
+//                    Element e4=par;
+//
+//                    System.out.println("Href: " + link.attr("href"));
+//                    System.out.println("Text: " + link.text());
+//                }
+//                Elements e7=e6.children();
+//
+//                Element e6 = e5.child(1);
+//                Elements e9 = e6.children();
+                //Element e7 = e5.child(2);
+                //Element e8 = e5.child(3);
+
+
+//                MAKE AN ARRAY HERE
+                int numberOfFrogs = 0;
+                String[] frogArray = new String[100];
+                //String[] frogArray = null;
+                ArrayList<Element> arrayElements = new ArrayList<>();
+
+                for (Element e : e9) {
+//                    if (numberOfCats==0){
+//                    e.text();
+//                    numberOfCats += 1;}
+                    //if (numberOfCats >= 1) {
+
+                    frogArray[numberOfFrogs] = (e.text());
+
+                    Log.i("eachFrogHere: ", "" + (frogArray[numberOfFrogs]));
+                    numberOfFrogs += 1;
+                    // }
+                }
+
+                String halfWords = frogArray[1];
+
+                Log.i("Frogs/2=", "" + (numberOfFrogs / 2));
+
+                //If an odd number of dogs add one more to left column
+                int remFrog = numberOfFrogs % 3;
+                int frogsInList = numberOfFrogs / 3;
+
+                int frogsRem = 0;
+                int frogsRem2 = 0;
+
+                int frogsLeft = 0;
+                int frogsCenter = 0;
+                int frogsRight = 0;
+//                if (remCat >= 0 && remCat<=2){
+////                if (remCat > 0 && remCat<2){
+//
+//                    catsRem+=1;
+//                    catsLeft+=1;
+//                }
+//                else if (remCat>0){
+//                    catsRem2=2;
+//                    catsLeft+=1;
+//                    catsCenter+=1;
+//                }
+                if (remFrog == 2) {
+//                if (remFrog > 0 && remFrog<2){
+
+                    //frogsRem+=1;
+                    frogsCenter += 1;
+                    frogsLeft += 1;
+                } else if (remFrog == 1) {
+                    //catsRem2=2;
+                    frogsLeft += 1;
+
+                }
+
+
+                frogsLeft = frogsLeft + frogsInList;
+                frogsCenter = frogsCenter + frogsInList;
+                frogsRight = frogsInList;
+
+
+                //Builds list for left side of Dogs
+                StringBuilder frogsLeftBuild = new StringBuilder();
+                String leftFrogs = "";
+                for (int i = 0; i < frogsLeft; i++) {
+                    frogsLeftBuild.append(frogArray[i]);
+                    frogsLeftBuild.append(System.getProperty("line.separator"));
+                    Log.i("Times leftFrogs loop", "lets see " + i);
+                    //leftDogs=dogArray[i];
+                    //leftDogs=leftDogs+("\n");
+                }
+                //String dogsLeftColumn=dogsLeftBuild.toString();
+                leftFrogs = frogsLeftBuild.toString();
+                Log.i("FrogsLEft Column=  ", "" + leftFrogs);
+                String frogTextLeft = leftFrogs;
+
+                int limitCenterLoop = frogsLeft + frogsCenter;
+
+                StringBuilder frogsCenterBuild = new StringBuilder();
+                String centerFrogs = "";
+                for (int p = frogsLeft + 1; p >= frogsLeft && p <= limitCenterLoop; p++) {
+                    frogsCenterBuild.append(frogArray[p]);
+                    frogsCenterBuild.append((System.getProperty("line.separator")));
+                    //Log.i("Times ifn centerD loop","lets see "+p);
+                    //leftDogs=dogArray[i];
+                    //leftDogs=leftDogs+("\n");
+                }
+                centerFrogs = frogsCenterBuild.toString();
+                //Log.i("DogsCenter Column=  ", ""+centerDogs);
+                String frogTextCenter = centerFrogs;
+                Log.i("frogsCenter", " " + frogTextCenter);
+
+                //frogTextCenter="something";
+
+                int limitRightLoop = frogsCenter + frogsRight;
+
+                //Creates right side list for Dogs
+                StringBuilder frogsRightBuild = new StringBuilder();
+                String rightFrogs = "";
+                for (int p = limitCenterLoop; p <= numberOfFrogs - 1; p++) {
+                    frogsRightBuild.append(frogArray[p]);
+                    frogsRightBuild.append((System.getProperty("line.separator")));
+                    //Log.i("Times ifn right loop","lets see "+p);
+                    //leftDogs=dogArray[i];
+                    //leftDogs=leftDogs+("\n");
+                }
+                rightFrogs = frogsRightBuild.toString();
+                //Log.i("DogsRight Column=  ", ""+rightDogs);
+                String frogTextRight = rightFrogs;
+                Log.i("frogsRight", " " + frogTextRight);
+
+
+                String frogOnLeft = frogsLeft + "";
+                String frogsOnRight = frogsRight + "";
+
+
+                //Element[] elementArr = arrayElements.toArray(new Element[]{});
+                Log.i("numberOfFrogs =", "" + numberOfFrogs);
+
 
                 Element e2 = doc.select("p:contains(Frogs)").get(0);
-                //Still hast HTML tags
+                frogTitle = e2.text();
 
-                frogHeader = e2.toString();
-                frogTitle = Jsoup.parse(frogHeader).text();
-                String parString = e2.nextElementSibling().toString();
-                String dogTextHtml = frogHeader + parString;
+                frogWords = 0;
+                String froggg;
 
-                //Document doc2 = Jsoup.parse(dogTextHtml);
-                Document doc2 = Jsoup.parse(parString);
+                Log.i("E9   Should Frogs", "" + e9);
+                Element froggEle = null;
 
-                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
-                doc2.select("p").append("\\n");
-                doc2.select("li").prepend("\\n\\n");
-                String s = doc2.html().replaceAll("\\\\n", "\n");
-                frogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
 
-                //combinedString=e2+parElement;
+                //NEED TO MAKE A STRING ARRAY THAT CAN BE PUT INTO TWO DIFFERENT TEXT VIEWS SIDE BY SIDE
+                //TO GET EACH SEPERATE ELEMENT DELIMITED BY /N
+                //public class TestConsole {
+                //   public static void main(String[] args) {
+                //      String nixSampleLine = "Line 1 \n Line 2 \n Line 3";
+                //      String[] lines = nixSampleLine.split("\\r?\\n");
+                //      for (String line : lines) {
+                //         System.out.println(line);
+                //      }
+                //   }
+                //}
+
+
+                frogFormattedArray[0] = frogTextLeft;
+                frogFormattedArray[1] = frogTextCenter;
+                frogFormattedArray[2] = frogTextRight;
+
+                intent3 = new Intent(MainActivity.this, FrogsActivity.class);
+                //Text editText =findViewById(R.id.somethingText);
+                //String message = editText.getText().toString();
+                Log.i("sendActivity", "222222222222222222222222");
+                intent3.putExtra(EXTRA_MESSAGE_SIXTEEN, frogTitle);
+                intent3.putExtra(EXTRA_MESSAGE_SEVENTEEN, frogTextLeft);
+                intent3.putExtra(EXTRA_MESSAGE_EIGHTEEN, frogTextCenter);
+                intent3.putExtra(EXTRA_MESSAGE_NINETEEN, frogTextRight);
+
+                //This intent message is for the table
+
+                // intent1.putExtra(EXTRA_MESSAGE_FIVE,listIntoTable);
+
+
+                // intent1.putExtra(EXTRA_MESSAGE_SIX,exTableLayout);
+
 
                 Log.i("in Element", "paragraph of dogs");
 
 
                 Log.i("JSoup", "Connected successfully!");
 
-            } catch (IOException e) {
+            } catch (Throwable e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
                 Log.i("HTML ERROR", "exception reading HTML");
+//                catch (IOException e) {
+//                final StringBuilder builder = new StringBuilder();
+//                builder.append("Error : ").append(e.getMessage()).append("\n");
+//                Log.i("HTML ERROR", "exception reading HTML");
+//            }
+                //return dogTextLeft;
+
             }
-            return frogText;
+            return frogFormattedArray;
         }
     }
+
+
+
+//        private String returnString3() {
+//
+//
+//            try {
+////                String url = getResources().getString(R.string.url);
+////                //String url = "@string/url";
+////                Document doc = Jsoup.connect(url).get();
+//
+//                String frogHeader;
+//
+//                Element e2 = doc.select("p:contains(Frogs)").get(0);
+//                //Still hast HTML tags
+//
+//                frogHeader = e2.toString();
+//                frogTitle = Jsoup.parse(frogHeader).text();
+//                String parString = e2.nextElementSibling().toString();
+//                String dogTextHtml = frogHeader + parString;
+//
+//                //Document doc2 = Jsoup.parse(dogTextHtml);
+//                Document doc2 = Jsoup.parse(parString);
+//
+//                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+//                doc2.select("p").append("\\n");
+//                doc2.select("li").prepend("\\n\\n");
+//                String s = doc2.html().replaceAll("\\\\n", "\n");
+//                frogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+//
+//                //combinedString=e2+parElement;
+//
+//                Log.i("in Element", "paragraph of dogs");
+//
+//
+//                Log.i("JSoup", "Connected successfully!");
+//
+//            }
+//            catch (Throwable e) {
+//                final StringBuilder builder = new StringBuilder();
+//                builder.append("Error : ").append(e.getMessage()).append("\n");
+//                Log.i("HTML ERROR", "exception reading HTML");
+//            }
+//            return frogText;
+//        }
+  //  }
 
 
 

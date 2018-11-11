@@ -17,6 +17,10 @@
     <string name="myPackage11">com.example.david.animalsinfo.MESSAGE_ELEVEN</string>
     <string name="myPackage12">com.example.david.animalsinfo.MESSAGE_TWELVE</string>
     <string name="myPackage13">com.example.david.animalsinfo.MESSAGE_THIRTEEN</string>
+    <string name="myPackage16">com.example.david.animalsinfo.MESSAGE_SIXTEEN</string>
+    <string name="myPackage17">com.example.david.animalsinfo.MESSAGE_SEVENTEEN</string>
+    <string name="myPackage18">com.example.david.animalsinfo.MESSAGE_EIGHTEEN</string>
+    <string name="myPackage19">com.example.david.animalsinfo.MESSAGE_NINETEEN</string>
     <string name="dogTitle">Dog Title</string>
     <string name="catTitle">Cat Title</string>
     <string name="frogTitle">Frog Title</string>
