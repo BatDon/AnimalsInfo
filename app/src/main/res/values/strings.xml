@@ -11,8 +11,20 @@
     <string name="myPackage2">com.example.david.animalsinfo.MESSAGE_TWO</string>
     <string name="myPackage3">com.example.david.animalsinfo.MESSAGE_THREE</string>
     <string name="myPackage4">com.example.david.animalsinfo.MESSAGE_FOUR</string>
+    <string name="myPackage5">com.example.david.animalsinfo.MESSAGE_FIVE</string>
+    <string name="myPackage6">com.example.david.animalsinfo.MESSAGE_SIX</string>
+    <string name="myPackage10">com.example.david.animalsinfo.MESSAGE_TEN</string>
+    <string name="myPackage11">com.example.david.animalsinfo.MESSAGE_ELEVEN</string>
+    <string name="myPackage12">com.example.david.animalsinfo.MESSAGE_TWELVE</string>
+    <string name="myPackage13">com.example.david.animalsinfo.MESSAGE_THIRTEEN</string>
     <string name="dogTitle">Dog Title</string>
     <string name="catTitle">Cat Title</string>
     <string name="frogTitle">Frog Title</string>
 
+     <!--Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="font_size_verysmall">10sp</dimen>
+    <dimen name="font_size_small">12sp</dimen>
+    <dimen name="font_size_medium">20sp</dimen>
 </resources>
