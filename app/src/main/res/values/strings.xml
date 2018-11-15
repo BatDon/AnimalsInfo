@@ -26,9 +26,15 @@
     <string name="frogTitle">Frog Title</string>
 
      <!--Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="font_size_verysmall">10sp</dimen>
-    <dimen name="font_size_small">12sp</dimen>
-    <dimen name="font_size_medium">20sp</dimen>
+    <!--<string name="activity_horizontal_margin">16</string>-->
+    <!--<string name="activity_vertical_margin">16</string>-->
+    <!--<string name="font_size_verysmall">10</string>-->
+    <!--<string name="font_size_small">12</string>-->
+    <!--<string name="font_size_medium">20</string>-->
+    <!--<string name="activity_horizontal_margin">16dp</string>-->
+    <!--<string name="activity_vertical_margin">16dp</string>-->
+    <!--<string name="font_size_verysmall">10sp</string>-->
+    <!--<string name="font_size_small">12sp</string>-->
+    <!--<string name="font_size_medium">20sp</string>-->
+    <!--<dimen name="font_size_medium">20sp</dimen>-->
 </resources>

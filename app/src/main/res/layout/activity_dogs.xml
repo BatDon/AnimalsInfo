@@ -94,15 +94,17 @@
         <ScrollView
             android:id="@+id/scrollDogs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <TableLayout
                 android:id="@+id/dogsTable"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="0dp"
                 android:stretchColumns="*"
                 >
+                <!--android:layout_height="match_parent"-->
             </TableLayout>
 
         </ScrollView>

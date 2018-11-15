@@ -15,6 +15,7 @@ import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -99,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
     //THIS VARIABLE IS FOR THE DOG TABLE
     public static final String EXTRA_MESSAGE_FIVE = "@string/myPackage5";
+    TableLayout mTableLayout;
+    TableLayout tableLayout2;
+    TableLayout[] tableArray;
+
 
 
     @Override
@@ -106,8 +111,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainx720);
         Log.i("onCreateMethod","0000000000000000000000");
+        //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
+        //mTableLayout.setStretchAllColumns(true);
 
-        //dataIntoTable();
+        //DogTableCreator dtc=new DogTableCreator();
+        //dtc.dataIntoTable();
+
 //        View vf=(View)findViewById(R.id.frogButton);
 //        Integer x2 = vf.getWidth();
 //        Integer y2 = vf.getHeight();
@@ -123,9 +132,14 @@ public class MainActivity extends AppCompatActivity {
 
         v.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalListenerClass());
 
+
+
+        //dataIntoTable();
+
         // Create and start the worker thread.
         workerThread = new MyWorkerThread();
         workerThread.start();
+        //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
 
         workerThread2=new MyWorkerThread2();
         workerThread2.start();
@@ -333,15 +347,34 @@ public class MainActivity extends AppCompatActivity {
             Looper.prepare();
             //Gets database from website
             //CREATE DYNAMIC TABLE HERE
-            //DogActivity dataIntoTable2=new DogsActivity.dataIntoTable();
+            Log.i("beforeDogCr","eator &&&&&&&&&&&&");
+            Log.i("after","dogcreator    ");
             FormatDatabase formatDatabase=new FormatDatabase();
+            final TableLayout dogLayout;
+            TableLayout[] dogLayoutArray;
+            DogTableCreator dtc =new DogTableCreator();
+            //dogLayout=dtc.dataIntoTable();
+            dogLayoutArray=dtc.dataIntoTable();
+            //final TableLayout tabDog=dogLayoutArray[0];
+            //final TableLayout tabDogView=dogLayoutArray[1];
             dogTable = formatDatabase.returnStringArray2();
 
 
             // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
-            workerThreadHandler2 = new Handler(Looper.myLooper()) {
+            workerThreadHandler2 = new Handler(Looper.getMainLooper()) {
+            //workerThreadHandler2 = new Handler(Looper.myLooper()) {
                 @Override
                 public void handleMessage(Message msg) {
+                                final TableLayout dogLayout;
+            TableLayout[] dogLayoutArray;
+            DogTableCreator dtc =new DogTableCreator();
+            //dogLayout=dtc.dataIntoTable();
+            dogLayoutArray=dtc.dataIntoTable();
+            final TableLayout tabDog=dogLayoutArray[0];
+            final TableLayout tabDogView=dogLayoutArray[1];
+//            dogTable = formatDatabase.returnStringArray2();
+                    tabDogView.addView(tabDog);
+                    //tableLayout2.addView(mTableLayout);
                     Log.i("handleMessage","$$$$$$$$$$$$$$$$$$$");
                     // When child thread handler get message from child thread message queue.
                     Log.i("CHILD_THREAD", "Receive message from main thread.");
@@ -372,311 +405,339 @@ public class MainActivity extends AppCompatActivity {
 //    TextView[][] listIntoTable=new TextView[30][4];
 //    TextView[] rowArray;
 //
-public void dataIntoTable(){
-    TableLayout mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
-    TextView[][] listIntoTable=new TextView[30][4];
-    TextView[] rowArray;
-    //InvoiceData.java=DogsAddData.java
-    //Invoices.java=DogsData.java
-
-    //data=dogsAddData
-    //invoices=dogsData
-    Log.i("dataInto Table", "))))))))))))))))");
-
-    //added this part
-    //setContentView(R.layout.activity_dogs);
-
-    //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
-
-    //mTableLayout.setStretchAllColumns(true);
-    //exTableLayout.setStretchAllColumns(true);
-
-
-
-    int leftRowMargin=0;
-    int topRowMargin=0;
-    int rightRowMargin=0;
-    int bottomRowMargin = 0;
-    int textSize = 0, smallTextSize =0, mediumTextSize = 0;
-
-    textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
-    smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
-    mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
-
-    DogsData dogsData = new DogsData();
-    DogsAddData[] dogsAddData = dogsData.getInfo();
-
-    int rows = dogsAddData.length;
-    TextView textSpacer = null;
-
-    //mTableLayout.removeAllViews();
-    //exTableLayout.removeAllViews();
-
-    // -1 means heading row
-    for(int i = -1; i < rows; i ++) {
-        DogsAddData row = null;
-        if (i > -1)
-            row = dogsAddData[i];
-        else {
-            textSpacer = new TextView(this);
-            textSpacer.setText("");
-
-        }
-        // data columns
-        final TextView tv = new TextView(this);
-        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT));
-
-        tv.setGravity(Gravity.LEFT);
-
-        tv.setPadding(5, 15, 0, 15);
-        if (i == -1) {
-            tv.setText("Dog Breed");
-            tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-        } else {
-            tv.setBackgroundColor(Color.parseColor("#f8f8f8"));
-            tv.setText(String.valueOf(row.dogName));
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        }
-
-        final TextView tv2 = new TextView(this);
-        if (i == -1) {
-            tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
-            tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-        } else {
-            tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.MATCH_PARENT));
-            tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        }
-
-        tv2.setGravity(Gravity.LEFT);
-
-        tv2.setPadding(5, 15, 0, 15);
-        if (i == -1) {
-            tv2.setText("Dog Weight");
-            tv2.setBackgroundColor(Color.parseColor("#f7f7f7"));
-        }else {
-            tv2.setBackgroundColor(Color.parseColor("#ffffff"));
-            tv2.setTextColor(Color.parseColor("#000000"));
-            tv2.setText(String.valueOf(row.dogWeight));
-        }
-
-
-//        final LinearLayout layCustomer = new LinearLayout(this);
-//        layCustomer.setOrientation(LinearLayout.VERTICAL);
-//        layCustomer.setPadding(0, 10, 0, 10);
-//        layCustomer.setBackgroundColor(Color.parseColor("#f8f8f8"));
-
-        final TextView tv3 = new TextView(this);
-        if (i == -1) {
-            tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.MATCH_PARENT));
-            tv3.setPadding(5, 5, 0, 5);
-            tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-        } else {
-            tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.MATCH_PARENT));
-            tv3.setPadding(5, 0, 0, 5);
-            tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        }
-
-        tv3.setGravity(Gravity.TOP);
-
-
-        if (i == -1) {
-            tv3.setText("Dog Height");
-            tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
-        } else {
-            tv3.setBackgroundColor(Color.parseColor("#f8f8f8"));
-            tv3.setTextColor(Color.parseColor("#000000"));
-            tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-            tv3.setText(row.dogHeight);
-        }
-        //layCustomer.addView(tv3);
-
-
-//            if (i > -1) {
-//                final TextView tv3b = new TextView(this);
-//                tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-//                        TableRow.LayoutParams.WRAP_CONTENT));
-//
-//                tv3b.setGravity(Gravity.RIGHT);
-//                tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//                tv3b.setPadding(5, 1, 0, 5);
-//                tv3b.setTextColor(Color.parseColor("#aaaaaa"));
-//                tv3b.setBackgroundColor(Color.parseColor("#f8f8f8"));
-//                tv3b.setText(row.customerAddress);
-//                layCustomer.addView(tv3b);
-//            }
-
-//            final LinearLayout layAmounts = new LinearLayout(this);
-//            layAmounts.setOrientation(LinearLayout.VERTICAL);
-//            layAmounts.setGravity(Gravity.RIGHT);
-//            layAmounts.setPadding(0, 10, 0, 10);
-//            layAmounts.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                    TableRow.LayoutParams.MATCH_PARENT));
-//
-//
-//
-        final TextView tv4 = new TextView(this);
-        if (i == -1) {
-            tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.MATCH_PARENT));
-            tv4.setPadding(5, 5, 1, 5);
-            //layAmounts.setBackgroundColor(Color.parseColor("#f7f7f7"));
-        } else {
-            tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
-            tv4.setPadding(5, 0, 1, 5);
-            //layAmounts.setBackgroundColor(Color.parseColor("#ffffff"));
-        }
-
-        tv4.setGravity(Gravity.RIGHT);
-
-        if (i == -1) {
-            tv4.setText("Dog Lifespan");
-            tv4.setBackgroundColor(Color.parseColor("#f7f7f7"));
-            tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-        } else {
-            tv4.setBackgroundColor(Color.parseColor("#ffffff"));
-            tv4.setTextColor(Color.parseColor("#000000"));
-            tv4.setText(String.valueOf(row.dogLifespan));
-            tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        }
-
-        //layAmounts.addView(tv4);
-
-
-//            if (i > -1) {
-//                final TextView tv4b = new TextView(this);
-//                tv4b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                        TableRow.LayoutParams.WRAP_CONTENT));
-//
-//                tv4b.setGravity(Gravity.RIGHT);
-//                tv4b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//                tv4b.setPadding(2, 2, 1, 5);
-//                tv4b.setTextColor(Color.parseColor("#00afff"));
-//                tv4b.setBackgroundColor(Color.parseColor("#ffffff"));
-//
-//                String due = "";
-//                if (row.amountDue.compareTo(new BigDecimal(0.01)) == 1) {
-//                    due = "Due:" + decimalFormat.format(row.amountDue);
-//                    due = due.trim();
-//                }
-//                tv4b.setText(due);
-//                layAmounts.addView(tv4b);
-//            }
-
-
-
-
-        // add table row
-
-        final TableRow tr = new TableRow(this);
-        tr.setId(i + 1);
-        TableLayout.LayoutParams trParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-                TableLayout.LayoutParams.WRAP_CONTENT);
-        trParams.setMargins(leftRowMargin, topRowMargin, rightRowMargin, bottomRowMargin);
-        tr.setPadding(0,0,0,0);
-        tr.setLayoutParams(trParams);
-
-
-
-        tr.addView(tv);
-        tr.addView(tv2);
-        tr.addView(tv3);
-        tr.addView(tv4);
-
-        //create array of arrays holding text views
-        int dogsRow=4;
-
-
-        TextView[] dogColumnArray = new TextView[dogsRow];
-        //Log.i("IntV","intextview not showing");
-        //for(int p = 0; p < dogsRow; p++) {
-        dogColumnArray[0] = tv;
-        dogColumnArray[1] = tv2;
-        dogColumnArray[2] = tv3;
-        dogColumnArray[3] = tv4;
-
-        //int r=0;
-        //
-        //listIntoTable[][]={dogColumnArray};
-        //for(int d = 0; d < rows; d++){
-        //listIntoTable[r][]={tv,tv2,tv3,tv4};
-        //r++;
-        //t is for rows and j is for columns iterates through all columns first then the row
-        int t=0;
-        //for (t; t < listIntoTable.length; t++) {
-        for (int j = 0; j < listIntoTable[t].length; j++) {
-            listIntoTable[t][j]=dogColumnArray[j];
-            //listIntoTable[t][j] = t + j;
-            Log.i("2d Array",""+listIntoTable[t][j]);
-        }
-        //}
-        t++;
-
-
-
-        // Log.i("2d Array",""+listIntoTable[t][j]);
-        //}
-
-
-
-//            tr.addView(layCustomer);
-//            tr.addView(layAmounts);
-
-//            if (i > -1) {
-//
-//                tr.setOnClickListener(new View.OnClickListener() {
-//                    public void onClick(View v) {
-//                        TableRow tr = (TableRow) v;
-//                        //do whatever action is needed
-//
-//                    }
-//                });
-        //     }
-
-
-
-        mTableLayout.addView(tr, trParams);
-        //exTableLayout.addView(tr, trParams);
-
-        //mTableLayout.setStretchAllColumns(true);
-        //exTableLayout.setStretchAllColumns(true);
-
-        if (i > -1) {
-
-            // add separator row
-            final TableRow trSep = new TableRow(this);
-            TableLayout.LayoutParams trParamsSep = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT);
-            trParamsSep.setMargins(leftRowMargin, topRowMargin, rightRowMargin, bottomRowMargin);
-
-            trSep.setLayoutParams(trParamsSep);
-            TextView tvSep = new TextView(this);
-            TableRow.LayoutParams tvSepLay = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT);
-            tvSepLay.span = 4;
-            tvSep.setLayoutParams(tvSepLay);
-            tvSep.setBackgroundColor(Color.parseColor("#d9d9d9"));
-            tvSep.setHeight(1);
-
-            trSep.addView(tvSep);
-            mTableLayout.addView(trSep, trParamsSep);
+    //TableLayout mTableLayout=new TableLayout(MainActivity.this);
+    //TableLayout mTableLayout;
+    public class DogTableCreator {
+        //public TableLayout dataIntoTable() {
+        public TableLayout[] dataIntoTable() {
+            Log.i("dataInto Table", "****************");
+            //TableLayout mTableLayout=new TableLayout(MainActivity.this);
+            setContentView(R.layout.activity_dogs);
+            mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
             mTableLayout.setStretchAllColumns(true);
+            //exTableLayout.setStretchAllColumns(true);
+            TextView[][] listIntoTable = new TextView[30][4];
+            TextView[] rowArray;
+            //InvoiceData.java=DogsAddData.java
+            //mTableLayout.setStretchAllColumns(true);
+            //Invoices.java=DogsData.java
 
-            //exTableLayout.addView(trSep, trParamsSep);
+            //data=dogsAddData
+            //invoices=dogsData
+            Log.i("dataInto Table", "))))))))))))))))");
+
+            //added this part
+            //setContentView(R.layout.activity_dogs);
+
+            //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
+
+
+//This section can be done on background thread///////////////////
+
+            int leftRowMargin = 0;
+            int topRowMargin = 0;
+            int rightRowMargin = 0;
+            int bottomRowMargin = 0;
+            int textSize = 0, smallTextSize = 0, mediumTextSize = 0;
+
+            TableLayout tableLayout2 = (TableLayout) findViewById(R.id.dogsTable);
+            textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
+            smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
+            mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
+
+//        textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
+//        smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
+//        mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
+
+            DogsData dogsData = new DogsData();
+            DogsAddData[] dogsAddData = dogsData.getInfo();
+
+            int rows = dogsAddData.length;
+            TextView textSpacer = null;
+
+            Log.i("tableRows", " " + rows);
+            //mTableLayout.removeAllViews();
+            //exTableLayout.removeAllViews();
+
+//This section can be done on background thread///////////////
+
+            // -1 means heading row
+            for (int i = -1; i < rows; i++) {
+                DogsAddData row = null;
+                if (i > -1)
+                    row = dogsAddData[i];
+                else {
+                    textSpacer = new TextView(MainActivity.this);
+                    textSpacer.setText("");
+
+                }
+                // data columns
+                final TextView tv = new TextView(MainActivity.this);
+                tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                        TableRow.LayoutParams.WRAP_CONTENT));
+
+                tv.setGravity(Gravity.LEFT);
+
+                tv.setPadding(5, 15, 0, 15);
+                if (i == -1) {
+                    tv.setText("Dog Breed");
+                    tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                } else {
+                    tv.setBackgroundColor(Color.parseColor("#f8f8f8"));
+                    tv.setText(String.valueOf(row.dogName));
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                }
+
+                final TextView tv2 = new TextView(MainActivity.this);
+                if (i == -1) {
+                    tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                            TableRow.LayoutParams.WRAP_CONTENT));
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                } else {
+                    tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.MATCH_PARENT));
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                }
+
+                tv2.setGravity(Gravity.LEFT);
+
+                tv2.setPadding(5, 15, 0, 15);
+                if (i == -1) {
+                    tv2.setText("Dog Weight");
+                    tv2.setBackgroundColor(Color.parseColor("#f7f7f7"));
+                } else {
+                    tv2.setBackgroundColor(Color.parseColor("#ffffff"));
+                    tv2.setTextColor(Color.parseColor("#000000"));
+                    tv2.setText(String.valueOf(row.dogWeight));
+                }
+
+
+                //        final LinearLayout layCustomer = new LinearLayout(this);
+                //        layCustomer.setOrientation(LinearLayout.VERTICAL);
+                //        layCustomer.setPadding(0, 10, 0, 10);
+                //        layCustomer.setBackgroundColor(Color.parseColor("#f8f8f8"));
+
+                final TextView tv3 = new TextView(MainActivity.this);
+                if (i == -1) {
+                    tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                            TableRow.LayoutParams.MATCH_PARENT));
+                    tv3.setPadding(5, 5, 0, 5);
+                    tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                } else {
+                    tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                            TableRow.LayoutParams.MATCH_PARENT));
+                    tv3.setPadding(5, 0, 0, 5);
+                    tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                }
+
+                tv3.setGravity(Gravity.TOP);
+
+
+                if (i == -1) {
+                    tv3.setText("Dog Height");
+                    tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
+                } else {
+                    tv3.setBackgroundColor(Color.parseColor("#f8f8f8"));
+                    tv3.setTextColor(Color.parseColor("#000000"));
+                    tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                    tv3.setText(row.dogHeight);
+                }
+                //layCustomer.addView(tv3);
+
+
+                //            if (i > -1) {
+                //                final TextView tv3b = new TextView(this);
+                //                tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                //                        TableRow.LayoutParams.WRAP_CONTENT));
+                //
+                //                tv3b.setGravity(Gravity.RIGHT);
+                //                tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                //                tv3b.setPadding(5, 1, 0, 5);
+                //                tv3b.setTextColor(Color.parseColor("#aaaaaa"));
+                //                tv3b.setBackgroundColor(Color.parseColor("#f8f8f8"));
+                //                tv3b.setText(row.customerAddress);
+                //                layCustomer.addView(tv3b);
+                //            }
+
+                //            final LinearLayout layAmounts = new LinearLayout(this);
+                //            layAmounts.setOrientation(LinearLayout.VERTICAL);
+                //            layAmounts.setGravity(Gravity.RIGHT);
+                //            layAmounts.setPadding(0, 10, 0, 10);
+                //            layAmounts.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                //                    TableRow.LayoutParams.MATCH_PARENT));
+                //
+                //
+                //
+                final TextView tv4 = new TextView(MainActivity.this);
+                if (i == -1) {
+                    tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                            TableRow.LayoutParams.MATCH_PARENT));
+                    tv4.setPadding(5, 5, 1, 5);
+                    //layAmounts.setBackgroundColor(Color.parseColor("#f7f7f7"));
+                } else {
+                    tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                            TableRow.LayoutParams.WRAP_CONTENT));
+                    tv4.setPadding(5, 0, 1, 5);
+                    //layAmounts.setBackgroundColor(Color.parseColor("#ffffff"));
+                }
+
+                tv4.setGravity(Gravity.RIGHT);
+
+                if (i == -1) {
+                    tv4.setText("Dog Lifespan");
+                    tv4.setBackgroundColor(Color.parseColor("#f7f7f7"));
+                    tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                } else {
+                    tv4.setBackgroundColor(Color.parseColor("#ffffff"));
+                    tv4.setTextColor(Color.parseColor("#000000"));
+                    tv4.setText(String.valueOf(row.dogLifespan));
+                    tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                }
+
+                //layAmounts.addView(tv4);
+
+
+                //            if (i > -1) {
+                //                final TextView tv4b = new TextView(this);
+                //                tv4b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                //                        TableRow.LayoutParams.WRAP_CONTENT));
+                //
+                //                tv4b.setGravity(Gravity.RIGHT);
+                //                tv4b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                //                tv4b.setPadding(2, 2, 1, 5);
+                //                tv4b.setTextColor(Color.parseColor("#00afff"));
+                //                tv4b.setBackgroundColor(Color.parseColor("#ffffff"));
+                //
+                //                String due = "";
+                //                if (row.amountDue.compareTo(new BigDecimal(0.01)) == 1) {
+                //                    due = "Due:" + decimalFormat.format(row.amountDue);
+                //                    due = due.trim();
+                //                }
+                //                tv4b.setText(due);
+                //                layAmounts.addView(tv4b);
+                //            }
+
+
+                // add table row
+
+                final TableRow tr = new TableRow(MainActivity.this);
+                tr.setId(i + 1);
+                TableLayout.LayoutParams trParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
+                        TableLayout.LayoutParams.WRAP_CONTENT);
+                trParams.setMargins(leftRowMargin, topRowMargin, rightRowMargin, bottomRowMargin);
+                tr.setPadding(0, 0, 0, 0);
+                tr.setLayoutParams(trParams);
+
+
+                tr.addView(tv);
+                tr.addView(tv2);
+                tr.addView(tv3);
+                tr.addView(tv4);
+
+                //create array of arrays holding text views
+                int dogsRow = 4;
+
+
+                TextView[] dogColumnArray = new TextView[dogsRow];
+                //Log.i("IntV","intextview not showing");
+                //for(int p = 0; p < dogsRow; p++) {
+                dogColumnArray[0] = tv;
+                dogColumnArray[1] = tv2;
+                dogColumnArray[2] = tv3;
+                dogColumnArray[3] = tv4;
+
+                //int r=0;
+                //
+                //listIntoTable[][]={dogColumnArray};
+                //for(int d = 0; d < rows; d++){
+                //listIntoTable[r][]={tv,tv2,tv3,tv4};
+                //r++;
+                //t is for rows and j is for columns iterates through all columns first then the row
+                int t = 0;
+                //for (t; t < listIntoTable.length; t++) {
+                for (int j = 0; j < listIntoTable[t].length; j++) {
+                    listIntoTable[t][j] = dogColumnArray[j];
+                    //listIntoTable[t][j] = t + j;
+                    Log.i("2d Array", "" + listIntoTable[t][j]);
+                }
+                //}
+                t++;
+
+
+                // Log.i("2d Array",""+listIntoTable[t][j]);
+                //}
+
+
+                //            tr.addView(layCustomer);
+                //            tr.addView(layAmounts);
+
+                //            if (i > -1) {
+                //
+                //                tr.setOnClickListener(new View.OnClickListener() {
+                //                    public void onClick(View v) {
+                //                        TableRow tr = (TableRow) v;
+                //                        //do whatever action is needed
+                //
+                //                    }
+                //                });
+                //     }
+
+
+                mTableLayout.addView(tr, trParams);
+                //exTableLayout.addView(tr, trParams);
+
+                //mTableLayout.setStretchAllColumns(true);
+                //exTableLayout.setStretchAllColumns(true);
+
+                if (i > -1) {
+
+                    // add separator row
+                    final TableRow trSep = new TableRow(MainActivity.this);
+                    TableLayout.LayoutParams trParamsSep = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
+                            TableLayout.LayoutParams.WRAP_CONTENT);
+                    trParamsSep.setMargins(leftRowMargin, topRowMargin, rightRowMargin, bottomRowMargin);
+
+                    trSep.setLayoutParams(trParamsSep);
+                    TextView tvSep = new TextView(MainActivity.this);
+                    TableRow.LayoutParams tvSepLay = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                            TableRow.LayoutParams.WRAP_CONTENT);
+                    tvSepLay.span = 4;
+                    tvSep.setLayoutParams(tvSepLay);
+                    tvSep.setBackgroundColor(Color.parseColor("#d9d9d9"));
+                    tvSep.setHeight(1);
+
+                    trSep.addView(tvSep);
+                    mTableLayout.addView(trSep, trParamsSep);
+                    //tableLayout2.addView(mTableLayout);
+                    Log.i("TL finished", " ////////////////////////////");
+
+                    TableLayout[] tableArray = {mTableLayout,tableLayout2};
+                    //mTableLayout.setStretchAllColumns(true);
+
+                    //exTableLayout.addView(trSep, trParamsSep);
+                }
+
+
+            }
+//            Bundle bundle = new Bundle();
+//            bundle.putStringArray("key1", mTableLayout);
+//            bundle.putStringArray("key2", tableLayout2);
+//
+//            Message message = new Message();
+//            message.setData(bundle);
+//            handler.sendMessage(message);
+//
+//            Message msgArray = new Message();
+//            Log.i("runTaskOneButton","11111111111111111111111111");
+//            msgArray.what = MAIN_THREAD_TASK_1;
+//            msgArray.arg1=tableArray;
+
+
+        //return tableLayout2;
+            return tableArray;
         }
-
-
     }
-
-
-
-}
     private class ConnectionClass {
 
         private Document getDoc() {
@@ -1655,55 +1716,6 @@ public void dataIntoTable(){
             return frogFormattedArray;
         }
     }
-
-
-
-//        private String returnString3() {
-//
-//
-//            try {
-////                String url = getResources().getString(R.string.url);
-////                //String url = "@string/url";
-////                Document doc = Jsoup.connect(url).get();
-//
-//                String frogHeader;
-//
-//                Element e2 = doc.select("p:contains(Frogs)").get(0);
-//                //Still hast HTML tags
-//
-//                frogHeader = e2.toString();
-//                frogTitle = Jsoup.parse(frogHeader).text();
-//                String parString = e2.nextElementSibling().toString();
-//                String dogTextHtml = frogHeader + parString;
-//
-//                //Document doc2 = Jsoup.parse(dogTextHtml);
-//                Document doc2 = Jsoup.parse(parString);
-//
-//                doc2.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
-//                doc2.select("p").append("\\n");
-//                doc2.select("li").prepend("\\n\\n");
-//                String s = doc2.html().replaceAll("\\\\n", "\n");
-//                frogText = Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
-//
-//                //combinedString=e2+parElement;
-//
-//                Log.i("in Element", "paragraph of dogs");
-//
-//
-//                Log.i("JSoup", "Connected successfully!");
-//
-//            }
-//            catch (Throwable e) {
-//                final StringBuilder builder = new StringBuilder();
-//                builder.append("Error : ").append(e.getMessage()).append("\n");
-//                Log.i("HTML ERROR", "exception reading HTML");
-//            }
-//            return frogText;
-//        }
-  //  }
-
-
-
 
     class MyGlobalListenerClass implements ViewTreeObserver.OnGlobalLayoutListener {
         @Override
