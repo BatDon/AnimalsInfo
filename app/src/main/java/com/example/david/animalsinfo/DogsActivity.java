@@ -82,7 +82,7 @@ public class DogsActivity extends AppCompatActivity {
                 int topRowMargin = 0;
                 int rightRowMargin = 0;
                 int bottomRowMargin = 0;
-                int textSize = 0, smallTextSize = 0, mediumTextSize = 0;
+                int textSize = 0, smallTextSize = 0, mediumTextSize = 17;
 
                 //TableLayout tableLayout2 = (TableLayout) findViewById(R.id.dogsTable);
                 textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
@@ -217,16 +217,17 @@ public class DogsActivity extends AppCompatActivity {
                     if (i == -1) {
                         tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
-                        tv4.setPadding(5, 5, 1, 5);
+                        tv4.setPadding(5, 5, 5, 5);
                         //layAmounts.setBackgroundColor(Color.parseColor("#f7f7f7"));
                     } else {
                         tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
-                        tv4.setPadding(5, 0, 1, 5);
+                        tv4.setPadding(5, 5, 5, 5);
                         //layAmounts.setBackgroundColor(Color.parseColor("#ffffff"));
                     }
 
-                    tv4.setGravity(Gravity.RIGHT);
+                    tv4.setGravity(Gravity.LEFT);
+                    //tv4.setGravity(Gravity.RIGHT);
 
                     if (i == -1) {
                         tv4.setText("Dog Lifespan");
