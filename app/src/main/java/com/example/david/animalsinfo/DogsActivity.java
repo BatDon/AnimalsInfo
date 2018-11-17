@@ -59,6 +59,7 @@ public class DogsActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_dogs);
                 TableLayout mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
                 mTableLayout.setStretchAllColumns(true);
+                mTableLayout.removeAllViews();
                 //exTableLayout.setStretchAllColumns(true);
                 TextView[][] listIntoTable = new TextView[30][4];
                 TextView[] rowArray;
@@ -133,6 +134,12 @@ public class DogsActivity extends AppCompatActivity {
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
                     }
 
+                    //LinearLayout for the dogs weight holds two TextViews
+                    final LinearLayout layDogWeight = new LinearLayout(DogsActivity.this);
+                    layDogWeight.setOrientation(LinearLayout.VERTICAL);
+                    layDogWeight.setPadding(0, 10, 0, 10);
+                    layDogWeight.setBackgroundColor(Color.parseColor("#f8f8f8"));
+
                     final TextView tv2 = new TextView(DogsActivity.this);
                     if (i == -1) {
                         tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
@@ -144,7 +151,8 @@ public class DogsActivity extends AppCompatActivity {
                         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
                     }
 
-                    tv2.setGravity(Gravity.LEFT);
+                    //tv2.setGravity(Gravity.LEFT);
+                    tv2.setGravity(Gravity.TOP);
 
                     tv2.setPadding(5, 15, 0, 15);
                     if (i == -1) {
@@ -155,12 +163,28 @@ public class DogsActivity extends AppCompatActivity {
                         tv2.setTextColor(Color.parseColor("#000000"));
                         tv2.setText(String.valueOf(row.dogWeight));
                     }
+                    layDogWeight.addView(tv2);
 
+                    final TextView tv2b = new TextView(DogsActivity.this);
+                    if (i > -1) {
+                        tv2b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                                TableRow.LayoutParams.WRAP_CONTENT));
+                        tv2b.setGravity(Gravity.BOTTOM);
+                        tv2b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv2b.setPadding(5, 15, 0, 15);
+                        tv2b.setBackgroundColor(Color.parseColor("#ffffff"));
+                        tv2b.setTextColor(Color.parseColor("#000000"));
+                        tv2b.setText(String.valueOf(row.dogPounds));
+                    }
+                    layDogWeight.addView(tv2b);
 
-                    //        final LinearLayout layCustomer = new LinearLayout(this);
-                    //        layCustomer.setOrientation(LinearLayout.VERTICAL);
-                    //        layCustomer.setPadding(0, 10, 0, 10);
-                    //        layCustomer.setBackgroundColor(Color.parseColor("#f8f8f8"));
+                    //tv2.setGravity(Gravity.LEFT);
+
+                    //LinearLayout for the dogs height holds two TextViews
+                    final LinearLayout layDogHeight = new LinearLayout(DogsActivity.this);
+                    layDogHeight.setOrientation(LinearLayout.VERTICAL);
+                    layDogHeight.setPadding(0, 10, 0, 10);
+                    layDogHeight.setBackgroundColor(Color.parseColor("#f8f8f8"));
 
                     final TextView tv3 = new TextView(DogsActivity.this);
                     if (i == -1) {
@@ -178,6 +202,7 @@ public class DogsActivity extends AppCompatActivity {
                     tv3.setGravity(Gravity.TOP);
 
 
+
                     if (i == -1) {
                         tv3.setText("Dog Height");
                         tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
@@ -187,32 +212,31 @@ public class DogsActivity extends AppCompatActivity {
                         tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                         tv3.setText(row.dogHeight);
                     }
-                    //layCustomer.addView(tv3);
+                    layDogHeight.addView(tv3);
 
 
-                    //            if (i > -1) {
-                    //                final TextView tv3b = new TextView(this);
-                    //                tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    //                        TableRow.LayoutParams.WRAP_CONTENT));
-                    //
-                    //                tv3b.setGravity(Gravity.RIGHT);
-                    //                tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-                    //                tv3b.setPadding(5, 1, 0, 5);
-                    //                tv3b.setTextColor(Color.parseColor("#aaaaaa"));
-                    //                tv3b.setBackgroundColor(Color.parseColor("#f8f8f8"));
-                    //                tv3b.setText(row.customerAddress);
-                    //                layCustomer.addView(tv3b);
-                    //            }
+                    final TextView tv3b = new TextView(DogsActivity.this);
+                    if (i > -1) {
+                        tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                                TableRow.LayoutParams.WRAP_CONTENT));
+                        tv3b.setGravity(Gravity.BOTTOM);
+                        tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv3b.setPadding(5, 15, 0, 15);
+                        tv3b.setBackgroundColor(Color.parseColor("#ffffff"));
+                        tv3b.setTextColor(Color.parseColor("#000000"));
+                        tv3b.setText(String.valueOf(row.dogInches));
+                    }
+                    layDogHeight.addView(tv3b);
 
-                    //            final LinearLayout layAmounts = new LinearLayout(this);
-                    //            layAmounts.setOrientation(LinearLayout.VERTICAL);
-                    //            layAmounts.setGravity(Gravity.RIGHT);
-                    //            layAmounts.setPadding(0, 10, 0, 10);
-                    //            layAmounts.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    //                    TableRow.LayoutParams.MATCH_PARENT));
-                    //
-                    //
-                    //
+
+                    //LinearLayout for the dogs lifespan holds two TextViews
+                    final LinearLayout layDogLifespan = new LinearLayout(DogsActivity.this);
+                    layDogLifespan.setOrientation(LinearLayout.VERTICAL);
+                    layDogLifespan.setPadding(0, 10, 0, 10);
+                    layDogLifespan.setBackgroundColor(Color.parseColor("#f8f8f8"));
+
+
+
                     final TextView tv4 = new TextView(DogsActivity.this);
                     if (i == -1) {
                         tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
@@ -240,7 +264,23 @@ public class DogsActivity extends AppCompatActivity {
                         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
                     }
 
-                    //layAmounts.addView(tv4);
+                    layDogLifespan.addView(tv4);
+
+                    final TextView tv4b = new TextView(DogsActivity.this);
+                    if (i > -1) {
+                        tv4b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                                TableRow.LayoutParams.WRAP_CONTENT));
+                        tv4b.setGravity(Gravity.BOTTOM);
+                        tv4b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv4b.setPadding(5, 15, 0, 15);
+                        tv4b.setBackgroundColor(Color.parseColor("#ffffff"));
+                        tv4b.setTextColor(Color.parseColor("#000000"));
+                        tv4b.setText(String.valueOf(row.dogYears));
+                    }
+
+                    layDogLifespan.addView(tv4b);
+
+
 
 
                     //            if (i > -1) {
@@ -276,21 +316,22 @@ public class DogsActivity extends AppCompatActivity {
 
 
                     tr.addView(tv);
-                    tr.addView(tv2);
-                    tr.addView(tv3);
-                    tr.addView(tv4);
+                    tr.addView(layDogWeight);
+                    //tr.addView(tv2);
+                    tr.addView(layDogHeight);
+                    tr.addView(layDogLifespan);
 
                     //create array of arrays holding text views
                     int dogsRow = 4;
 
 
-                    TextView[] dogColumnArray = new TextView[dogsRow];
-                    //Log.i("IntV","intextview not showing");
-                    //for(int p = 0; p < dogsRow; p++) {
-                    dogColumnArray[0] = tv;
-                    dogColumnArray[1] = tv2;
-                    dogColumnArray[2] = tv3;
-                    dogColumnArray[3] = tv4;
+//                    TextView[] dogColumnArray = new TextView[dogsRow];
+//                    //Log.i("IntV","intextview not showing");
+//                    //for(int p = 0; p < dogsRow; p++) {
+//                    dogColumnArray[0] = tv;
+//                    dogColumnArray[1] = tv2;
+//                    dogColumnArray[2] = tv3;
+//                    dogColumnArray[3] = tv4;
 
                     //int r=0;
                     //
@@ -299,15 +340,15 @@ public class DogsActivity extends AppCompatActivity {
                     //listIntoTable[r][]={tv,tv2,tv3,tv4};
                     //r++;
                     //t is for rows and j is for columns iterates through all columns first then the row
-                    int t = 0;
-                    //for (t; t < listIntoTable.length; t++) {
-                    for (int j = 0; j < listIntoTable[t].length; j++) {
-                        listIntoTable[t][j] = dogColumnArray[j];
-                        //listIntoTable[t][j] = t + j;
-                        Log.i("2d Array", "" + listIntoTable[t][j]);
-                    }
-                    //}
-                    t++;
+//                    int t = 0;
+//                    //for (t; t < listIntoTable.length; t++) {
+//                    for (int j = 0; j < listIntoTable[t].length; j++) {
+//                        listIntoTable[t][j] = dogColumnArray[j];
+//                        //listIntoTable[t][j] = t + j;
+//                        Log.i("2d Array", "" + listIntoTable[t][j]);
+//                    }
+//                    //}
+//                    t++;
 
 
                     // Log.i("2d Array",""+listIntoTable[t][j]);
