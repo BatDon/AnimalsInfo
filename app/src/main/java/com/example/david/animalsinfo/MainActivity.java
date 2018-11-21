@@ -3,6 +3,7 @@ package com.example.david.animalsinfo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -110,11 +111,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainx720);
         Log.i("onCreateMethod","0000000000000000000000");
+        //String url2 = getResources().getString(R.string.url2);
+
+
+
         //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
         //mTableLayout.setStretchAllColumns(true);
 
@@ -146,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
 
         workerThread2=new MyWorkerThread2();
-        //workerThread2.start();
+        workerThread2.start();
 
         // Get run task buttons.
         ImageButton runTaskOneButton = findViewById(R.id.dogButton);
@@ -154,6 +160,26 @@ public class MainActivity extends AppCompatActivity {
         ImageButton runTaskTwoButton = findViewById(R.id.catButton);
 
         ImageButton runTaskThreeButton = findViewById(R.id.frogButton);
+        try{
+            for(int i=5 ; i>0 ; i--){
+                //System.out.println("main thread: " + i);
+                Thread.sleep(2000);
+
+            }
+        }
+        catch(InterruptedException e){
+            Log.i("sleep","main thread interrupted");
+        }
+//        try{
+//            Thread.sleep(3000);
+//        }
+//        catch (IOException e) {
+//            final StringBuilder builder = new StringBuilder();
+//            builder.append("Error : ").append(e.getMessage()).append("\n");
+//            Log.i("SLEEP ER", "exception main thread sleeping");
+//        }
+
+
 
         // Set on click listener to each button.
         runTaskOneButton.setOnClickListener(new View.OnClickListener()
@@ -196,7 +222,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
     }
+
 
     //This sends the information to the Activity to be viewed
     //public void sendActivity(String dogTitle,String dogTextLeft,String dogTextCenter,String dogTextRight) {
@@ -327,14 +355,15 @@ public class MainActivity extends AppCompatActivity {
 
             };
             // Loop the child thread message queue.
-            Looper.loop();
+
+            //Looper.loop();
 
             // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
-            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
-            // Send a message to main thread.
-            Message msg = new Message();
-            msg.what = CHILD_THREAD_QUIT_LOOPER;
-            mainThreadHandler.sendMessage(msg);
+//            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
+//            // Send a message to main thread.
+//            Message msg = new Message();
+//            msg.what = CHILD_THREAD_QUIT_LOOPER;
+//            mainThreadHandler.sendMessage(msg);
         }
     }
 
@@ -350,11 +379,13 @@ public class MainActivity extends AppCompatActivity {
             //Prepares thread to add tasks in a loop
             Log.i("handleMessage","###################");
             Looper.prepare();
+            String url2 = getResources().getString(R.string.url2);
+            new DogsData().getDogsStatsArray(url2);
             //Gets database from website
             //CREATE DYNAMIC TABLE HERE
             Log.i("beforeDogCr","eator &&&&&&&&&&&&");
             Log.i("after","dogcreator    ");
-            FormatDatabase formatDatabase=new FormatDatabase();
+            //FormatDatabase formatDatabase=new FormatDatabase();
             final TableLayout dogLayout;
             TableLayout[] dogLayoutArray;
             //DogTableCreator dtc =new DogTableCreator();
@@ -362,7 +393,8 @@ public class MainActivity extends AppCompatActivity {
             //dogLayoutArray=dtc.dataIntoTable();
             //final TableLayout tabDog=dogLayoutArray[0];
             //final TableLayout tabDogView=dogLayoutArray[1];
-            dogTable = formatDatabase.returnStringArray2();
+            //formatDatabase.returnStringArray2();
+            //dogTable = formatDatabase.returnStringArray2();
 
 
             // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
@@ -395,7 +427,8 @@ public class MainActivity extends AppCompatActivity {
 
             };
             // Loop the child thread message queue.
-            Looper.loop();
+
+            //Looper.loop();
 
             // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
             Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
@@ -474,340 +507,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-//    public class DogTableCreator {
-//        //public TableLayout dataIntoTable() {
-//        public TableLayout dataIntoTable() {
-//            Log.i("dataInto Table", "****************");
-//            //TableLayout mTableLayout=new TableLayout(MainActivity.this);
-//            setContentView(R.layout.activity_dogs);
-//            mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
-//            mTableLayout.setStretchAllColumns(true);
-//            //exTableLayout.setStretchAllColumns(true);
-//            TextView[][] listIntoTable = new TextView[30][4];
-//            TextView[] rowArray;
-//            //InvoiceData.java=DogsAddData.java
-//            //mTableLayout.setStretchAllColumns(true);
-//            //Invoices.java=DogsData.java
-//
-//            //data=dogsAddData
-//            //invoices=dogsData
-//            Log.i("dataInto Table", "))))))))))))))))");
-//
-//            //added this part
-//            //setContentView(R.layout.activity_dogs);
-//
-//            //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
-//
-//
-////This section can be done on background thread///////////////////
-//
-//            int leftRowMargin = 0;
-//            int topRowMargin = 0;
-//            int rightRowMargin = 0;
-//            int bottomRowMargin = 0;
-//            int textSize = 0, smallTextSize = 0, mediumTextSize = 0;
-//
-//            //TableLayout tableLayout2 = (TableLayout) findViewById(R.id.dogsTable);
-//            textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
-//            smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
-//            mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
-//
-////        textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
-////        smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
-////        mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
-//
-//            DogsData dogsData = new DogsData();
-//            DogsAddData[] dogsAddData = dogsData.getInfo();
-//
-//            int rows = dogsAddData.length;
-//            TextView textSpacer = null;
-//
-//            Log.i("tableRows", " " + rows);
-//            //mTableLayout.removeAllViews();
-//            //exTableLayout.removeAllViews();
-//
-////This section can be done on background thread///////////////
-//
-//            // -1 means heading row
-//            for (int i = -1; i < rows; i++) {
-//                DogsAddData row = null;
-//                if (i > -1)
-//                    row = dogsAddData[i];
-//                else {
-//                    textSpacer = new TextView(MainActivity.this);
-//                    textSpacer.setText("");
-//
-//                }
-//                // data columns
-//                final TextView tv = new TextView(MainActivity.this);
-//                tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-//                        TableRow.LayoutParams.WRAP_CONTENT));
-//
-//                tv.setGravity(Gravity.LEFT);
-//
-//                tv.setPadding(5, 15, 0, 15);
-//                if (i == -1) {
-//                    tv.setText("Dog Breed");
-//                    tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
-//                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-//                } else {
-//                    tv.setBackgroundColor(Color.parseColor("#f8f8f8"));
-//                    tv.setText(String.valueOf(row.dogName));
-//                    tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//                }
-//
-//                final TextView tv2 = new TextView(MainActivity.this);
-//                if (i == -1) {
-//                    tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                            TableRow.LayoutParams.WRAP_CONTENT));
-//                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-//                } else {
-//                    tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-//                            TableRow.LayoutParams.MATCH_PARENT));
-//                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//                }
-//
-//                tv2.setGravity(Gravity.LEFT);
-//
-//                tv2.setPadding(5, 15, 0, 15);
-//                if (i == -1) {
-//                    tv2.setText("Dog Weight");
-//                    tv2.setBackgroundColor(Color.parseColor("#f7f7f7"));
-//                } else {
-//                    tv2.setBackgroundColor(Color.parseColor("#ffffff"));
-//                    tv2.setTextColor(Color.parseColor("#000000"));
-//                    tv2.setText(String.valueOf(row.dogWeight));
-//                }
-//
-//
-//                //        final LinearLayout layCustomer = new LinearLayout(this);
-//                //        layCustomer.setOrientation(LinearLayout.VERTICAL);
-//                //        layCustomer.setPadding(0, 10, 0, 10);
-//                //        layCustomer.setBackgroundColor(Color.parseColor("#f8f8f8"));
-//
-//                final TextView tv3 = new TextView(MainActivity.this);
-//                if (i == -1) {
-//                    tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                            TableRow.LayoutParams.MATCH_PARENT));
-//                    tv3.setPadding(5, 5, 0, 5);
-//                    tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-//                } else {
-//                    tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                            TableRow.LayoutParams.MATCH_PARENT));
-//                    tv3.setPadding(5, 0, 0, 5);
-//                    tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//                }
-//
-//                tv3.setGravity(Gravity.TOP);
-//
-//
-//                if (i == -1) {
-//                    tv3.setText("Dog Height");
-//                    tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
-//                } else {
-//                    tv3.setBackgroundColor(Color.parseColor("#f8f8f8"));
-//                    tv3.setTextColor(Color.parseColor("#000000"));
-//                    tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-//                    tv3.setText(row.dogHeight);
-//                }
-//                //layCustomer.addView(tv3);
-//
-//
-//                //            if (i > -1) {
-//                //                final TextView tv3b = new TextView(this);
-//                //                tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-//                //                        TableRow.LayoutParams.WRAP_CONTENT));
-//                //
-//                //                tv3b.setGravity(Gravity.RIGHT);
-//                //                tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//                //                tv3b.setPadding(5, 1, 0, 5);
-//                //                tv3b.setTextColor(Color.parseColor("#aaaaaa"));
-//                //                tv3b.setBackgroundColor(Color.parseColor("#f8f8f8"));
-//                //                tv3b.setText(row.customerAddress);
-//                //                layCustomer.addView(tv3b);
-//                //            }
-//
-//                //            final LinearLayout layAmounts = new LinearLayout(this);
-//                //            layAmounts.setOrientation(LinearLayout.VERTICAL);
-//                //            layAmounts.setGravity(Gravity.RIGHT);
-//                //            layAmounts.setPadding(0, 10, 0, 10);
-//                //            layAmounts.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                //                    TableRow.LayoutParams.MATCH_PARENT));
-//                //
-//                //
-//                //
-//                final TextView tv4 = new TextView(MainActivity.this);
-//                if (i == -1) {
-//                    tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                            TableRow.LayoutParams.MATCH_PARENT));
-//                    tv4.setPadding(5, 5, 1, 5);
-//                    //layAmounts.setBackgroundColor(Color.parseColor("#f7f7f7"));
-//                } else {
-//                    tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                            TableRow.LayoutParams.WRAP_CONTENT));
-//                    tv4.setPadding(5, 0, 1, 5);
-//                    //layAmounts.setBackgroundColor(Color.parseColor("#ffffff"));
-//                }
-//
-//                tv4.setGravity(Gravity.RIGHT);
-//
-//                if (i == -1) {
-//                    tv4.setText("Dog Lifespan");
-//                    tv4.setBackgroundColor(Color.parseColor("#f7f7f7"));
-//                    tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
-//                } else {
-//                    tv4.setBackgroundColor(Color.parseColor("#ffffff"));
-//                    tv4.setTextColor(Color.parseColor("#000000"));
-//                    tv4.setText(String.valueOf(row.dogLifespan));
-//                    tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//                }
-//
-//                //layAmounts.addView(tv4);
-//
-//
-//                //            if (i > -1) {
-//                //                final TextView tv4b = new TextView(this);
-//                //                tv4b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                //                        TableRow.LayoutParams.WRAP_CONTENT));
-//                //
-//                //                tv4b.setGravity(Gravity.RIGHT);
-//                //                tv4b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//                //                tv4b.setPadding(2, 2, 1, 5);
-//                //                tv4b.setTextColor(Color.parseColor("#00afff"));
-//                //                tv4b.setBackgroundColor(Color.parseColor("#ffffff"));
-//                //
-//                //                String due = "";
-//                //                if (row.amountDue.compareTo(new BigDecimal(0.01)) == 1) {
-//                //                    due = "Due:" + decimalFormat.format(row.amountDue);
-//                //                    due = due.trim();
-//                //                }
-//                //                tv4b.setText(due);
-//                //                layAmounts.addView(tv4b);
-//                //            }
-//
-//
-//                // add table row
-//
-//                final TableRow tr = new TableRow(MainActivity.this);
-//                tr.setId(i + 1);
-//                TableLayout.LayoutParams trParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-//                        TableLayout.LayoutParams.WRAP_CONTENT);
-//                trParams.setMargins(leftRowMargin, topRowMargin, rightRowMargin, bottomRowMargin);
-//                tr.setPadding(0, 0, 0, 0);
-//                tr.setLayoutParams(trParams);
-//
-//
-//                tr.addView(tv);
-//                tr.addView(tv2);
-//                tr.addView(tv3);
-//                tr.addView(tv4);
-//
-//                //create array of arrays holding text views
-//                int dogsRow = 4;
-//
-//
-//                TextView[] dogColumnArray = new TextView[dogsRow];
-//                //Log.i("IntV","intextview not showing");
-//                //for(int p = 0; p < dogsRow; p++) {
-//                dogColumnArray[0] = tv;
-//                dogColumnArray[1] = tv2;
-//                dogColumnArray[2] = tv3;
-//                dogColumnArray[3] = tv4;
-//
-//                //int r=0;
-//                //
-//                //listIntoTable[][]={dogColumnArray};
-//                //for(int d = 0; d < rows; d++){
-//                //listIntoTable[r][]={tv,tv2,tv3,tv4};
-//                //r++;
-//                //t is for rows and j is for columns iterates through all columns first then the row
-//                int t = 0;
-//                //for (t; t < listIntoTable.length; t++) {
-//                for (int j = 0; j < listIntoTable[t].length; j++) {
-//                    listIntoTable[t][j] = dogColumnArray[j];
-//                    //listIntoTable[t][j] = t + j;
-//                    Log.i("2d Array", "" + listIntoTable[t][j]);
-//                }
-//                //}
-//                t++;
-//
-//
-//                // Log.i("2d Array",""+listIntoTable[t][j]);
-//                //}
-//
-//
-//                //            tr.addView(layCustomer);
-//                //            tr.addView(layAmounts);
-//
-//                //            if (i > -1) {
-//                //
-//                //                tr.setOnClickListener(new View.OnClickListener() {
-//                //                    public void onClick(View v) {
-//                //                        TableRow tr = (TableRow) v;
-//                //                        //do whatever action is needed
-//                //
-//                //                    }
-//                //                });
-//                //     }
-//
-//
-//                mTableLayout.addView(tr, trParams);
-//                //exTableLayout.addView(tr, trParams);
-//
-//                //mTableLayout.setStretchAllColumns(true);
-//                //exTableLayout.setStretchAllColumns(true);
-//
-//                if (i > -1) {
-//
-//                    // add separator row
-//                    final TableRow trSep = new TableRow(MainActivity.this);
-//                    TableLayout.LayoutParams trParamsSep = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-//                            TableLayout.LayoutParams.WRAP_CONTENT);
-//                    trParamsSep.setMargins(leftRowMargin, topRowMargin, rightRowMargin, bottomRowMargin);
-//
-//                    trSep.setLayoutParams(trParamsSep);
-//                    TextView tvSep = new TextView(MainActivity.this);
-//                    TableRow.LayoutParams tvSepLay = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-//                            TableRow.LayoutParams.WRAP_CONTENT);
-//                    tvSepLay.span = 4;
-//                    tvSep.setLayoutParams(tvSepLay);
-//                    tvSep.setBackgroundColor(Color.parseColor("#d9d9d9"));
-//                    tvSep.setHeight(1);
-//
-//                    trSep.addView(tvSep);
-//                    mTableLayout.addView(trSep, trParamsSep);
-//                    //tableLayout2.addView(mTableLayout);
-//                    Log.i("TL finished", " ////////////////////////////");
-//
-//                    //TableLayout[] tableArray = {mTableLayout,tableLayout2};
-//                    //mTableLayout.setStretchAllColumns(true);
-//
-//                    //exTableLayout.addView(trSep, trParamsSep);
-//                }
-//
-//
-//            }
-////            Bundle bundle = new Bundle();
-////            bundle.putStringArray("key1", mTableLayout);
-////            bundle.putStringArray("key2", tableLayout2);
-////
-////            Message message = new Message();
-////            message.setData(bundle);
-////            handler.sendMessage(message);
-////
-////            Message msgArray = new Message();
-////            Log.i("runTaskOneButton","11111111111111111111111111");
-////            msgArray.what = MAIN_THREAD_TASK_1;
-////            msgArray.arg1=tableArray;
-//            //intent1.putExtra(EXTRA_MESSAGE_FIVE, tableArray);
-//
-//
-//        //return tableLayout2;
-//            //return tableArray;
-//            return mTableLayout;
-//        }
-//    }
     private class ConnectionClass {
 
         private Document getDoc() {
@@ -1035,159 +734,29 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(url).get();
                 Elements elements = doc.body().select("*");
                 Log.i("FormatDatabase"," "+elements);
-//                Elements e5=elements.select("p:contains(Dogs)");
-                //Element masthead = doc.select("div.masthead").first();
-                //Log.i("inFormatDatabase"," "+masthead);
+                Element e5 = doc.select("body").first();
+                //Elements nes =doc.select("body ~ br");
+                Elements nes =doc.select("body");
 
-
-                //This selects the class that all the animals are in
-                //Element e5 = doc.select("div.entry-content").first();
-
-                //Element e6 = e5.child(1);
+//                Element e6 = e5.child(1);
+//                Log.i("dog e6="," "+e6);
+//                Element e6 = e5.child(1);
+//                Log.i("dog e6="," "+e6);
+//                Elements e9 = e6.children();
+//                Log.i("FD e6", ""+e9);
+                Elements e9 = e5.children();
+                Log.i("dog e9="," "+e9);
                 //Elements e9 = e6.children();
-                //Element e7 = e5.child(2);
-                //Element e8 = e5.child(3);
+                Log.i("FD e6", ""+e9);
+                int numberOfDogs2 = 0;
+                String[] dogArrayTB = new String[100];
+                //ArrayList<Element> arrayElements = new ArrayList<>();
+                for (Element e : nes) {
+                    numberOfDogs2 += 1;
+                    dogArrayTB[numberOfDogs2] = (e.text());
 
-
-//                MAKE AN ARRAY HERE
-//                int numberOfDogs = 0;
-//                String[] dogArray = new String[100];
-//                //ArrayList<Element> arrayElements = new ArrayList<>();
-//                for (Element e : e9) {
-//                    numberOfDogs += 1;
-//                    dogArray[numberOfDogs] = (e.text());
-//
-//                    Log.i("eachDogHere: ", "" + (dogArray[numberOfDogs]));
-//                }
-                //String halfWords = dogArray[1];
-
-                //Log.i("Dogs/2=", "" + (numberOfDogs / 2));
-
-                //If an odd number of dogs add one more to left column
-//                int remDog = numberOfDogs % 3;
-//                int dogsInList=numberOfDogs/3;
-//
-//                int dogsRem=0;
-//                int dogsRem2=0;
-//
-//                int dogsLeft=0;
-//                int dogsCenter=0;
-//                int dogsRight=0;
-//                if (remDog > 0 && remDog<2){
-//
-//                    dogsRem+=1;
-//                    dogsLeft+=1;
-//                }
-//                else if (remDog>0){
-//                    dogsRem2=2;
-//                    dogsLeft+=1;
-//                    dogsCenter+=1;
-//                }
-
-
-//                dogsLeft=dogsLeft+dogsInList;
-//                dogsCenter=dogsCenter+dogsInList;
-//                dogsRight=dogsInList;
-
-
-                //Builds list for left side of Dogs
-                //StringBuilder dogsLeftBuild=new StringBuilder();
-//                String leftDogs="";
-//                for(int i=1;i<=dogsLeft;i++){
-//                    dogsLeftBuild.append(dogArray[i]);
-//                    dogsLeftBuild.append((System.getProperty("line.separator")));
-//                    Log.i("Times ifn leftDogs loop","lets see "+i);
-//                    //leftDogs=dogArray[i];
-//                    //leftDogs=leftDogs+("\n");
-//                }
-//                //String dogsLeftColumn=dogsLeftBuild.toString();
-//                leftDogs=dogsLeftBuild.toString();
-//                Log.i("DogsLEft Column=  ", ""+leftDogs);
-//                String dogTextLeft=leftDogs;
-//
-//                int limitCenterLoop=dogsLeft+dogsCenter;
-//
-//                StringBuilder dogsCenterBuild=new StringBuilder();
-//                String centerDogs="";
-//                for(int p=dogsLeft+1;p>dogsLeft&& p<=limitCenterLoop;p++){
-//                    dogsCenterBuild.append(dogArray[p]);
-//                    dogsCenterBuild.append((System.getProperty("line.separator")));
-//                    //Log.i("Times ifn centerD loop","lets see "+p);
-//                    //leftDogs=dogArray[i];
-//                    //leftDogs=leftDogs+("\n");
-//                }
-//                centerDogs=dogsCenterBuild.toString();
-//                //Log.i("DogsCenter Column=  ", ""+centerDogs);
-//                String dogTextCenter=centerDogs;
-//
-//                //dogTextCenter="something";
-//
-//                int limitRightLoop=dogsCenter+dogsRight;
-//
-//                //Creates right side list for Dogs
-//                StringBuilder dogsRightBuild=new StringBuilder();
-//                String rightDogs="";
-//                for(int p=limitCenterLoop+1;p<=numberOfDogs;p++){
-//                    dogsRightBuild.append(dogArray[p]);
-//                    dogsRightBuild.append((System.getProperty("line.separator")));
-//                    //Log.i("Times ifn right loop","lets see "+p);
-//                    //leftDogs=dogArray[i];
-//                    //leftDogs=leftDogs+("\n");
-//                }
-//                rightDogs=dogsRightBuild.toString();
-//                //Log.i("DogsRight Column=  ", ""+rightDogs);
-//                String dogTextRight=rightDogs;
-//
-//
-//                String dogsOnLeft=dogsLeft+"";
-//                String dogsOnRight=dogsRight+"";
-
-
-
-
-
-                //Element[] elementArr = arrayElements.toArray(new Element[]{});
-                //Log.i("numberOfDogs =",""+numberOfDogs);
-
-
-
-
-//                Element e2 = doc.select("p:contains(Dogs)").get(0);
-//                dogTitle=e2.text();
-//
-//                catWords=0;
-//                String cattt;
-//
-//                //Log.i("E9   Should Dogs",""+e9);
-//                Element cattEle=null;
-
-
-
-                //NEED TO MAKE A STRING ARRAY THAT CAN BE PUT INTO TWO DIFFERENT TEXT VIEWS SIDE BY SIDE
-                //TO GET EACH SEPERATE ELEMENT DELIMITED BY /N
-                //public class TestConsole {
-                //   public static void main(String[] args) {
-                //      String nixSampleLine = "Line 1 \n Line 2 \n Line 3";
-                //      String[] lines = nixSampleLine.split("\\r?\\n");
-                //      for (String line : lines) {
-                //         System.out.println(line);
-                //      }
-                //   }
-                //}
-
-
-//                dogFormattedArray[0]=dogTextLeft;
-//                dogFormattedArray[1]=dogTextCenter;
-//                dogFormattedArray[2]=dogTextRight;
-//
-//                intent1 = new Intent(MainActivity.this, DogsActivity.class);
-//                //Text editText =findViewById(R.id.somethingText);
-//                //String message = editText.getText().toString();
-//                Log.i("sendActivity","222222222222222222222222");
-//                intent1.putExtra(EXTRA_MESSAGE, dogTitle);
-//                intent1.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
-//                intent1.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
-//                intent1.putExtra(EXTRA_MESSAGE_FOUR,dogTextRight);
+                    Log.i("eachDogHereTB: ", "" + (dogArrayTB[numberOfDogs2]));
+                }
 
 
                 Log.i("in Element", "paragraph of dogs");
