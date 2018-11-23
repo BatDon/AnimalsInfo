@@ -12,11 +12,14 @@ import java.io.IOException;
 public class DogsData {
 
 
-    String[][] dogArrayTB = new String[30][10];
+    static String[][] dogArrayTB = new String[16][7];
+    //String[][] dogArrayTB = new String[16][10];
+    //String[][] dogArrayTB = new String[30][10];
     String lines[];
     //String[]checksRows={};
     //int ar = 0;
     public String [][] getDogsStatsArray(String url2){
+        //public static String[][] dogArrayTB = new String[16][7];
         //String[][] dogFormattedArray2=new String[row][column];
         String[][] dogFormattedArray2=new String[7][7];
         //public String[] returnStringArray2() {
@@ -106,7 +109,7 @@ public class DogsData {
                                 Log.i("firRowStr", " " + firRowStr);
                                 Log.i("3 words[ln2]", " " + words[ln2]);
                                 Log.i("3 ln2=", " " + ln2);
-                                dogArrayTB[ar][ln2 - 1] = words[ln2];
+                                dogArrayTB[ar][ln2-1] = words[ln2];
                                 //dogArrayTB[ar][ln2] = words[ln2];
                                 firRowStr.setLength(0);
                                 endFirst++;
@@ -125,21 +128,21 @@ public class DogsData {
                                 if (arrPlace < 1) {
                                     worStr = worStr.append(words[ln2]);
                                     worStr.append(" ");
-                                    worStr.append(words[ln2 + 1]);
+                                    worStr.append(words[ln2+1]);
                                     Log.i("firRowStr", " " + firRowStr);
                                     Log.i("$0 words[ln2]", " " + words[ln2]);
                                     Log.i("$0 ln2=", " " + ln2);
                                     dogArrayTB[ar][0] = worStr.toString();
                                     worStr.setLength(0);
                                     arrPlace = 2;
-
+                                    
                                     ++ln2;
 
                                     //checksRows[forEight]="8";
                                     //ln2++;
                                     continue;
                                 } else {
-                                    dogArrayTB[ar][ln2 - 1] = words[ln2];
+                                    dogArrayTB[ar][ln2-1] = words[ln2];
                                     //dogArrayTB[ar][ln2 - 1] = worStr.toString();
                                     continue;
                                 }
@@ -153,12 +156,38 @@ public class DogsData {
                 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //                            if(firstRow3<1&&firstRow==2){
 //                                firRowStr.append(words[ln2+1]);
 //                                firstRow3=3;
 //                                continue;
 //                            }
-                // if (firstRow2 < 1) {
+                            // if (firstRow2 < 1) {
+
+
+
+
+
+
+
+
+
+
 
 
 //                            worStr.append(words[ln2]);
@@ -346,17 +375,27 @@ public class DogsData {
 //                }
 
 
-//                for (int i = 0; i < dogArrayTB.length; i++) {
-//                    for (int j = 0; j < dogArrayTB[i].length; j++) {
-//                        Log.i("wholeAr", "Values [" + i + "][" + j + "] is " + dogArrayTB[i][j]);
-//                    }
-//                }
 
 
-                //now regex pattern string space string
-                //if string space string then add to array
-                //String [] splitted = sb.toString.split("\\s+");
-                //else string space string then add to array
+
+                for (int i = 0; i < dogArrayTB.length; i++) {
+                    for (int j = 0; j < dogArrayTB[i].length; j++) {
+                        Log.i("wholeAr", "Values [" + i + "][" + j + "] is " + dogArrayTB[i][j]);
+                    }
+                }
+
+
+
+
+
+
+
+
+
+                    //now regex pattern string space string
+                    //if string space string then add to array
+                    //String [] splitted = sb.toString.split("\\s+");
+                    //else string space string then add to array
 //                for (int i = 0; i < dogText.length(); i++) {
 //
 //                    sb.append(dogText.charAt(i));
@@ -382,16 +421,16 @@ public class DogsData {
 //                Log.i("dog e6="," "+e6);
 //                Elements e9 = e6.children();
 //                Log.i("FD e6", ""+e9);
-                Elements e9 = e5.children();
-                Log.i("dog e9=", " " + e9.text());
-                //Elements e9 = e6.children();
-                Log.i("FD e9", "" + e9);
-                int numberOfDogs2 = 0;
-                //String[][] dogArrayTB = new String[100][7];
-                //ArrayList<Element> arrayElements = new ArrayList<>();
-                //pattern to use if second element is "abcdefghijklmnopqrstuvwxyz" then join first and second element
-                //for (Element e : nes) {
-                //String[] splitted=new String[7];
+                    Elements e9 = e5.children();
+                    Log.i("dog e9=", " " + e9.text());
+                    //Elements e9 = e6.children();
+                    Log.i("FD e9", "" + e9);
+                    int numberOfDogs2 = 0;
+                    //String[][] dogArrayTB = new String[100][7];
+                    //ArrayList<Element> arrayElements = new ArrayList<>();
+                    //pattern to use if second element is "abcdefghijklmnopqrstuvwxyz" then join first and second element
+                    //for (Element e : nes) {
+                    //String[] splitted=new String[7];
 
 //                for(String s:dogText){
 //
@@ -414,19 +453,13 @@ public class DogsData {
 //                }
 
 
-                Log.i("in Element", "paragraph of dogs");
+                    Log.i("in Element", "paragraph of dogs");
 
 
-                Log.i("JSoup", "Connected successfully!");
+                    Log.i("JSoup", "Connected successfully!");
 
-                for (int i = 0; i < dogArrayTB.length; i++) {
-                    for (int j = 0; j<dogArrayTB[i].length; j++) {
-                    //for (int j = 0; j < 8; j++) {
 
-                        Log.i("wholeAr", "Values [" + i + "][" + j + "] is " + dogArrayTB[i][j]);
-                    }
                 }
-            }
 
 
 
@@ -449,11 +482,9 @@ public class DogsData {
 
     public com.example.david.animalsinfo.DogsAddData[] getInfo() {
         Log.i("getInfost","getInfostarted");
-        //com.example.david.animalsinfo.DogsAddData[] data = new com.example.david.animalsinfo.DogsAddData[dogArrayTB.length];
-        com.example.david.animalsinfo.DogsAddData[] data = new com.example.david.animalsinfo.DogsAddData[14];
+        com.example.david.animalsinfo.DogsAddData[] data = new com.example.david.animalsinfo.DogsAddData[dogArrayTB.length];
 
-        for (int i = 0; i < 14; i++) {
-            //for (int i = 0; i < dogArrayTB.length; i++) {
+        for (int i = 0; i < dogArrayTB.length; i++) {
             com.example.david.animalsinfo.DogsAddData row = new com.example.david.animalsinfo.DogsAddData();
 //            if(checksRows[i].equals("8")){
 //
@@ -467,31 +498,22 @@ public class DogsData {
                 //iterates through rows and sets data
                 int j=0;
 
-                //This is only for the first row
-                if(i==0) {
-                    row.dogName = dogArrayTB[i][j];
-                    row.dogWeight = dogArrayTB[i][j + 1];
-                    row.dogPounds = dogArrayTB[i][j + 2];
-                    row.dogHeight = dogArrayTB[i][j + 3];
 
-                    data[i]=row;
-                }
                 //iterates through columns
-                //This is for all the other rows with information
-                else {
-                    row.dogName = dogArrayTB[i][j];
-                    row.dogWeight = dogArrayTB[i][j + 1];
-                    row.dogPounds = dogArrayTB[i][j + 2];
-                    row.dogHeight = dogArrayTB[i][j + 3];
-                    row.dogInches = dogArrayTB[i][j + 4];
-                    row.dogLifespan = dogArrayTB[i][j + 5];
-                    row.dogYears = dogArrayTB[i][j + 6];
-
+                row.dogName = dogArrayTB[i][j];
+                row.dogWeight =dogArrayTB[i][j+1];
+                row.dogPounds = dogArrayTB[i][j+2];
+                row.dogHeight = dogArrayTB[i][j+3];
+                row.dogInches = dogArrayTB[i][j+4];
+                row.dogLifespan = dogArrayTB[i][j+5];
+                row.dogYears = dogArrayTB[i][j+6];
+                Log.i("i in for"," "+i);
+                Log.i("row.dogName"," "+dogArrayTB[i][j]);
 
 //creates row with data
-                    data[i] = row;
-                    //data[i][j] = row;
-                }
+                data[i] = row;
+
+                //data[i][j] = row;
             }
         return data;
         }

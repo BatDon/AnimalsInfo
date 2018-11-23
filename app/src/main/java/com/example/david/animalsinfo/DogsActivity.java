@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -58,16 +59,22 @@ public class DogsActivity extends AppCompatActivity {
                 //TableLayout mTableLayout=new TableLayout(MainActivity.this);
                 setContentView(R.layout.activity_dogs);
                 TableLayout mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
+
+//                if(mTableLayout.getParent()!=null)
+//                    ((ViewGroup)mTableLayout.getParent()).removeView(mTableLayout);
+
+
                 mTableLayout.setStretchAllColumns(true);
-                mTableLayout.removeAllViews();
                 //exTableLayout.setStretchAllColumns(true);
+                //TextView[][] listIntoTable = new TextView[16][4];
                 TextView[][] listIntoTable = new TextView[30][4];
                 TextView[] rowArray;
                 //InvoiceData.java=DogsAddData.java
                 //mTableLayout.setStretchAllColumns(true);
                 //Invoices.java=DogsData.java
 
-                //data=dogsAddData
+                //data=dogsAddDataif(tv.getParent()!=null)
+    //((ViewGroup)tv.getParent()).removeView(tv);
                 //invoices=dogsData
                 Log.i("dataInto Table", "))))))))))))))))");
 
@@ -105,11 +112,12 @@ public class DogsActivity extends AppCompatActivity {
                 //exTableLayout.removeAllViews();
 
 //This section can be done on background thread///////////////
+                //String[][] dogArrayTB = new String[14][10];
 
                 // -1 means heading row
-                for (int i = -1; i < rows; i++) {
+                for (int i = 0; i < rows; i++) {
                     DogsAddData row = null;
-                    if (i > -1)
+                    if (i > 0)
                         row = dogsAddData[i];
                     else {
                         textSpacer = new TextView(DogsActivity.this);
@@ -118,15 +126,18 @@ public class DogsActivity extends AppCompatActivity {
                     }
                     // data columns
                     final TextView tv = new TextView(DogsActivity.this);
+
+//                    if(tv.getParent()!=null)
+//                        ((ViewGroup)tv.getParent()).removeView(tv);
+
                     tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                             TableRow.LayoutParams.WRAP_CONTENT));
 
                     tv.setGravity(Gravity.LEFT);
 
                     tv.setPadding(5, 15, 0, 15);
-                    if (i == -1) {
-                        //tv.setText("Dog Breed");
-                        tv.setText(String.valueOf(row.dogName));
+                    if (i == 0) {
+                        tv.setText("Dog Breed");
                         tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                     } else {
@@ -135,14 +146,17 @@ public class DogsActivity extends AppCompatActivity {
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
                     }
 
-                    //LinearLayout for the dogs weight holds two TextViews
                     final LinearLayout layDogWeight = new LinearLayout(DogsActivity.this);
                     layDogWeight.setOrientation(LinearLayout.VERTICAL);
                     layDogWeight.setPadding(0, 10, 0, 10);
                     layDogWeight.setBackgroundColor(Color.parseColor("#f8f8f8"));
 
                     final TextView tv2 = new TextView(DogsActivity.this);
-                    if (i == -1) {
+
+//                    if(tv2.getParent()!=null)
+//                        ((ViewGroup)tv2.getParent()).removeView(tv2);
+
+                    if (i == 0) {
                         tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
@@ -156,9 +170,8 @@ public class DogsActivity extends AppCompatActivity {
                     tv2.setGravity(Gravity.TOP);
 
                     tv2.setPadding(5, 15, 0, 15);
-                    if (i == -1) {
-                        //tv2.setText("Dog Weight");
-                        tv2.setText(String.valueOf(row.dogWeight));
+                    if (i == 0) {
+                        tv2.setText("Dog Weight");
                         tv2.setBackgroundColor(Color.parseColor("#f7f7f7"));
                     } else {
                         tv2.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -168,7 +181,11 @@ public class DogsActivity extends AppCompatActivity {
                     layDogWeight.addView(tv2);
 
                     final TextView tv2b = new TextView(DogsActivity.this);
-                    if (i > -1) {
+
+//                    if(tv2b.getParent()!=null)
+//                        ((ViewGroup)tv2b.getParent()).removeView(tv2b);
+
+                    if (i > 0) {
                         tv2b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         tv2b.setGravity(Gravity.BOTTOM);
@@ -176,20 +193,24 @@ public class DogsActivity extends AppCompatActivity {
                         tv2b.setPadding(5, 15, 0, 15);
                         tv2b.setBackgroundColor(Color.parseColor("#ffffff"));
                         tv2b.setTextColor(Color.parseColor("#000000"));
-                        tv2b.setText(String.valueOf(row.dogPounds));
+                        tv2b.setText(row.dogPounds);
+                        layDogWeight.addView(tv2b);
+                        //tv2b.setText(String.valueOf(row.dogPounds));
                     }
-                    layDogWeight.addView(tv2b);
+
 
                     //tv2.setGravity(Gravity.LEFT);
-
-                    //LinearLayout for the dogs height holds two TextViews
                     final LinearLayout layDogHeight = new LinearLayout(DogsActivity.this);
                     layDogHeight.setOrientation(LinearLayout.VERTICAL);
                     layDogHeight.setPadding(0, 10, 0, 10);
                     layDogHeight.setBackgroundColor(Color.parseColor("#f8f8f8"));
 
                     final TextView tv3 = new TextView(DogsActivity.this);
-                    if (i == -1) {
+
+//                    if(tv3.getParent()!=null)
+//                        ((ViewGroup)tv3.getParent()).removeView(tv3);
+
+                    if (i == 0) {
                         tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv3.setPadding(5, 5, 0, 5);
@@ -204,10 +225,8 @@ public class DogsActivity extends AppCompatActivity {
                     tv3.setGravity(Gravity.TOP);
 
 
-
-                    if (i == -1) {
-                        //tv3.setText("Dog Height");
-                        tv3.setText(row.dogHeight);
+                    if (i == 0) {
+                        tv3.setText("Dog Height");
                         tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
                     } else {
                         tv3.setBackgroundColor(Color.parseColor("#f8f8f8"));
@@ -215,11 +234,15 @@ public class DogsActivity extends AppCompatActivity {
                         tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                         tv3.setText(row.dogHeight);
                     }
+
                     layDogHeight.addView(tv3);
 
-
                     final TextView tv3b = new TextView(DogsActivity.this);
-                    if (i > -1) {
+
+//                    if(tv3b.getParent()!=null)
+//                        ((ViewGroup)tv3b.getParent()).removeView(tv3b);
+
+                    if (i > 0) {
                         tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         tv3b.setGravity(Gravity.BOTTOM);
@@ -228,20 +251,46 @@ public class DogsActivity extends AppCompatActivity {
                         tv3b.setBackgroundColor(Color.parseColor("#ffffff"));
                         tv3b.setTextColor(Color.parseColor("#000000"));
                         tv3b.setText(String.valueOf(row.dogInches));
+                        layDogHeight.addView(tv3b);
                     }
-                    layDogHeight.addView(tv3b);
+                    //layDogHeight.addView(tv3b);
+                    //layCustomer.addView(tv3);
 
 
-                    //LinearLayout for the dogs lifespan holds two TextViews
+                    //            if (i > -1) {
+                    //                final TextView tv3b = new TextView(this);
+                    //                tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                    //                        TableRow.LayoutParams.WRAP_CONTENT));
+                    //
+                    //                tv3b.setGravity(Gravity.RIGHT);
+                    //                tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                    //                tv3b.setPadding(5, 1, 0, 5);
+                    //                tv3b.setTextColor(Color.parseColor("#aaaaaa"));
+                    //                tv3b.setBackgroundColor(Color.parseColor("#f8f8f8"));
+                    //                tv3b.setText(row.customerAddress);
+                    //                layCustomer.addView(tv3b);
+                    //            }
+
+                    //            final LinearLayout layAmounts = new LinearLayout(this);
+                    //            layAmounts.setOrientation(LinearLayout.VERTICAL);
+                    //            layAmounts.setGravity(Gravity.RIGHT);
+                    //            layAmounts.setPadding(0, 10, 0, 10);
+                    //            layAmounts.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                    //                    TableRow.LayoutParams.MATCH_PARENT));
+                    //
+                    //
+                    //
                     final LinearLayout layDogLifespan = new LinearLayout(DogsActivity.this);
                     layDogLifespan.setOrientation(LinearLayout.VERTICAL);
                     layDogLifespan.setPadding(0, 10, 0, 10);
                     layDogLifespan.setBackgroundColor(Color.parseColor("#f8f8f8"));
 
-
-
                     final TextView tv4 = new TextView(DogsActivity.this);
-                    if (i == -1) {
+
+//                    if(tv4.getParent()!=null)
+//                        ((ViewGroup)tv4.getParent()).removeView(tv4);
+
+                    if (i == 0) {
                         tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv4.setPadding(5, 5, 5, 5);
@@ -256,9 +305,8 @@ public class DogsActivity extends AppCompatActivity {
                     tv4.setGravity(Gravity.LEFT);
                     //tv4.setGravity(Gravity.RIGHT);
 
-                    if (i == -1) {
-                        //tv4.setText("Dog Lifespan");
-                        tv4.setText(String.valueOf(row.dogLifespan));
+                    if (i == 0) {
+                        tv4.setText("Dog Lifespan");
                         tv4.setBackgroundColor(Color.parseColor("#f7f7f7"));
                         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                     } else {
@@ -267,11 +315,14 @@ public class DogsActivity extends AppCompatActivity {
                         tv4.setText(String.valueOf(row.dogLifespan));
                         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
                     }
-
                     layDogLifespan.addView(tv4);
 
                     final TextView tv4b = new TextView(DogsActivity.this);
-                    if (i > -1) {
+
+//                    if(tv4b.getParent()!=null)
+//                        ((ViewGroup)tv4b.getParent()).removeView(tv4b);
+
+                    if (i > 0) {
                         tv4b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         tv4b.setGravity(Gravity.BOTTOM);
@@ -280,11 +331,12 @@ public class DogsActivity extends AppCompatActivity {
                         tv4b.setBackgroundColor(Color.parseColor("#ffffff"));
                         tv4b.setTextColor(Color.parseColor("#000000"));
                         tv4b.setText(String.valueOf(row.dogYears));
+                        layDogLifespan.addView(tv4b);
                     }
 
-                    layDogLifespan.addView(tv4b);
 
 
+                    //layAmounts.addView(tv4);
 
 
                     //            if (i > -1) {
@@ -318,12 +370,15 @@ public class DogsActivity extends AppCompatActivity {
                     tr.setPadding(0, 0, 0, 0);
                     tr.setLayoutParams(trParams);
 
-
                     tr.addView(tv);
                     tr.addView(layDogWeight);
-                    //tr.addView(tv2);
                     tr.addView(layDogHeight);
                     tr.addView(layDogLifespan);
+
+//                    tr.addView(tv);
+//                    tr.addView(tv2);
+//                    tr.addView(tv3);
+//                    tr.addView(tv4);
 
                     //create array of arrays holding text views
                     int dogsRow = 4;
@@ -344,6 +399,8 @@ public class DogsActivity extends AppCompatActivity {
                     //listIntoTable[r][]={tv,tv2,tv3,tv4};
                     //r++;
                     //t is for rows and j is for columns iterates through all columns first then the row
+
+
 //                    int t = 0;
 //                    //for (t; t < listIntoTable.length; t++) {
 //                    for (int j = 0; j < listIntoTable[t].length; j++) {
@@ -353,6 +410,7 @@ public class DogsActivity extends AppCompatActivity {
 //                    }
 //                    //}
 //                    t++;
+
 
 
                     // Log.i("2d Array",""+listIntoTable[t][j]);
@@ -380,7 +438,7 @@ public class DogsActivity extends AppCompatActivity {
                     //mTableLayout.setStretchAllColumns(true);
                     //exTableLayout.setStretchAllColumns(true);
 
-                    if (i > -1) {
+                    if (i > 0) {
 
                         // add separator row
                         final TableRow trSep = new TableRow(DogsActivity.this);
