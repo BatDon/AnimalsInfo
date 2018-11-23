@@ -125,7 +125,8 @@ public class DogsActivity extends AppCompatActivity {
 
                     tv.setPadding(5, 15, 0, 15);
                     if (i == -1) {
-                        tv.setText("Dog Breed");
+                        //tv.setText("Dog Breed");
+                        tv.setText(String.valueOf(row.dogName));
                         tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                     } else {
@@ -156,7 +157,8 @@ public class DogsActivity extends AppCompatActivity {
 
                     tv2.setPadding(5, 15, 0, 15);
                     if (i == -1) {
-                        tv2.setText("Dog Weight");
+                        //tv2.setText("Dog Weight");
+                        tv2.setText(String.valueOf(row.dogWeight));
                         tv2.setBackgroundColor(Color.parseColor("#f7f7f7"));
                     } else {
                         tv2.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -204,7 +206,8 @@ public class DogsActivity extends AppCompatActivity {
 
 
                     if (i == -1) {
-                        tv3.setText("Dog Height");
+                        //tv3.setText("Dog Height");
+                        tv3.setText(row.dogHeight);
                         tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
                     } else {
                         tv3.setBackgroundColor(Color.parseColor("#f8f8f8"));
@@ -254,7 +257,8 @@ public class DogsActivity extends AppCompatActivity {
                     //tv4.setGravity(Gravity.RIGHT);
 
                     if (i == -1) {
-                        tv4.setText("Dog Lifespan");
+                        //tv4.setText("Dog Lifespan");
+                        tv4.setText(String.valueOf(row.dogLifespan));
                         tv4.setBackgroundColor(Color.parseColor("#f7f7f7"));
                         tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                     } else {

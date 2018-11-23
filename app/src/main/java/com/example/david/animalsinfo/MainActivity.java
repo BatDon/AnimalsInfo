@@ -160,16 +160,18 @@ public class MainActivity extends AppCompatActivity {
         ImageButton runTaskTwoButton = findViewById(R.id.catButton);
 
         ImageButton runTaskThreeButton = findViewById(R.id.frogButton);
-        try{
-            for(int i=5 ; i>0 ; i--){
-                //System.out.println("main thread: " + i);
-                Thread.sleep(2000);
 
-            }
-        }
-        catch(InterruptedException e){
-            Log.i("sleep","main thread interrupted");
-        }
+//        try{
+//            for(int i=5 ; i>0 ; i--){
+//                //System.out.println("main thread: " + i);
+//                Thread.sleep(2000);
+//
+//            }
+//        }
+//        catch(InterruptedException e){
+//            Log.i("sleep","main thread interrupted");
+//        }
+
 //        try{
 //            Thread.sleep(3000);
 //        }
@@ -178,6 +180,8 @@ public class MainActivity extends AppCompatActivity {
 //            builder.append("Error : ").append(e.getMessage()).append("\n");
 //            Log.i("SLEEP ER", "exception main thread sleeping");
 //        }
+
+
 
 
 
@@ -190,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // When click this button, create a message object
                 Message msg = new Message();
-                Log.i("runTaskOneButton","11111111111111111111111111");
+                Log.i("runTaskOneButton","AAAAAAAAAAAAAAAAAAAA");
                 msg.what = MAIN_THREAD_TASK_1;
                 // Use worker thread message Handler to put message into worker thread message queue.
                 workerThread.workerThreadHandler.sendMessage(msg);
@@ -207,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_2;
+                Log.i("runTaskTwoButton","BBBBBBBBBBBBBBBBBBBBB");
                 workerThread.workerThreadHandler.sendMessage(msg);
             }
         });
@@ -217,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_3;
+                Log.i("runTaskThreeButton","CCCCCCCCCCCCCCCCCCCC");
                 workerThread.workerThreadHandler.sendMessage(msg);
             }
         });
@@ -229,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
     //This sends the information to the Activity to be viewed
     //public void sendActivity(String dogTitle,String dogTextLeft,String dogTextCenter,String dogTextRight) {
 //    public void sendActivity(String dogTitle,String dogTextLeft,String dogTextCenter,String dogTextRight){
-    public void sendActivity(Intent intent){
+    public void sendActivity1(Intent intent1){
 //        Intent intent = new Intent(this, DogsActivity.class);
 //        //Text editText =findViewById(R.id.somethingText);
 //        //String message = editText.getText().toString();
@@ -238,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 //        intent.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
 //        intent.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
 //        intent.putExtra(EXTRA_MESSAGE_FOUR,dogTextRight);
-        startActivity(intent);
+        startActivity(intent1);
     }
 
     public void sendActivity2(Intent intent2) {
@@ -305,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
 
             FormatDocument3 formattedDoc3 = new FormatDocument3();
             frogFormatted = formattedDoc3.returnFrogStringArray();
-
+            Log.i("Wthread","at end of run");
 
             // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
             workerThreadHandler = new Handler(Looper.myLooper()) {
@@ -321,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("if msg.what==Main","6666666666666666666666666");
                         barking.start();
                         //taskStatusTextView.setText(dogText);
-                        sendActivity(intent1);
+                        sendActivity1(intent1);
                         //sendActivity(dogTitle,dogTextLeft,dogTextCenter,dogTextRight);
                     } else if (msg.what == MAIN_THREAD_TASK_2) {
                         // If task two button is clicked.
@@ -356,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
             };
             // Loop the child thread message queue.
 
-            //Looper.loop();
+            Looper.loop();
 
             // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
 //            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
@@ -428,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
             };
             // Loop the child thread message queue.
 
-            //Looper.loop();
+            Looper.loop();
 
             // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
             Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
