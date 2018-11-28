@@ -387,6 +387,19 @@ public class MainActivity extends AppCompatActivity {
             Looper.prepare();
             String url2 = getResources().getString(R.string.url2);
             new DogsData().getDogsStatsArray(url2);
+            new CatsData().getCatsStatsArray(url2);
+            new FrogsData().getFrogsStatsArray(url2);
+
+
+
+
+
+
+
+
+
+
+
             //Gets database from website
             //CREATE DYNAMIC TABLE HERE
             Log.i("beforeDogCr","eator &&&&&&&&&&&&");

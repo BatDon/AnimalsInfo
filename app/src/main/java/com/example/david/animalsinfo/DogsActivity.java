@@ -52,9 +52,11 @@ public class DogsActivity extends AppCompatActivity {
         //if (true) {
 
 
-        public class DogTableCreator {
+        private class DogTableCreator {
+        //public class DogTableCreator {
             //public TableLayout dataIntoTable() {
-            public TableLayout dataIntoTable() {
+            //public TableLayout dataIntoTable() {
+            private TableLayout dataIntoTable() {
                 Log.i("dataInto Table", "****************");
                 //TableLayout mTableLayout=new TableLayout(MainActivity.this);
                 setContentView(R.layout.activity_dogs);
@@ -90,12 +92,13 @@ public class DogsActivity extends AppCompatActivity {
                 int topRowMargin = 0;
                 int rightRowMargin = 0;
                 int bottomRowMargin = 0;
-                int textSize = 0, smallTextSize = 0, mediumTextSize = 17;
+                int textSize, smallTextSize, mediumTextSize, largeTextSize;
 
                 //TableLayout tableLayout2 = (TableLayout) findViewById(R.id.dogsTable);
                 textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
                 smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
                 mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
+                largeTextSize = (int) getResources().getDimension(R.dimen.font_size_large);
 
 //        textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
 //        smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
@@ -138,17 +141,19 @@ public class DogsActivity extends AppCompatActivity {
                     tv.setPadding(5, 15, 0, 15);
                     if (i == 0) {
                         tv.setText("Dog Breed");
+                        //tv.setText(String.valueOf(row.dogName));
                         tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
                     } else {
                         tv.setBackgroundColor(Color.parseColor("#f8f8f8"));
                         tv.setText(String.valueOf(row.dogName));
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                     }
 
                     final LinearLayout layDogWeight = new LinearLayout(DogsActivity.this);
                     layDogWeight.setOrientation(LinearLayout.VERTICAL);
                     layDogWeight.setPadding(0, 10, 0, 10);
+                    //layDogWeight.setPadding(0, 10, 0, 10);
                     layDogWeight.setBackgroundColor(Color.parseColor("#f8f8f8"));
 
                     final TextView tv2 = new TextView(DogsActivity.this);
@@ -159,18 +164,19 @@ public class DogsActivity extends AppCompatActivity {
                     if (i == 0) {
                         tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
-                        tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                        tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
                     } else {
                         tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
-                        tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                     }
 
                     //tv2.setGravity(Gravity.LEFT);
                     tv2.setGravity(Gravity.TOP);
 
-                    tv2.setPadding(5, 15, 0, 15);
+                    tv2.setPadding(5, 5, 0, 5);
                     if (i == 0) {
+                        //tv2.setText(String.valueOf(row.dogWeight));
                         tv2.setText("Dog Weight");
                         tv2.setBackgroundColor(Color.parseColor("#f7f7f7"));
                     } else {
@@ -189,7 +195,7 @@ public class DogsActivity extends AppCompatActivity {
                         tv2b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         tv2b.setGravity(Gravity.BOTTOM);
-                        tv2b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv2b.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                         tv2b.setPadding(5, 15, 0, 15);
                         tv2b.setBackgroundColor(Color.parseColor("#ffffff"));
                         tv2b.setTextColor(Color.parseColor("#000000"));
@@ -214,24 +220,25 @@ public class DogsActivity extends AppCompatActivity {
                         tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv3.setPadding(5, 5, 0, 5);
-                        tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                        tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
                     } else {
                         tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
-                        tv3.setPadding(5, 0, 0, 5);
-                        tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv3.setPadding(5, 5, 0, 5);
+                        tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                     }
 
                     tv3.setGravity(Gravity.TOP);
 
 
                     if (i == 0) {
+                        //tv3.setText(String.valueOf(row.dogHeight));
                         tv3.setText("Dog Height");
                         tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
                     } else {
                         tv3.setBackgroundColor(Color.parseColor("#f8f8f8"));
                         tv3.setTextColor(Color.parseColor("#000000"));
-                        tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                        //tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                         tv3.setText(row.dogHeight);
                     }
 
@@ -246,7 +253,7 @@ public class DogsActivity extends AppCompatActivity {
                         tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         tv3b.setGravity(Gravity.BOTTOM);
-                        tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                         tv3b.setPadding(5, 15, 0, 15);
                         tv3b.setBackgroundColor(Color.parseColor("#ffffff"));
                         tv3b.setTextColor(Color.parseColor("#000000"));
@@ -293,12 +300,12 @@ public class DogsActivity extends AppCompatActivity {
                     if (i == 0) {
                         tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
-                        tv4.setPadding(5, 5, 5, 5);
+                        tv4.setPadding(5, 5, 0, 5);
                         //layAmounts.setBackgroundColor(Color.parseColor("#f7f7f7"));
                     } else {
                         tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
-                        tv4.setPadding(5, 5, 5, 5);
+                        tv4.setPadding(5, 5, 0, 5);
                         //layAmounts.setBackgroundColor(Color.parseColor("#ffffff"));
                     }
 
@@ -306,14 +313,15 @@ public class DogsActivity extends AppCompatActivity {
                     //tv4.setGravity(Gravity.RIGHT);
 
                     if (i == 0) {
+                        //tv4.setText(String.valueOf(row.dogLifespan));
                         tv4.setText("Dog Lifespan");
                         tv4.setBackgroundColor(Color.parseColor("#f7f7f7"));
-                        tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
+                        tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
                     } else {
                         tv4.setBackgroundColor(Color.parseColor("#ffffff"));
                         tv4.setTextColor(Color.parseColor("#000000"));
                         tv4.setText(String.valueOf(row.dogLifespan));
-                        tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                     }
                     layDogLifespan.addView(tv4);
 
@@ -326,7 +334,7 @@ public class DogsActivity extends AppCompatActivity {
                         tv4b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         tv4b.setGravity(Gravity.BOTTOM);
-                        tv4b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                        tv4b.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                         tv4b.setPadding(5, 15, 0, 15);
                         tv4b.setBackgroundColor(Color.parseColor("#ffffff"));
                         tv4b.setTextColor(Color.parseColor("#000000"));

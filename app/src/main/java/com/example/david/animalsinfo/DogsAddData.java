@@ -1,7 +1,7 @@
 package com.example.david.animalsinfo;
-//InvoiceData.java
 
-public class DogsAddData {
+
+class DogsAddData {
     public String dogName;
     public String dogWeight;
     public String dogPounds;
