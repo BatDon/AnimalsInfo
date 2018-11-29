@@ -12,16 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#4affffff">
+        android:background="#afffffff">
         <TextView
             android:id="@+id/catTitle"
             android:textSize="45sp"
             android:textStyle="bold"
-            android:textColor="#6dfffd"
+            android:textColor="#145800"
+
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/catTitle" />
+        <!--android:textColor="#6dfffd"-->
         <!--android:layout_gravity="center"-->
 
         <LinearLayout
@@ -32,7 +34,7 @@
                 android:id="@+id/catsTextBox"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:textColor="#6dfffd"
+                android:textColor="#145800"
                 android:paddingTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
@@ -43,7 +45,7 @@
                 android:id="@+id/catsTextBox2"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:textColor="#6dfffd"
+                android:textColor="#145800"
                 android:paddingTop="10dp"
                 android:layout_marginLeft="13dp"
                 android:layout_marginRight="13dp"
@@ -55,7 +57,7 @@
                 android:id="@+id/catsTextBox3"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:textColor="#6dfffd"
+                android:textColor="#145800"
                 android:paddingTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

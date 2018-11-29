@@ -145,23 +145,24 @@ public class DogsActivity extends AppCompatActivity {
                         tvTitle.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
+                        tvTitle.setGravity(Gravity.TOP);
                     } else {
                         tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         //tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 //TableRow.LayoutParams.MATCH_PARENT));
+                        tv.setGravity(Gravity.TOP);
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                     }
 
                     //tv2.setGravity(Gravity.LEFT);
-                    tv.setGravity(Gravity.TOP);
                     //tv.setPadding(0, 0, 0, 0);
                     if (i == 0) {
                         tvTitle.setPadding(10, 15, 0, 5);
                         //tv2.setText(String.valueOf(row.dogWeight));
                         tvTitle.setText("Dog Name");
                         tvTitle.setTextColor(Color.parseColor("#000000"));
-                        tvTitle.setBackgroundColor(Color.parseColor("#805b39c6"));
+                        tvTitle.setBackgroundColor(Color.parseColor("#80171c59"));
                         //tv.setBackgroundColor(Color.parseColor("#80a84908"));
                         //tv.setBackgroundColor(Color.parseColor("#f7f7f7"));
                     } else {
@@ -189,7 +190,7 @@ public class DogsActivity extends AppCompatActivity {
                         tvb.setBackgroundColor(Color.parseColor("#70E8D9B5"));
                         tvb.setGravity(Gravity.BOTTOM);
                         tvb.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
-                        tvb.setPadding(5, 15, 0, 15);
+                        tvb.setPadding(10, 15, 0, 5);
                         //tvb.setBackgroundColor(Color.parseColor("#6ba814"));
                         //tvb.setBackgroundColor(Color.parseColor("#ffffff"));
                         //tvb.setTextColor(Color.parseColor("#000000"));
@@ -200,28 +201,6 @@ public class DogsActivity extends AppCompatActivity {
 
 
 
-
-//                    if(tv.getParent()!=null)
-//                        ((ViewGroup)tv.getParent()).removeView(tv);
-
-                    //tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                            //TableRow.LayoutParams.WRAP_CONTENT));
-
-//                    tv.setGravity(Gravity.LEFT);
-//
-//                    tv.setPadding(5, 15, 0, 15);
-//                    if (i == 0) {
-//                        tv.setText("Dog Breed");
-//                        //tv.setText(String.valueOf(row.dogName));
-//                        tv.setBackgroundColor(Color.parseColor("#4affffff"));
-//                        //tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
-//                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
-//                    } else {
-//                        tv.setBackgroundColor(Color.parseColor("#d2b48c"));
-//                        //tv.setBackgroundColor(Color.parseColor("#f8f8f8"));
-//                        tv.setText(String.valueOf(row.dogName));
-//                        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
-//                    }
 
                     final LinearLayout layDogWeight = new LinearLayout(DogsActivity.this);
                     layDogWeight.setOrientation(LinearLayout.VERTICAL);
@@ -239,14 +218,16 @@ public class DogsActivity extends AppCompatActivity {
                         tv2Title.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv2Title.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
+                        tv2Title.setGravity(Gravity.TOP);
                     } else {
                         tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
+                        tv2.setGravity(Gravity.TOP);
                     }
 
                     //tv2.setGravity(Gravity.LEFT);
-                    tv2Title.setGravity(Gravity.TOP);
+
 
 
                     if (i == 0) {
@@ -254,7 +235,7 @@ public class DogsActivity extends AppCompatActivity {
                         //tv2.setText(String.valueOf(row.dogWeight));
                         tv2Title.setText("Dog Weight");
                         tv2Title.setTextColor(Color.parseColor("#000000"));
-                        tv2Title.setBackgroundColor(Color.parseColor("#805b39c6"));
+                        tv2Title.setBackgroundColor(Color.parseColor("#80171c59"));
                     } else {
                         tv2.setBackgroundColor(Color.parseColor("#80F7B05E"));
                         tv2.setTextColor(Color.parseColor("#000000"));
@@ -273,7 +254,7 @@ public class DogsActivity extends AppCompatActivity {
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv2b.setGravity(Gravity.BOTTOM);
                         tv2b.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
-                        tv2b.setPadding(5, 15, 0, 5);
+                        tv2b.setPadding(10, 15, 0, 5);
                         tv2b.setBackgroundColor(Color.parseColor("#70E8D9B5"));
                         tv2b.setTextColor(Color.parseColor("#000000"));
                         tv2b.setText(row.dogPounds);
@@ -285,7 +266,7 @@ public class DogsActivity extends AppCompatActivity {
                     //tv2.setGravity(Gravity.LEFT);
                     final LinearLayout layDogHeight = new LinearLayout(DogsActivity.this);
                     layDogHeight.setOrientation(LinearLayout.VERTICAL);
-                    layDogHeight.setPadding(0, 0, 0, 10);
+                    layDogHeight.setPadding(0, 0, 0, 0);
                     layDogHeight.setBackgroundColor(Color.parseColor("#70E8D9B5"));
 
                     final TextView tv3Title = new TextView(DogsActivity.this);
@@ -300,22 +281,22 @@ public class DogsActivity extends AppCompatActivity {
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv3Title.setPadding(10, 15, 0, 5);
                         tv3Title.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
-                        tv3.setGravity(Gravity.TOP);
+                        tv3Title.setGravity(Gravity.TOP);
                     } else {
                         tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
+                        tv3.setGravity(Gravity.TOP);
                         tv3.setPadding(10, 15, 0, 5);
                         tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
                     }
 
-                    tv3.setGravity(Gravity.TOP);
 
 
                     if (i == 0) {
                         //tv3.setText(String.valueOf(row.dogHeight));
                         tv3Title.setText("Dog Height");
                         tv3Title.setTextColor(Color.parseColor("#000000"));
-                        tv3Title.setBackgroundColor(Color.parseColor("#805b39c6"));
+                        tv3Title.setBackgroundColor(Color.parseColor("#80171c59"));
                     } else {
                         tv3.setBackgroundColor(Color.parseColor("#80F7B05E"));
                         tv3.setTextColor(Color.parseColor("#000000"));
@@ -335,39 +316,13 @@ public class DogsActivity extends AppCompatActivity {
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv3b.setGravity(Gravity.BOTTOM);
                         tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
-                        tv3b.setPadding(5, 15, 0, 5);
+                        tv3b.setPadding(10, 15, 0, 5);
                         tv3b.setBackgroundColor(Color.parseColor("#70E8D9B5"));
                         tv3b.setTextColor(Color.parseColor("#000000"));
                         tv3b.setText(String.valueOf(row.dogInches));
                         layDogHeight.addView(tv3b);
                     }
-                    //layDogHeight.addView(tv3b);
-                    //layCustomer.addView(tv3);
 
-
-                    //            if (i > -1) {
-                    //                final TextView tv3b = new TextView(this);
-                    //                tv3b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    //                        TableRow.LayoutParams.WRAP_CONTENT));
-                    //
-                    //                tv3b.setGravity(Gravity.RIGHT);
-                    //                tv3b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-                    //                tv3b.setPadding(5, 1, 0, 5);
-                    //                tv3b.setTextColor(Color.parseColor("#aaaaaa"));
-                    //                tv3b.setBackgroundColor(Color.parseColor("#f8f8f8"));
-                    //                tv3b.setText(row.customerAddress);
-                    //                layCustomer.addView(tv3b);
-                    //            }
-
-                    //            final LinearLayout layAmounts = new LinearLayout(this);
-                    //            layAmounts.setOrientation(LinearLayout.VERTICAL);
-                    //            layAmounts.setGravity(Gravity.RIGHT);
-                    //            layAmounts.setPadding(0, 10, 0, 10);
-                    //            layAmounts.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    //                    TableRow.LayoutParams.MATCH_PARENT));
-                    //
-                    //
-                    //
                     final LinearLayout layDogLifespan = new LinearLayout(DogsActivity.this);
                     layDogLifespan.setOrientation(LinearLayout.VERTICAL);
                     layDogLifespan.setPadding(0, 0, 0, 0);
@@ -382,16 +337,18 @@ public class DogsActivity extends AppCompatActivity {
                     if (i == 0) {
                         tv4Title.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
+                        tv4Title.setGravity(Gravity.TOP);
                         tv4Title.setPadding(10, 15, 0, 5);
                         //layAmounts.setBackgroundColor(Color.parseColor("#f7f7f7"));
                     } else {
                         tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv4.setPadding(10, 15, 0, 5);
+                        tv4.setGravity(Gravity.TOP);
                         //layAmounts.setBackgroundColor(Color.parseColor("#ffffff"));
                     }
 
-                    tv4.setGravity(Gravity.LEFT);
+
                     //tv4.setGravity(Gravity.RIGHT);
 
                     if (i == 0) {
@@ -400,7 +357,7 @@ public class DogsActivity extends AppCompatActivity {
                         tv4Title.setTextColor(Color.parseColor("#000000"));
                         //"#E6f7f7f7"
                         //tv4.setBackgroundColor(Color.parseColor("#F2f7f7f7"));
-                        tv4Title.setBackgroundColor(Color.parseColor("#805b39c6"));
+                        tv4Title.setBackgroundColor(Color.parseColor("#80171c59"));
                         tv4Title.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
                     } else {
                         tv4.setBackgroundColor(Color.parseColor("#80F7B05E"));
@@ -420,7 +377,7 @@ public class DogsActivity extends AppCompatActivity {
                                 TableRow.LayoutParams.MATCH_PARENT));
                         tv4b.setGravity(Gravity.BOTTOM);
                         tv4b.setTextSize(TypedValue.COMPLEX_UNIT_PX, mediumTextSize);
-                        tv4b.setPadding(5, 15, 0, 5);
+                        tv4b.setPadding(10, 15, 0, 5);
                         tv4b.setBackgroundColor(Color.parseColor("#70E8D9B5"));
                         tv4b.setTextColor(Color.parseColor("#000000"));
                         tv4b.setText(String.valueOf(row.dogYears));
@@ -428,29 +385,6 @@ public class DogsActivity extends AppCompatActivity {
                     }
 
 
-
-                    //layAmounts.addView(tv4);
-
-
-                    //            if (i > -1) {
-                    //                final TextView tv4b = new TextView(this);
-                    //                tv4b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                    //                        TableRow.LayoutParams.WRAP_CONTENT));
-                    //
-                    //                tv4b.setGravity(Gravity.RIGHT);
-                    //                tv4b.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-                    //                tv4b.setPadding(2, 2, 1, 5);
-                    //                tv4b.setTextColor(Color.parseColor("#00afff"));
-                    //                tv4b.setBackgroundColor(Color.parseColor("#ffffff"));
-                    //
-                    //                String due = "";
-                    //                if (row.amountDue.compareTo(new BigDecimal(0.01)) == 1) {
-                    //                    due = "Due:" + decimalFormat.format(row.amountDue);
-                    //                    due = due.trim();
-                    //                }
-                    //                tv4b.setText(due);
-                    //                layAmounts.addView(tv4b);
-                    //            }
 
 
                     // add table row
@@ -476,61 +410,13 @@ public class DogsActivity extends AppCompatActivity {
                     }
 
 
-//                    tr.addView(tv);
-//                    tr.addView(tv2);
-//                    tr.addView(tv3);
-//                    tr.addView(tv4);
+
 
                     //create array of arrays holding text views
                     int dogsRow = 4;
 
 
-//                    TextView[] dogColumnArray = new TextView[dogsRow];
-//                    //Log.i("IntV","intextview not showing");
-//                    //for(int p = 0; p < dogsRow; p++) {
-//                    dogColumnArray[0] = tv;
-//                    dogColumnArray[1] = tv2;
-//                    dogColumnArray[2] = tv3;
-//                    dogColumnArray[3] = tv4;
 
-                    //int r=0;
-                    //
-                    //listIntoTable[][]={dogColumnArray};
-                    //for(int d = 0; d < rows; d++){
-                    //listIntoTable[r][]={tv,tv2,tv3,tv4};
-                    //r++;
-                    //t is for rows and j is for columns iterates through all columns first then the row
-
-
-//                    int t = 0;
-//                    //for (t; t < listIntoTable.length; t++) {
-//                    for (int j = 0; j < listIntoTable[t].length; j++) {
-//                        listIntoTable[t][j] = dogColumnArray[j];
-//                        //listIntoTable[t][j] = t + j;
-//                        Log.i("2d Array", "" + listIntoTable[t][j]);
-//                    }
-//                    //}
-//                    t++;
-
-
-
-                    // Log.i("2d Array",""+listIntoTable[t][j]);
-                    //}
-
-
-                    //            tr.addView(layCustomer);
-                    //            tr.addView(layAmounts);
-
-                    //            if (i > -1) {
-                    //
-                    //                tr.setOnClickListener(new View.OnClickListener() {
-                    //                    public void onClick(View v) {
-                    //                        TableRow tr = (TableRow) v;
-                    //                        //do whatever action is needed
-                    //
-                    //                    }
-                    //                });
-                    //     }
 
 
                     mTableLayout.addView(tr, trParams);
@@ -570,23 +456,7 @@ public class DogsActivity extends AppCompatActivity {
 
 
                 }
-//            Bundle bundle = new Bundle();
-//            bundle.putStringArray("key1", mTableLayout);
-//            bundle.putStringArray("key2", tableLayout2);
-//
-//            Message message = new Message();
-//            message.setData(bundle);
-//            handler.sendMessage(message);
-//
-//            Message msgArray = new Message();
-//            Log.i("runTaskOneButton","11111111111111111111111111");
-//            msgArray.what = MAIN_THREAD_TASK_1;
-//            msgArray.arg1=tableArray;
-                //intent1.putExtra(EXTRA_MESSAGE_FIVE, tableArray);
 
-
-                //return tableLayout2;
-                //return tableArray;
                 return mTableLayout;
             }
         }

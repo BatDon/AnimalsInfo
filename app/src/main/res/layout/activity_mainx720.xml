@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#020ffd"
+    android:background="#061130"
     android:orientation="vertical">
 
 
@@ -14,6 +14,7 @@
         android:layout_gravity="center"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:textColor="#ffffff"
         android:text="@string/animalChoice"/>
 
     <LinearLayout
@@ -22,7 +23,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#020ffd"
+        android:background="#083752"
         android:id="@+id/animalBox">
     <FrameLayout
         android:layout_width="match_parent"
