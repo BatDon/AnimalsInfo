@@ -23,8 +23,11 @@ public class DogsActivity extends AppCompatActivity {
         //Log.i("something", "ok");
 
         // Get the Intent that started this activity and extract the string
+        //Intent intent = this.getIntent();
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        //String message=this.getIntent().getExtras().getString(EXTRA_MESSAGE);
+        String message=intent.getStringExtra(EXTRA_MESSAGE);
+        //String message = intent.getStringExtra(getActivity().getBaseContext().EXTRA_MESSAGE);
         String message2 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_TWO);
         String message3 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_THREE);
         String message4 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_FOUR);
