@@ -1,11 +1,9 @@
-package com.example.david.animalsinfo;
+package com.mydavidjerome.david.animalsinfo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.LinearLayout;
@@ -35,7 +33,7 @@ public class FrogsActivity extends AppCompatActivity {
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.frogTitle);
         textView.setText(message);
-        Log.i("textView", "= " + textView);
+        //Log.i("textView", "= " + textView);
         TextView textView2 = findViewById(R.id.frogsTextBox);
         textView2.setText(message2);
         TextView textView3 = findViewById(R.id.frogsTextBox2);
@@ -50,7 +48,7 @@ public class FrogsActivity extends AppCompatActivity {
         //public TableLayout dataIntoTable() {
         //public TableLayout dataIntoTable() {
         private TableLayout dataIntoTable3() {
-            Log.i("dataInto Table", "****************");
+            //Log.i("dataInto Table", "****************");
             //TableLayout mTableLayout=new TableLayout(MainActivity.this);
             setContentView(R.layout.activity_frogs);
             TableLayout mTableLayout = (TableLayout) findViewById(R.id.frogsTable);
@@ -71,7 +69,7 @@ public class FrogsActivity extends AppCompatActivity {
             //data=dogsAddDataif(tv.getParent()!=null)
             //((ViewGroup)tv.getParent()).removeView(tv);
             //invoices=frogsData
-            Log.i("dataInto Table", "))))))))))))))))");
+            //Log.i("dataInto Table", "))))))))))))))))");
 
             //added this part
             //setContentView(R.layout.activity_frogs);
@@ -103,7 +101,7 @@ public class FrogsActivity extends AppCompatActivity {
             int rows = frogsAddData.length;
             TextView textSpacer = null;
 
-            Log.i("tableRows", " " + rows);
+            //Log.i("tableRows", " " + rows);
             //mTableLayout.removeAllViews();
             //exTableLayout.removeAllViews();
 
@@ -439,7 +437,7 @@ public class FrogsActivity extends AppCompatActivity {
                     trSep.addView(tvSep);
                     mTableLayout.addView(trSep, trParamsSep);
                     //tableLayout2.addView(mTableLayout);
-                    Log.i("TL finished", " ////////////////////////////");
+                    //Log.i("TL finished", " ////////////////////////////");
 
                     //TableLayout[] tableArray = {mTableLayout,tableLayout2};
                     //mTableLayout.setStretchAllColumns(true);

@@ -1,11 +1,8 @@
-package com.example.david.animalsinfo;
-
-import android.util.Log;
+package com.mydavidjerome.david.animalsinfo;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -32,12 +29,12 @@ public class DogsData {
                 //String url = "@string/url";
                 Document doc = Jsoup.connect(url2).get();
                 Elements elements = doc.body().select("*");
-                Log.i("FormatDatabase", " " + elements);
+                //Log.i("FormatDatabase", " " + elements);
                 Element dogElement= doc.select("#dogPara").first();
                 Elements dogElements3= doc.select("#dogPara");
-                Log.i("dogElement",""+dogElements3);
+                //Log.i("dogElement",""+dogElements3);
                 String dogText3=dogElements3.html();
-                Log.i("dogAsHTML",""+dogText3);
+                //Log.i("dogAsHTML",""+dogText3);
                 dogElement.removeAttr("<p>");
                 //Elements dogElements = doc.select("#dogPara");
                 //Element dogElement2=dogElement.child(1);
@@ -85,14 +82,14 @@ public class DogsData {
                 //lines=dogElements.split("\\r?\\n");
 
 
-                Log.i("lines[0]", "" + lines[0]);
-                Log.i("lines[2]", "" + lines[2]);
-                Log.i("lines[4]", "" + lines[4]);
-                Log.i("lines[6]", "" + lines[6]);
+                //Log.i("lines[0]", "" + lines[0]);
+                //Log.i("lines[2]", "" + lines[2]);
+                //Log.i("lines[4]", "" + lines[4]);
+                //Log.i("lines[6]", "" + lines[6]);
                 //}
                 String lines2[] = dogText3.split("\\n");
-                Log.i("lines2[0]", "" + lines2[0]);
-                Log.i("lines2[4]", "" + lines2[4]);
+                //Log.i("lines2[0]", "" + lines2[0]);
+                //Log.i("lines2[4]", "" + lines2[4]);
                 String regex = "[A-Z]&&[a-z]";
                 //int ncol=0;
                 int ar = 0;
@@ -105,7 +102,7 @@ public class DogsData {
                 //int forEight=0;
                 //for (int ln = 0; ln < (lines.length); ln += 2, ar++) {
                 for (int ln = 0; ln < (lines.length); ln += 1, ar++) {
-                    Log.i("ln", "" + ln);
+                    //Log.i("ln", "" + ln);
                     String sg = lines[ln];
                     String[] words = sg.split("\\s+");
                     int wd = 0;
@@ -118,8 +115,8 @@ public class DogsData {
 //                        ar++;}
                     if (ar == 0) {
                         for (ln2 = 0; ln2 < (words.length) && ar == 0; ln2++) {
-                            Log.i("words[ln2]", " " + words[ln2]);
-                            Log.i("ln2=", " " + ln2);
+                            //Log.i("words[ln2]", " " + words[ln2]);
+                            //Log.i("ln2=", " " + ln2);
 
 //                            if(firstRow3<1&&firstRow==2){
 //                                firRowStr.append(words[ln2+1]);
@@ -130,9 +127,9 @@ public class DogsData {
                                 firRowStr.append(words[ln2]);
                                 firRowStr.append(" ");
                                 firRowStr.append(words[ln2 + 1]);
-                                Log.i("firRowStr", " " + firRowStr);
-                                Log.i("2 words[ln2]", " " + words[ln2]);
-                                Log.i("2 ln2=", " " + ln2);
+                                //Log.i("firRowStr", " " + firRowStr);
+                                //Log.i("2 words[ln2]", " " + words[ln2]);
+                                //Log.i("2 ln2=", " " + ln2);
                                 dogArrayTB[ar][0] = firRowStr.toString();
                                 firRowStr.setLength(0);
                                 ++ln2;
@@ -141,19 +138,19 @@ public class DogsData {
                                 continue;
                             } else {
                                 //ncol+=2;
-                                Log.i("firRowStr", " " + firRowStr);
-                                Log.i("3 words[ln2]", " " + words[ln2]);
-                                Log.i("3 ln2=", " " + ln2);
+                                //Log.i("firRowStr", " " + firRowStr);
+                                //Log.i("3 words[ln2]", " " + words[ln2]);
+                                //Log.i("3 ln2=", " " + ln2);
                                 dogArrayTB[ar][ln2-1] = words[ln2];
                                 //dogArrayTB[ar][ln2] = words[ln2];
                                 firRowStr.setLength(0);
                                 endFirst++;
-                                Log.i("ar=", "" + ar);
+                                //Log.i("ar=", "" + ar);
 //                                if (endFirst == 2) {
 //                                    //ar++;
 //                                    ++ar;
 //                                }
-                                Log.i("elseFR", "" + firRowStr);
+                                //Log.i("elseFR", "" + firRowStr);
                             }
                         }
                     } else {
@@ -164,9 +161,9 @@ public class DogsData {
                                     worStr = worStr.append(words[ln2]);
                                     worStr.append(" ");
                                     worStr.append(words[ln2+1]);
-                                    Log.i("firRowStr", " " + firRowStr);
-                                    Log.i("$0 words[ln2]", " " + words[ln2]);
-                                    Log.i("$0 ln2=", " " + ln2);
+                                    //Log.i("firRowStr", " " + firRowStr);
+                                    //Log.i("$0 words[ln2]", " " + words[ln2]);
+                                    //Log.i("$0 ln2=", " " + ln2);
                                     dogArrayTB[ar][0] = worStr.toString();
                                     worStr.setLength(0);
                                     arrPlace = 2;
@@ -194,7 +191,7 @@ public class DogsData {
 
                 for (int i = 0; i < dogArrayTB.length; i++) {
                     for (int j = 0; j < dogArrayTB[i].length; j++) {
-                        Log.i("wholeAr", "Values [" + i + "][" + j + "] is " + dogArrayTB[i][j]);
+                        //Log.i("wholeAr", "Values [" + i + "][" + j + "] is " + dogArrayTB[i][j]);
                     }
                 }
 
@@ -236,17 +233,17 @@ public class DogsData {
 //                Elements e9 = e6.children();
 //                Log.i("FD e6", ""+e9);
                     Elements e9 = e5.children();
-                    Log.i("dog e9=", " " + e9.text());
+                    //Log.i("dog e9=", " " + e9.text());
                     //Elements e9 = e6.children();
-                    Log.i("FD e9", "" + e9);
+                    //Log.i("FD e9", "" + e9);
                     int numberOfDogs2 = 0;
 
 
 
-                    Log.i("in Element", "paragraph of dogs");
+                    //Log.i("in Element", "paragraph of dogs");
 
 
-                    Log.i("JSoup", "Connected successfully!");
+                    //Log.i("JSoup", "Connected successfully!");
 
 
                 }
@@ -257,7 +254,7 @@ public class DogsData {
             catch (IOException e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
-                Log.i("HTML ERROR", "exception reading HTML");
+                //Log.i("HTML ERROR", "exception reading HTML");
             }
             //return dogTextLeft;
             return dogFormattedArray2;
@@ -270,12 +267,12 @@ public class DogsData {
 
 
 
-    public com.example.david.animalsinfo.DogsAddData[] getInfo() {
-        Log.i("getInfost","getInfostarted");
-        com.example.david.animalsinfo.DogsAddData[] data = new com.example.david.animalsinfo.DogsAddData[dogArrayTB.length];
+    public com.mydavidjerome.david.animalsinfo.DogsAddData[] getInfo() {
+        //Log.i("getInfost","getInfostarted");
+        com.mydavidjerome.david.animalsinfo.DogsAddData[] data = new com.mydavidjerome.david.animalsinfo.DogsAddData[dogArrayTB.length];
 
         for (int i = 0; i < dogArrayTB.length; i++) {
-            com.example.david.animalsinfo.DogsAddData row = new com.example.david.animalsinfo.DogsAddData();
+            com.mydavidjerome.david.animalsinfo.DogsAddData row = new com.mydavidjerome.david.animalsinfo.DogsAddData();
 //            if(checksRows[i].equals("8")){
 //
 //            }
@@ -297,8 +294,8 @@ public class DogsData {
                 row.dogInches = dogArrayTB[i][j+4];
                 row.dogLifespan = dogArrayTB[i][j+5];
                 row.dogYears = dogArrayTB[i][j+6];
-                Log.i("i in for"," "+i);
-                Log.i("row.dogName"," "+dogArrayTB[i][j]);
+                //Log.i("i in for"," "+i);
+                //Log.i("row.dogName"," "+dogArrayTB[i][j]);
 
 //creates row with data
                 data[i] = row;

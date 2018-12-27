@@ -1,13 +1,11 @@
-package com.example.david.animalsinfo;
+package com.mydavidjerome.david.animalsinfo;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -37,7 +35,7 @@ public class DogsActivity extends AppCompatActivity {
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.dogTitle);
         textView.setText(message);
-        Log.i("textView", "= " + textView);
+        //Log.i("textView", "= " + textView);
         TextView textView2 = findViewById(R.id.dogsTextBox);
         textView2.setText(message2);
         TextView textView3 = findViewById(R.id.dogsTextBox2);
@@ -57,7 +55,7 @@ public class DogsActivity extends AppCompatActivity {
         //public TableLayout dataIntoTable() {
         //public TableLayout dataIntoTable() {
         private TableLayout dataIntoTable() {
-            Log.i("dataInto Table", "****************");
+            //Log.i("dataInto Table", "****************");
             //TableLayout mTableLayout=new TableLayout(MainActivity.this);
             setContentView(R.layout.activity_dogs);
             TableLayout mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
@@ -78,7 +76,7 @@ public class DogsActivity extends AppCompatActivity {
             //data=dogsAddDataif(tv.getParent()!=null)
             //((ViewGroup)tv.getParent()).removeView(tv);
             //invoices=dogsData
-            Log.i("dataInto Table", "))))))))))))))))");
+            //Log.i("dataInto Table", "))))))))))))))))");
 
             //added this part
             //setContentView(R.layout.activity_dogs);
@@ -110,7 +108,7 @@ public class DogsActivity extends AppCompatActivity {
             int rows = dogsAddData.length;
             TextView textSpacer = null;
 
-            Log.i("tableRows", " " + rows);
+            //Log.i("tableRows", " " + rows);
             //mTableLayout.removeAllViews();
             //exTableLayout.removeAllViews();
 
@@ -446,7 +444,7 @@ public class DogsActivity extends AppCompatActivity {
                     trSep.addView(tvSep);
                     mTableLayout.addView(trSep, trParamsSep);
                     //tableLayout2.addView(mTableLayout);
-                    Log.i("TL finished", " ////////////////////////////");
+                    //Log.i("TL finished", " ////////////////////////////");
 
                     //TableLayout[] tableArray = {mTableLayout,tableLayout2};
                     //mTableLayout.setStretchAllColumns(true);

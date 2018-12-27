@@ -1,46 +1,29 @@
-package com.example.david.animalsinfo;
+package com.mydavidjerome.david.animalsinfo;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
-import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -116,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainx720);
-        Log.i("onCreateMethod","0000000000000000000000");
+        //Log.i("onCreateMethod","0000000000000000000000");
         //String url2 = getResources().getString(R.string.url2);
 
 
@@ -194,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // When click this button, create a message object
                 Message msg = new Message();
-                Log.i("runTaskOneButton","AAAAAAAAAAAAAAAAAAAA");
+                //Log.i("runTaskOneButton","AAAAAAAAAAAAAAAAAAAA");
                 msg.what = MAIN_THREAD_TASK_1;
                 // Use worker thread message Handler to put message into worker thread message queue.
                 workerThread.workerThreadHandler.sendMessage(msg);
@@ -211,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_2;
-                Log.i("runTaskTwoButton","BBBBBBBBBBBBBBBBBBBBB");
+                //Log.i("runTaskTwoButton","BBBBBBBBBBBBBBBBBBBBB");
                 workerThread.workerThreadHandler.sendMessage(msg);
             }
         });
@@ -222,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Message msg = new Message();
                 msg.what = MAIN_THREAD_TASK_3;
-                Log.i("runTaskThreeButton","CCCCCCCCCCCCCCCCCCCC");
+                //Log.i("runTaskThreeButton","CCCCCCCCCCCCCCCCCCCC");
                 workerThread.workerThreadHandler.sendMessage(msg);
             }
         });
@@ -278,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
             //Prepares thread to add tasks in a loop
 
             Looper.prepare();
-            Log.i("run","3333333333333333333333");
+            //Log.i("run","3333333333333333333333");
 
             //Get Screen size to format images
 
@@ -302,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
 
             FormatDocument formattedDoc = new FormatDocument();
 //            dogTextLeft = formattedDoc.returnString();
-            Log.i("runTaskOneButton","4444444444444444444444444");
+            //Log.i("runTaskOneButton","4444444444444444444444444");
             dogFormatted = formattedDoc.returnStringArray();
 
 
@@ -311,20 +294,20 @@ public class MainActivity extends AppCompatActivity {
 
             FormatDocument3 formattedDoc3 = new FormatDocument3();
             frogFormatted = formattedDoc3.returnFrogStringArray();
-            Log.i("Wthread","at end of run");
+            //Log.i("Wthread","at end of run");
 
             // Create child thread Handler. Connects Looper to current(MyWorkerThread)thread
             workerThreadHandler = new Handler(Looper.myLooper()) {
                 @Override
                 public void handleMessage(Message msg) {
-                    Log.i("handleMessage","55555555555555555555555");
+                    //Log.i("handleMessage","55555555555555555555555");
                     // When child thread handler get message from child thread message queue.
-                    Log.i("CHILD_THREAD", "Receive message from main thread.");
+                    //Log.i("CHILD_THREAD", "Receive message from main thread.");
                     Message message = new Message();
                     message.what = msg.what;
-                    Log.i("AFtermsg.what", ""+msg.what);
+                    //Log.i("AFtermsg.what", ""+msg.what);
                     if (msg.what == MAIN_THREAD_TASK_1) {
-                        Log.i("if msg.what==Main","6666666666666666666666666");
+                        //Log.i("if msg.what==Main","6666666666666666666666666");
                         barking.start();
                         //taskStatusTextView.setText(dogText);
                         sendActivity1(intent1);
@@ -383,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             // Prepare MyWorkerThread which is a child of Thread Looper object.
             //Prepares thread to add tasks in a loop
-            Log.i("handleMessage","###################");
+            //Log.i("handleMessage","###################");
             Looper.prepare();
             String url2 = getResources().getString(R.string.url2);
             new DogsData().getDogsStatsArray(url2);
@@ -402,8 +385,8 @@ public class MainActivity extends AppCompatActivity {
 
             //Gets database from website
             //CREATE DYNAMIC TABLE HERE
-            Log.i("beforeDogCr","eator &&&&&&&&&&&&");
-            Log.i("after","dogcreator    ");
+            //Log.i("beforeDogCr","eator &&&&&&&&&&&&");
+            //Log.i("after","dogcreator    ");
             //FormatDatabase formatDatabase=new FormatDatabase();
             final TableLayout dogLayout;
             TableLayout[] dogLayoutArray;
@@ -432,12 +415,12 @@ public class MainActivity extends AppCompatActivity {
 //            dogTable = formatDatabase.returnStringArray2();
                         //tabDogView.addView(tabDog);
                         //tableLayout2.addView(mTableLayout);
-                        Log.i("handleMessage", "$$$$$$$$$$$$$$$$$$$");
+                        //Log.i("handleMessage", "$$$$$$$$$$$$$$$$$$$");
                         // When child thread handler get message from child thread message queue.
-                        Log.i("CHILD_THREAD", "Receive message from main thread.");
+                        //Log.i("CHILD_THREAD", "Receive message from main thread.");
                         Message message = new Message();
                         message.what = msg.what;
-                        Log.i("AFtermsg.what", "" + msg.what);
+                        //Log.i("AFtermsg.what", "" + msg.what);
                     }
 
                     // Send the message back to main thread message queue use main thread message Handler.
@@ -450,7 +433,7 @@ public class MainActivity extends AppCompatActivity {
             Looper.loop();
 
             // The code after Looper.loop() will not be executed until you call workerThreadHandler.getLooper().quit()
-            Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
+            //Log.i("CHILD_THREAD", "This log is printed after Looper.loop() method. Only when this thread loop quit can this log be printed.");
             // Send a message to main thread.
             //Message msg = new Message();
             //msg.what = CHILD_THREAD_QUIT_LOOPER;
@@ -539,7 +522,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
-                Log.i("HTML ERROR", "exception reading HTML");
+                //Log.i("HTML ERROR", "exception reading HTML");
             }
             return doc;
 
@@ -563,7 +546,7 @@ public class MainActivity extends AppCompatActivity {
         private String[] dogFormattedArray=new String[3];
         private String[] returnStringArray() {
             try {
-                Log.i("runTaskOneButton","777777777777777777777777");
+                //Log.i("runTaskOneButton","777777777777777777777777");
 //                String url = getResources().getString(R.string.url);
 //                //String url = "@string/url";
 //                Document doc = Jsoup.connect(url).get();
@@ -576,7 +559,7 @@ public class MainActivity extends AppCompatActivity {
                 Element e5 = doc.select("div.entry-content").first();
 
                 Element e6 = e5.child(1);
-                Log.i("dog e6="," "+e6);
+                //Log.i("dog e6="," "+e6);
                 Elements e9 = e6.children();
                 //Element e7 = e5.child(2);
                 //Element e8 = e5.child(3);
@@ -590,11 +573,11 @@ public class MainActivity extends AppCompatActivity {
                     numberOfDogs += 1;
                     dogArray[numberOfDogs] = (e.text());
 
-                    Log.i("eachDogHere: ", "" + (dogArray[numberOfDogs]));
+                    //Log.i("eachDogHere: ", "" + (dogArray[numberOfDogs]));
                 }
                 String halfWords = dogArray[1];
 
-                Log.i("Dogs/2=", "" + (numberOfDogs / 2));
+                //Log.i("Dogs/2=", "" + (numberOfDogs / 2));
 
                 //If an odd number of dogs add one more to left column
                 int remDog = numberOfDogs % 3;
@@ -629,13 +612,13 @@ public class MainActivity extends AppCompatActivity {
                 for(int i=1;i<=dogsLeft;i++){
                     dogsLeftBuild.append(dogArray[i]);
                     dogsLeftBuild.append((System.getProperty("line.separator")));
-                    Log.i("Times ifn leftDogs loop","lets see "+i);
+                    //Log.i("Times ifn leftDogs loop","lets see "+i);
                     //leftDogs=dogArray[i];
                     //leftDogs=leftDogs+("\n");
                 }
                 //String dogsLeftColumn=dogsLeftBuild.toString();
                 leftDogs=dogsLeftBuild.toString();
-                Log.i("DogsLEft Column=  ", ""+leftDogs);
+                //Log.i("DogsLEft Column=  ", ""+leftDogs);
                 String dogTextLeft=leftDogs;
 
                 int limitCenterLoop=dogsLeft+dogsCenter;
@@ -680,7 +663,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //Element[] elementArr = arrayElements.toArray(new Element[]{});
-                Log.i("numberOfDogs =",""+numberOfDogs);
+                //Log.i("numberOfDogs =",""+numberOfDogs);
 
 
 
@@ -691,7 +674,7 @@ public class MainActivity extends AppCompatActivity {
                 catWords=0;
                 String cattt;
 
-                Log.i("E9   Should Dogs",""+e9);
+                //Log.i("E9   Should Dogs",""+e9);
                 Element cattEle=null;
 
 
@@ -716,7 +699,7 @@ public class MainActivity extends AppCompatActivity {
                 intent1 = new Intent(MainActivity.this, DogsActivity.class);
                 //Text editText =findViewById(R.id.somethingText);
                 //String message = editText.getText().toString();
-                Log.i("sendActivity","222222222222222222222222");
+                //Log.i("sendActivity","222222222222222222222222");
                 intent1.putExtra(EXTRA_MESSAGE, dogTitle);
                 intent1.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
                 intent1.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
@@ -730,15 +713,15 @@ public class MainActivity extends AppCompatActivity {
                // intent1.putExtra(EXTRA_MESSAGE_SIX,exTableLayout);
 
 
-                Log.i("in Element", "paragraph of dogs");
+                //Log.i("in Element", "paragraph of dogs");
 
 
-                Log.i("JSoup", "Connected successfully!");
+                //Log.i("JSoup", "Connected successfully!");
 
             } catch(Throwable e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
-                Log.i("HTML ERROR", "exception reading HTML");
+                //Log.i("HTML ERROR", "exception reading HTML");
             }
             //return dogTextLeft;
             return dogFormattedArray;
@@ -752,7 +735,7 @@ public class MainActivity extends AppCompatActivity {
                 //String url = "@string/url";
                 Document doc = Jsoup.connect(url).get();
                 Elements elements = doc.body().select("*");
-                Log.i("FormatDatabase"," "+elements);
+                //Log.i("FormatDatabase"," "+elements);
                 Element e5 = doc.select("body").first();
                 //Elements nes =doc.select("body ~ br");
                 Elements nes =doc.select("body");
@@ -764,9 +747,9 @@ public class MainActivity extends AppCompatActivity {
 //                Elements e9 = e6.children();
 //                Log.i("FD e6", ""+e9);
                 Elements e9 = e5.children();
-                Log.i("dog e9="," "+e9);
+                //Log.i("dog e9="," "+e9);
                 //Elements e9 = e6.children();
-                Log.i("FD e6", ""+e9);
+                //Log.i("FD e6", ""+e9);
                 int numberOfDogs2 = 0;
                 String[] dogArrayTB = new String[100];
                 //ArrayList<Element> arrayElements = new ArrayList<>();
@@ -774,14 +757,14 @@ public class MainActivity extends AppCompatActivity {
                     numberOfDogs2 += 1;
                     dogArrayTB[numberOfDogs2] = (e.text());
 
-                    Log.i("eachDogHereTB: ", "" + (dogArrayTB[numberOfDogs2]));
+                    //Log.i("eachDogHereTB: ", "" + (dogArrayTB[numberOfDogs2]));
                 }
 
 
-                Log.i("in Element", "paragraph of dogs");
+                //Log.i("in Element", "paragraph of dogs");
 
 
-                Log.i("JSoup", "Connected successfully!");
+                //Log.i("JSoup", "Connected successfully!");
 
 
             }
@@ -791,7 +774,7 @@ public class MainActivity extends AppCompatActivity {
             catch (IOException e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
-                Log.i("HTML ERROR", "exception reading HTML");
+                //Log.i("HTML ERROR", "exception reading HTML");
             }
             //return dogTextLeft;
             return dogFormattedArray2;
@@ -805,7 +788,7 @@ public class MainActivity extends AppCompatActivity {
 
         private String[] returnCatStringArray() {
             try {
-                Log.i("runTaskOneButton", "777777777777777777777777");
+                //Log.i("runTaskOneButton", "777777777777777777777777");
 //                String url = getResources().getString(R.string.url);
 //                //String url = "@string/url";
 //                Document doc = Jsoup.connect(url).get();
@@ -848,11 +831,11 @@ public class MainActivity extends AppCompatActivity {
                 //Elements e9=epar2.getAllElements();
                 //Elements e9=epar2.getAllElements();
                 //Element e9=epar2.firstElementSibling();
-                Log.i("Cate11= ", " " + e11);
-                Log.i("Cate9= ", " " + e9);
-                Log.i("Cate10= ", " " + e10);
+                //Log.i("Cate11= ", " " + e11);
+                //Log.i("Cate9= ", " " + e9);
+                //Log.i("Cate10= ", " " + e10);
 
-                Log.i("epars", "epar1 " + epar1 + " epar2 " + epar2);
+                //Log.i("epars", "epar1 " + epar1 + " epar2 " + epar2);
 
                 //Elements e9=e6.getElementsByIndexEquals(2);
 //                for (Element e:e7) {
@@ -911,14 +894,14 @@ public class MainActivity extends AppCompatActivity {
 
                     catArray[numberOfCats] = (e.text());
 
-                    Log.i("eachCatHere: ", "" + (catArray[numberOfCats]));
+                    //Log.i("eachCatHere: ", "" + (catArray[numberOfCats]));
                     numberOfCats += 1;
                     // }
                 }
 
                 String halfWords = catArray[1];
 
-                Log.i("Cats/2=", "" + (numberOfCats / 2));
+                //Log.i("Cats/2=", "" + (numberOfCats / 2));
 
                 //If an odd number of dogs add one more to left column
                 int remCat = numberOfCats % 3;
@@ -965,13 +948,13 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < catsLeft; i++) {
                     catsLeftBuild.append(catArray[i]);
                     catsLeftBuild.append(System.getProperty("line.separator"));
-                    Log.i("Times ifn leftCats loop", "lets see " + i);
+                    //Log.i("Times ifn leftCats loop", "lets see " + i);
                     //leftDogs=dogArray[i];
                     //leftDogs=leftDogs+("\n");
                 }
                 //String dogsLeftColumn=dogsLeftBuild.toString();
                 leftCats = catsLeftBuild.toString();
-                Log.i("CatsLEft Column=  ", "" + leftCats);
+                //Log.i("CatsLEft Column=  ", "" + leftCats);
                 String catTextLeft = leftCats;
 
                 int limitCenterLoop = catsLeft + catsCenter;
@@ -988,7 +971,7 @@ public class MainActivity extends AppCompatActivity {
                 centerCats = catsCenterBuild.toString();
                 //Log.i("DogsCenter Column=  ", ""+centerDogs);
                 String catTextCenter = centerCats;
-                Log.i("catsCenter", " " + catTextCenter);
+                //Log.i("catsCenter", " " + catTextCenter);
 
                 //dogTextCenter="something";
 
@@ -1007,7 +990,7 @@ public class MainActivity extends AppCompatActivity {
                 rightCats = catsRightBuild.toString();
                 //Log.i("DogsRight Column=  ", ""+rightDogs);
                 String catTextRight = rightCats;
-                Log.i("catsRight", " " + catTextRight);
+                //Log.i("catsRight", " " + catTextRight);
 
 
                 String catsOnLeft = catsLeft + "";
@@ -1015,7 +998,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //Element[] elementArr = arrayElements.toArray(new Element[]{});
-                Log.i("numberOfCats =", "" + numberOfCats);
+                //Log.i("numberOfCats =", "" + numberOfCats);
 
 
                 Element e2 = doc.select("p:contains(Cats)").get(0);
@@ -1024,7 +1007,7 @@ public class MainActivity extends AppCompatActivity {
                 catWords = 0;
                 String cattt;
 
-                Log.i("E9   Should Cats", "" + e9);
+                //Log.i("E9   Should Cats", "" + e9);
                 Element cattEle = null;
 
 
@@ -1048,7 +1031,7 @@ public class MainActivity extends AppCompatActivity {
                 intent2 = new Intent(MainActivity.this, CatsActivity.class);
                 //Text editText =findViewById(R.id.somethingText);
                 //String message = editText.getText().toString();
-                Log.i("sendActivity", "222222222222222222222222");
+                //Log.i("sendActivity", "222222222222222222222222");
                 intent2.putExtra(EXTRA_MESSAGE_TEN, catTitle);
                 intent2.putExtra(EXTRA_MESSAGE_ELEVEN, catTextLeft);
                 intent2.putExtra(EXTRA_MESSAGE_TWELVE, catTextCenter);
@@ -1062,15 +1045,15 @@ public class MainActivity extends AppCompatActivity {
                 // intent1.putExtra(EXTRA_MESSAGE_SIX,exTableLayout);
 
 
-                Log.i("in Element", "paragraph of dogs");
+                //Log.i("in Element", "paragraph of dogs");
 
 
-                Log.i("JSoup", "Connected successfully!");
+                //Log.i("JSoup", "Connected successfully!");
 
             } catch (Throwable e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
-                Log.i("HTML ERROR", "exception reading HTML");
+                //log.i("HTML ERROR", "exception reading HTML");
 //                catch (IOException e) {
 //                final StringBuilder builder = new StringBuilder();
 //                builder.append("Error : ").append(e.getMessage()).append("\n");
@@ -1087,7 +1070,7 @@ public class MainActivity extends AppCompatActivity {
         private String[] frogFormattedArray = new String[3];
         private String[] returnFrogStringArray() {
             try {
-                Log.i("runTaskOneButton", "777777777777777777777777");
+                //log.i("runTaskOneButton", "777777777777777777777777");
 //                String url = getResources().getString(R.string.url);
 //                //String url = "@string/url";
 //                Document doc = Jsoup.connect(url).get();
@@ -1140,11 +1123,11 @@ public class MainActivity extends AppCompatActivity {
                 //Elements e9=epar2.getAllElements();
                 //Elements e9=epar2.getAllElements();
                 //Element e9=epar2.firstElementSibling();
-                Log.i("Cate11= ", " " + e11);
-                Log.i("Cate9= ", " " + e9);
-                Log.i("Cate10= ", " " + e10);
+                //Log.i("Cate11= ", " " + e11);
+                //Log.i("Cate9= ", " " + e9);
+                //Log.i("Cate10= ", " " + e10);
 
-                Log.i("epars", "epar1 " + epar1 + " epar2 " + epar2 + "epar3 "+epar3);
+                //Log.i("epars", "epar1 " + epar1 + " epar2 " + epar2 + "epar3 "+epar3);
 
                 //Elements e9=e6.getElementsByIndexEquals(2);
 //                for (Element e:e7) {
@@ -1203,14 +1186,14 @@ public class MainActivity extends AppCompatActivity {
 
                     frogArray[numberOfFrogs] = (e.text());
 
-                    Log.i("eachFrogHere: ", "" + (frogArray[numberOfFrogs]));
+                    //Log.i("eachFrogHere: ", "" + (frogArray[numberOfFrogs]));
                     numberOfFrogs += 1;
                     // }
                 }
 
                 String halfWords = frogArray[1];
 
-                Log.i("Frogs/2=", "" + (numberOfFrogs / 2));
+                //Log.i("Frogs/2=", "" + (numberOfFrogs / 2));
 
                 //If an odd number of dogs add one more to left column
                 int remFrog = numberOfFrogs % 3;
@@ -1257,13 +1240,13 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < frogsLeft; i++) {
                     frogsLeftBuild.append(frogArray[i]);
                     frogsLeftBuild.append(System.getProperty("line.separator"));
-                    Log.i("Times leftFrogs loop", "lets see " + i);
+                    //Log.i("Times leftFrogs loop", "lets see " + i);
                     //leftDogs=dogArray[i];
                     //leftDogs=leftDogs+("\n");
                 }
                 //String dogsLeftColumn=dogsLeftBuild.toString();
                 leftFrogs = frogsLeftBuild.toString();
-                Log.i("FrogsLEft Column=  ", "" + leftFrogs);
+                //Log.i("FrogsLEft Column=  ", "" + leftFrogs);
                 String frogTextLeft = leftFrogs;
 
                 int limitCenterLoop = frogsLeft + frogsCenter;
@@ -1280,7 +1263,7 @@ public class MainActivity extends AppCompatActivity {
                 centerFrogs = frogsCenterBuild.toString();
                 //Log.i("DogsCenter Column=  ", ""+centerDogs);
                 String frogTextCenter = centerFrogs;
-                Log.i("frogsCenter", " " + frogTextCenter);
+                //Log.i("frogsCenter", " " + frogTextCenter);
 
                 //frogTextCenter="something";
 
@@ -1299,7 +1282,7 @@ public class MainActivity extends AppCompatActivity {
                 rightFrogs = frogsRightBuild.toString();
                 //Log.i("DogsRight Column=  ", ""+rightDogs);
                 String frogTextRight = rightFrogs;
-                Log.i("frogsRight", " " + frogTextRight);
+                //Log.i("frogsRight", " " + frogTextRight);
 
 
                 String frogOnLeft = frogsLeft + "";
@@ -1307,7 +1290,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //Element[] elementArr = arrayElements.toArray(new Element[]{});
-                Log.i("numberOfFrogs =", "" + numberOfFrogs);
+                //Log.i("numberOfFrogs =", "" + numberOfFrogs);
 
 
                 Element e2 = doc.select("p:contains(Frogs)").get(0);
@@ -1316,7 +1299,7 @@ public class MainActivity extends AppCompatActivity {
                 frogWords = 0;
                 String froggg;
 
-                Log.i("E9   Should Frogs", "" + e9);
+                //Log.i("E9   Should Frogs", "" + e9);
                 Element froggEle = null;
 
 
@@ -1340,7 +1323,7 @@ public class MainActivity extends AppCompatActivity {
                 intent3 = new Intent(MainActivity.this, FrogsActivity.class);
                 //Text editText =findViewById(R.id.somethingText);
                 //String message = editText.getText().toString();
-                Log.i("sendActivity", "222222222222222222222222");
+                //Log.i("sendActivity", "222222222222222222222222");
                 intent3.putExtra(EXTRA_MESSAGE_SIXTEEN, frogTitle);
                 intent3.putExtra(EXTRA_MESSAGE_SEVENTEEN, frogTextLeft);
                 intent3.putExtra(EXTRA_MESSAGE_EIGHTEEN, frogTextCenter);
@@ -1354,10 +1337,10 @@ public class MainActivity extends AppCompatActivity {
                 // intent1.putExtra(EXTRA_MESSAGE_SIX,exTableLayout);
 
 
-                Log.i("in Element", "paragraph of dogs");
+                //Log.i("in Element", "paragraph of dogs");
 
 
-                Log.i("JSoup", "Connected successfully!");
+                //Log.i("JSoup", "Connected successfully!");
 
             } catch (Throwable e) {
                 final StringBuilder builder = new StringBuilder();

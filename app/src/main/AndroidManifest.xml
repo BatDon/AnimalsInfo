@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.david.animalsinfo">
+    package="com.mydavidjerome.david.animalsinfo">
 
     <supports-screens
         android:largeScreens="true"
@@ -12,12 +12,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/benjy"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name="com.mydavidjerome.david.animalsinfo.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,12 +26,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.david.animalsinfo.DogsActivity"
+            android:name="com.mydavidjerome.david.animalsinfo.DogsActivity"
             android:label="AnimalsInfo"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.mydavidjerome.david.animalsinfo.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.mydavidjerome.david.animalsinfo.MainActivity" />
             <intent-filter android:label="@string/dogs">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -40,8 +40,9 @@
                 <!--<category android:name="android.intent.category.ALTERNATIVE"/>-->
                 <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
                 <data android:scheme="http"
-                    android:host="www.example.com"
+                    android:host="www.mydavidjerome.com"
                     android:pathPrefix="/animalsInfo" />
+                <!--android:host="www.mydavidjerome.com"-->
                 <!-- note that the leading "/" is required for pathPrefix-->
             </intent-filter>
             <intent-filter android:label="@string/dogs">
@@ -59,17 +60,17 @@
             <!--android:name="android.support.PARENT_ACTIVITY"-->
             <!--android:value=".MainActivity" />-->
         <!--</activity>-->
-        <activity android:name=".FrogsActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name="com.mydavidjerome.david.animalsinfo.FrogsActivity"
+            android:parentActivityName="com.mydavidjerome.david.animalsinfo.MainActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
+            android:value="com.mydavidjerome.david.animalsinfo.MainActivity" />
         </activity>
-        <activity android:name=".CatsActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name="com.mydavidjerome.david.animalsinfo.CatsActivity"
+            android:parentActivityName="com.mydavidjerome.david.animalsinfo.MainActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
+            android:value="com.mydavidjerome.david.animalsinfo.MainActivity" />
         </activity>
         <!--<activity-->
             <!--android:name=".CatLayout"-->

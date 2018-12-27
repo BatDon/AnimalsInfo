@@ -1,6 +1,4 @@
-package com.example.david.animalsinfo;
-
-import android.util.Log;
+package com.mydavidjerome.david.animalsinfo;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,23 +29,23 @@ public class CatsData {
             //String url = "@string/url";
             Document doc = Jsoup.connect(url2).get();
             Elements elements = doc.body().select("*");
-            Log.i("FormatDatabase", " " + elements);
+            //Log.i("FormatDatabase", " " + elements);
             Element e5 = doc.select("body").first();
-            Log.i("FDe5 ", "" + e5);
+            //Log.i("FDe5 ", "" + e5);
             //elements of e5 is the same as e5
             //Elements nes =doc.select("body ~ br");
             Elements nes = doc.select("body");
             Elements catElements= doc.select("#catPara");
-            Log.i("catElements",""+catElements);
+            //Log.i("catElements",""+catElements);
             String catText=catElements.html();
-            Log.i("catText",""+catText);
+            //Log.i("catText",""+catText);
 
 
 
             //String catText = elements.html();
             //String dogText =e5.html();
             catText = catText.replaceAll("<br>", "\n");
-            Log.i("catHTML", "" + catText);
+            //Log.i("catHTML", "" + catText);
             Character c1;
             StringBuilder sb = new StringBuilder();
             //int ar=0;
@@ -58,14 +56,14 @@ public class CatsData {
             lines = catText.split("\\r?\\n");
 
 
-            Log.i("catLines[0]", "" + lines[0]);
-            Log.i("catLines[2]", "" + lines[2]);
-            Log.i("catLines[4]", "" + lines[4]);
-            Log.i("catLines[6]", "" + lines[6]);
+            //Log.i("catLines[0]", "" + lines[0]);
+            //Log.i("catLines[2]", "" + lines[2]);
+            //Log.i("catLines[4]", "" + lines[4]);
+            //Log.i("catLines[6]", "" + lines[6]);
             //}
             String lines2[] = catText.split("\\n");
-            Log.i("lines2[0]", "" + lines2[0]);
-            Log.i("lines2[4]", "" + lines2[4]);
+            //Log.i("lines2[0]", "" + lines2[0]);
+            //Log.i("lines2[4]", "" + lines2[4]);
             String regex = "[A-Z]&&[a-z]";
             //int ncol=0;
             int ar = 0;
@@ -77,7 +75,7 @@ public class CatsData {
             //checksRows={};
             //int forEight=0;
             for (int ln = 0; ln < (lines.length); ln += 1, ar++) {
-                Log.i("ln", "" + ln);
+                //Log.i("ln", "" + ln);
                 String sg = lines[ln];
                 String[] words = sg.split("\\s+");
                 int wd = 0;
@@ -90,8 +88,8 @@ public class CatsData {
 //                        ar++;}
                 if (ar == 0) {
                     for (ln2 = 0; ln2 < (words.length) && ar == 0; ln2++) {
-                        Log.i("words[ln2]", " " + words[ln2]);
-                        Log.i("ln2=", " " + ln2);
+                        //Log.i("words[ln2]", " " + words[ln2]);
+                        //Log.i("ln2=", " " + ln2);
 
 //                            if(firstRow3<1&&firstRow==2){
 //                                firRowStr.append(words[ln2+1]);
@@ -102,9 +100,9 @@ public class CatsData {
                             firRowStr.append(words[ln2]);
                             firRowStr.append(" ");
                             firRowStr.append(words[ln2 + 1]);
-                            Log.i("firRowStr", " " + firRowStr);
-                            Log.i("2 words[ln2]", " " + words[ln2]);
-                            Log.i("2 ln2=", " " + ln2);
+                            //Log.i("firRowStr", " " + firRowStr);
+                            //Log.i("2 words[ln2]", " " + words[ln2]);
+                            //Log.i("2 ln2=", " " + ln2);
                             catArrayTB[ar][0] = firRowStr.toString();
                             firRowStr.setLength(0);
                             ++ln2;
@@ -113,19 +111,19 @@ public class CatsData {
                             continue;
                         } else {
                             //ncol+=2;
-                            Log.i("firRowStr", " " + firRowStr);
-                            Log.i("3 words[ln2]", " " + words[ln2]);
-                            Log.i("3 ln2=", " " + ln2);
+                            //Log.i("firRowStr", " " + firRowStr);
+                            //Log.i("3 words[ln2]", " " + words[ln2]);
+                            //Log.i("3 ln2=", " " + ln2);
                             catArrayTB[ar][ln2-1] = words[ln2];
                             //dogArrayTB[ar][ln2] = words[ln2];
                             firRowStr.setLength(0);
                             endFirst++;
-                            Log.i("ar=", "" + ar);
+                            //Log.i("ar=", "" + ar);
 //                                if (endFirst == 2) {
 //                                    //ar++;
 //                                    ++ar;
 //                                }
-                            Log.i("elseFR", "" + firRowStr);
+                            //Log.i("elseFR", "" + firRowStr);
                         }
                     }
                 } else {
@@ -136,9 +134,9 @@ public class CatsData {
                                 worStr = worStr.append(words[ln2]);
                                 worStr.append(" ");
                                 worStr.append(words[ln2+1]);
-                                Log.i("firRowStr", " " + firRowStr);
-                                Log.i("$0 words[ln2]", " " + words[ln2]);
-                                Log.i("$0 ln2=", " " + ln2);
+                                //Log.i("firRowStr", " " + firRowStr);
+                                //Log.i("$0 words[ln2]", " " + words[ln2]);
+                                //Log.i("$0 ln2=", " " + ln2);
                                 catArrayTB[ar][0] = worStr.toString();
                                 worStr.setLength(0);
                                 arrPlace = 2;
@@ -166,7 +164,7 @@ public class CatsData {
 
             for (int i = 0; i < catArrayTB.length; i++) {
                 for (int j = 0; j < catArrayTB[i].length; j++) {
-                    Log.i("catWholeAr", "Values [" + i + "][" + j + "] is " + catArrayTB[i][j]);
+                    //Log.i("catWholeAr", "Values [" + i + "][" + j + "] is " + catArrayTB[i][j]);
                 }
             }
 
@@ -208,17 +206,17 @@ public class CatsData {
 //                Elements e9 = e6.children();
 //                Log.i("FD e6", ""+e9);
             Elements e9 = e5.children();
-            Log.i("cat e9=", " " + e9.text());
+            //Log.i("cat e9=", " " + e9.text());
             //Elements e9 = e6.children();
-            Log.i("FDcat e9", "" + e9);
+            //Log.i("FDcat e9", "" + e9);
             int numberOfCats2 = 0;
 
 
 
-            Log.i("in Element", "paragraph of cats");
+            //Log.i("in Element", "paragraph of cats");
 
 
-            Log.i("JSoup", "Connected successfully!");
+            //Log.i("JSoup", "Connected successfully!");
 
 
         }
@@ -229,7 +227,7 @@ public class CatsData {
         catch (IOException e) {
             final StringBuilder builder = new StringBuilder();
             builder.append("Error : ").append(e.getMessage()).append("\n");
-            Log.i("HTML ERROR", "exception reading HTML");
+            //Log.i("HTML ERROR", "exception reading HTML");
         }
         //return dogTextLeft;
         return catFormattedArray2;
@@ -242,12 +240,12 @@ public class CatsData {
 
 
 
-    public com.example.david.animalsinfo.CatsAddData[] getInfo() {
-        Log.i("getInfost","getInfostarted");
-        com.example.david.animalsinfo.CatsAddData[] data = new com.example.david.animalsinfo.CatsAddData[catArrayTB.length];
+    public com.mydavidjerome.david.animalsinfo.CatsAddData[] getInfo() {
+        //Log.i("getInfost","getInfostarted");
+        com.mydavidjerome.david.animalsinfo.CatsAddData[] data = new com.mydavidjerome.david.animalsinfo.CatsAddData[catArrayTB.length];
 
         for (int i = 0; i < catArrayTB.length; i++) {
-            com.example.david.animalsinfo.CatsAddData row = new com.example.david.animalsinfo.CatsAddData();
+            com.mydavidjerome.david.animalsinfo.CatsAddData row = new com.mydavidjerome.david.animalsinfo.CatsAddData();
 //            if(checksRows[i].equals("8")){
 //
 //            }
@@ -269,8 +267,8 @@ public class CatsData {
             row.catInches = catArrayTB[i][j+4];
             row.catLifespan = catArrayTB[i][j+5];
             row.catYears = catArrayTB[i][j+6];
-            Log.i("i in for"," "+i);
-            Log.i("row.catName"," "+catArrayTB[i][j]);
+            //Log.i("i in for"," "+i);
+            //Log.i("row.catName"," "+catArrayTB[i][j]);
 
 //creates row with data
             data[i] = row;

@@ -64,30 +64,30 @@
             <!--android:layout_gravity="center"-->
         </LinearLayout>
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
 
-            <!--<Button-->
-                <!--android:id="@+id/sortName"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:text="button1" />-->
-            <!--<Button-->
-                <!--android:id="@+id/sortWeight"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:text="button2" />-->
-            <!--<Button-->
-                <!--android:id="@+id/sortHeight"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:text="button3" />-->
-            <!--<Button-->
-                <!--android:id="@+id/sortLifespan"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:text="button4" />-->
+        <!--<Button-->
+        <!--android:id="@+id/sortName"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="button1" />-->
+        <!--<Button-->
+        <!--android:id="@+id/sortWeight"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="button2" />-->
+        <!--<Button-->
+        <!--android:id="@+id/sortHeight"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="button3" />-->
+        <!--<Button-->
+        <!--android:id="@+id/sortLifespan"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="button4" />-->
 
         <!--</LinearLayout>-->
 
@@ -119,46 +119,46 @@
 
 
 </LinearLayout>
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--android:layout_width="fill_parent"-->
     <!--android:layout_height="fill_parent"-->
     <!--android:orientation="vertical"-->
     <!--android:background="@drawable/cat2">-->
 
     <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical"-->
-        <!--&gt;-->
-        <!--&lt;!&ndash;android:background="#4affffff"&ndash;&gt;-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--&gt;-->
+    <!--&lt;!&ndash;android:background="#4affffff"&ndash;&gt;-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/catsTitle"-->
-            <!--android:textSize="30sp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:textColor="#6dfffd"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="@string/catTitle" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/catsTitle"-->
+    <!--android:textSize="30sp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textColor="#6dfffd"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/catTitle" />-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/catsTextBox"-->
+    <!--<TextView-->
+    <!--android:id="@+id/catsTextBox"-->
 
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
 
-            <!--android:hint="@string/cats"-->
-            <!--android:textColor="#6dfffd"-->
-            <!--android:textSize="20sp"-->
-            <!--android:textStyle="bold" />-->
-        <!--&lt;!&ndash;android:paddingTop="10dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+    <!--android:hint="@string/cats"-->
+    <!--android:textColor="#6dfffd"-->
+    <!--android:textSize="20sp"-->
+    <!--android:textStyle="bold" />-->
+    <!--&lt;!&ndash;android:paddingTop="10dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
     <!--</LinearLayout>-->
 
 
-<!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->
     <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->

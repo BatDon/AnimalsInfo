@@ -1,4 +1,4 @@
-package com.example.david.animalsinfo;
+package com.mydavidjerome.david.animalsinfo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
