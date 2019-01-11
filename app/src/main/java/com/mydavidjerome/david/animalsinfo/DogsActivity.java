@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.LinearLayout;
@@ -12,11 +13,13 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class DogsActivity extends AppCompatActivity {
+    Integer dogWidth;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dogs);
-        new DogTableCreator().dataIntoTable();
+        //new DogTableCreator().dataIntoTable();
+
         //dataIntoTable();
         //Log.i("something", "ok");
 
@@ -26,15 +29,23 @@ public class DogsActivity extends AppCompatActivity {
         String message2 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_TWO);
         String message3 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_THREE);
         String message4 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_FOUR);
+        //String wid=intent.getStringExtra(MainActivity.EXTRA_MESSAGE_FIVE);
+        //Log.i("inDogIntent",wid+"");
+        dogWidth=Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_MESSAGE_FIVE));
         //TableLayout[] tableLayout = intent.get(MainActivity.EXTRA_MESSAGE_FIVE);
         //TableLayout tableLayout = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_FIVE);
         //change this message5 into table
         //String table[] = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE_FIVE);
         //TableLayout tableLayout = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE_FIVE);
 
+        new DogTableCreator().dataIntoTable();
+
+
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.dogTitle);
         textView.setText(message);
+
+
         //Log.i("textView", "= " + textView);
         TextView textView2 = findViewById(R.id.dogsTextBox);
         textView2.setText(message2);
@@ -42,6 +53,8 @@ public class DogsActivity extends AppCompatActivity {
         textView3.setText(message3);
         TextView textView4 = findViewById(R.id.dogsTextBox3);
         textView4.setText(message4);
+
+
     }
     //tHIS IS FOR THE DOGS TABLE
 
@@ -90,13 +103,38 @@ public class DogsActivity extends AppCompatActivity {
             int topRowMargin = 0;
             int rightRowMargin = 0;
             int bottomRowMargin = 0;
-            int textSize, smallTextSize, mediumTextSize, largeTextSize;
+  //          int textSize, smallTextSize, mediumTextSize, largeTextSize;
+
+            //10,12,16,20sp text sizes
+
+//            float mediumTextSize=(float)width*.033333333;
+//            float largeTextSize=(float)width*.023333333;
+            //int mediumTextSize=(int)Math.rint(width*0.01808785529);
+            //int largeTextSize=(int)Math.rint(width*.02583979328);
+            int mediumTextSize=(int)Math.rint(dogWidth*0.03636363636);
+            int largeTextSize=(int)Math.rint(dogWidth*0.0484848484848);
+
 
             //TableLayout tableLayout2 = (TableLayout) findViewById(R.id.dogsTable);
-            textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
-            smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
-            mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
-            largeTextSize = (int) getResources().getDimension(R.dimen.font_size_large);
+//            textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
+//            smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
+//            mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
+//            largeTextSize = (int) getResources().getDimension(R.dimen.font_size_large);
+
+//            float textSize, smallTextSize, mediumTextSize, largeTextSize;
+//
+//            textSize = .25f;
+//            smallTextSize = .3f;
+//            mediumTextSize = .4f;
+//            largeTextSize = .5f;
+
+//            sp textSize, smallTextSize, mediumTextSize, largeTextSize;
+//
+//            textSize = .25f;
+//            smallTextSize = .3f;
+//            mediumTextSize = .4f;
+//            largeTextSize = .5f;
+
 
 //        textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
 //        smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
@@ -129,6 +167,7 @@ public class DogsActivity extends AppCompatActivity {
                 layDogName.setOrientation(LinearLayout.VERTICAL);
                 layDogName.setPadding(0, 0, 0, 0);
                 //layDogWeight.setPadding(0, 10, 0, 10);
+                //layDogName.setBackgroundColor(Color.parseColor("#8F5A2E"));
                 layDogName.setBackgroundColor(Color.parseColor("#70E8D9B5"));
                 //layDogName.setBackgroundColor(Color.parseColor("#80a84908"));
                 //layDogName.setBackgroundColor(Color.parseColor("#f8f8f8"));
@@ -158,9 +197,11 @@ public class DogsActivity extends AppCompatActivity {
                 if (i == 0) {
                     tvTitle.setPadding(10, 15, 0, 5);
                     //tv2.setText(String.valueOf(row.dogWeight));
-                    tvTitle.setText("Dog Name");
+                    tvTitle.setText("Name");
+                    //tvTitle.setText("Dog Name");
                     tvTitle.setTextColor(Color.parseColor("#000000"));
-                    tvTitle.setBackgroundColor(Color.parseColor("#80171c59"));
+                    tvTitle.setBackgroundColor(Color.parseColor("#80C28357"));
+                    //tvTitle.setBackgroundColor(Color.parseColor("#80171c59"));
                     //tv.setBackgroundColor(Color.parseColor("#80a84908"));
                     //tv.setBackgroundColor(Color.parseColor("#f7f7f7"));
                 } else {
@@ -215,6 +256,9 @@ public class DogsActivity extends AppCompatActivity {
                 if (i == 0) {
                     tv2Title.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                             TableRow.LayoutParams.MATCH_PARENT));
+      /////////////////Edit text size here
+                    //tv2Title.setTextSize(TypedValue.COMPLEX_UNIT_PX, (0.4f));
+
                     tv2Title.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
                     tv2Title.setGravity(Gravity.TOP);
                 } else {
@@ -231,9 +275,10 @@ public class DogsActivity extends AppCompatActivity {
                 if (i == 0) {
                     tv2Title.setPadding(10, 15, 0, 5);
                     //tv2.setText(String.valueOf(row.dogWeight));
-                    tv2Title.setText("Dog Weight");
+                    tv2Title.setText("Weight");
                     tv2Title.setTextColor(Color.parseColor("#000000"));
-                    tv2Title.setBackgroundColor(Color.parseColor("#80171c59"));
+                    tv2Title.setBackgroundColor(Color.parseColor("#80C28357"));
+                    //tv2Title.setBackgroundColor(Color.parseColor("#80171c59"));
                 } else {
                     tv2.setBackgroundColor(Color.parseColor("#80F7B05E"));
                     tv2.setTextColor(Color.parseColor("#000000"));
@@ -292,9 +337,10 @@ public class DogsActivity extends AppCompatActivity {
 
                 if (i == 0) {
                     //tv3.setText(String.valueOf(row.dogHeight));
-                    tv3Title.setText("Dog Height");
+                    tv3Title.setText("Height");
                     tv3Title.setTextColor(Color.parseColor("#000000"));
-                    tv3Title.setBackgroundColor(Color.parseColor("#80171c59"));
+                    tv3Title.setBackgroundColor(Color.parseColor("#80C28357"));
+                    //tv3Title.setBackgroundColor(Color.parseColor("#80171c59"));
                 } else {
                     tv3.setBackgroundColor(Color.parseColor("#80F7B05E"));
                     tv3.setTextColor(Color.parseColor("#000000"));
@@ -351,11 +397,12 @@ public class DogsActivity extends AppCompatActivity {
 
                 if (i == 0) {
                     //tv4.setText(String.valueOf(row.dogLifespan));
-                    tv4Title.setText("Dog Lifespan");
+                    tv4Title.setText("Lifespan");
                     tv4Title.setTextColor(Color.parseColor("#000000"));
                     //"#E6f7f7f7"
                     //tv4.setBackgroundColor(Color.parseColor("#F2f7f7f7"));
-                    tv4Title.setBackgroundColor(Color.parseColor("#80171c59"));
+                    tv4Title.setBackgroundColor(Color.parseColor("#80C28357"));
+                    //tv4Title.setBackgroundColor(Color.parseColor("#80171c59"));
                     tv4Title.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
                 } else {
                     tv4.setBackgroundColor(Color.parseColor("#80F7B05E"));

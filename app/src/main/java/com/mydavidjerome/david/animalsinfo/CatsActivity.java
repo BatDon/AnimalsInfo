@@ -2,6 +2,7 @@ package com.mydavidjerome.david.animalsinfo;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
@@ -12,10 +13,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class CatsActivity extends AppCompatActivity {
+    Integer catWidth;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cats);
-        new CatTableCreator().dataIntoTable2();
+
         //dataIntoTable();
         //Log.i("something", "ok");
 
@@ -25,9 +27,12 @@ public class CatsActivity extends AppCompatActivity {
         String message2 = intent2.getStringExtra(MainActivity.EXTRA_MESSAGE_ELEVEN);
         String message3 = intent2.getStringExtra(MainActivity.EXTRA_MESSAGE_TWELVE);
         String message4 = intent2.getStringExtra(MainActivity.EXTRA_MESSAGE_THIRTEEN);
+        catWidth=Integer.parseInt(intent2.getStringExtra(MainActivity.EXTRA_MESSAGE_FOURTEEN));
         //change this message5 into table
         //String table[] = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE_FIVE);
         //TableLayout tableLayout = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE_FIVE);
+
+        new CatTableCreator().dataIntoTable2();
 
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.catTitle);
@@ -83,13 +88,23 @@ public class CatsActivity extends AppCompatActivity {
             int topRowMargin = 0;
             int rightRowMargin = 0;
             int bottomRowMargin = 0;
-            int textSize, smallTextSize, mediumTextSize, largeTextSize;
+            //int textSize, smallTextSize, mediumTextSize, largeTextSize;
 
+            //10,12,16,20sp text sizes
             //TableLayout tableLayout2 = (TableLayout) findViewById(R.id.catsTable);
-            textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
-            smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
-            mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
-            largeTextSize = (int) getResources().getDimension(R.dimen.font_size_large);
+//            textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
+//            smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
+//            mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
+//            largeTextSize = (int) getResources().getDimension(R.dimen.font_size_large);
+
+            int mediumTextSize=(int)Math.rint(catWidth*0.03636363636);
+//            if(mediumTextSize<12){
+//                mediumTextSize=18;
+//            }
+            int largeTextSize=(int)Math.rint(catWidth*0.0484848484848);
+//            if(largeTextSize<14){
+//                largeTextSize=22;
+//            }
 
 //        textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
 //        smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
@@ -137,6 +152,7 @@ public class CatsActivity extends AppCompatActivity {
                             TableRow.LayoutParams.MATCH_PARENT));
                     tvTitle.setGravity(Gravity.TOP);
                     tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, largeTextSize);
+                    //tvTitle.setTypeface(null, Typeface.BOLD);
                 } else {
                     tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                             TableRow.LayoutParams.MATCH_PARENT));
@@ -152,7 +168,7 @@ public class CatsActivity extends AppCompatActivity {
                 if (i == 0) {
                     tvTitle.setPadding(10, 15, 0, 5);
                     //tv2.setText(String.valueOf(row.catWeight));
-                    tvTitle.setText("Cat Name");
+                    tvTitle.setText("Name");
                     tvTitle.setTextColor(Color.parseColor("#000000"));
                     tvTitle.setBackgroundColor(Color.parseColor("#80145800"));
                     //tv.setBackgroundColor(Color.parseColor("#80a84908"));
@@ -224,7 +240,7 @@ public class CatsActivity extends AppCompatActivity {
                     tv2Title.setPadding(10, 15, 0, 5);
                     tv2Title.setGravity(Gravity.TOP);
                     //tv2.setText(String.valueOf(row.catWeight));
-                    tv2Title.setText("Cat Weight");
+                    tv2Title.setText("Weight");
                     tv2Title.setTextColor(Color.parseColor("#000000"));
                     tv2Title.setBackgroundColor(Color.parseColor("#80145800"));
                 } else {
@@ -287,7 +303,7 @@ public class CatsActivity extends AppCompatActivity {
 
                 if (i == 0) {
                     //tv3.setText(String.valueOf(row.catHeight));
-                    tv3Title.setText("Cat Height");
+                    tv3Title.setText("Height");
                     tv3Title.setGravity(Gravity.TOP);
                     tv3Title.setTextColor(Color.parseColor("#000000"));
                     tv3Title.setBackgroundColor(Color.parseColor("#80145800"));
@@ -347,7 +363,7 @@ public class CatsActivity extends AppCompatActivity {
 
                 if (i == 0) {
                     //tv4.setText(String.valueOf(row.catLifespan));
-                    tv4Title.setText("Cat Lifespan");
+                    tv4Title.setText("Lifespan");
                     tv4Title.setTextColor(Color.parseColor("#000000"));
                     //"#E6f7f7f7"
                     //tv4.setBackgroundColor(Color.parseColor("#F2f7f7f7"));

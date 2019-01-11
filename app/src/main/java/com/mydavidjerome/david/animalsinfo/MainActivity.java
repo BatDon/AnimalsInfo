@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
     Intent intent2;
     Intent intent3;
 
+    Integer x;
+    String dogHeight,catHeight,frogHeight;
+    String dogWidth,catWidth,frogWidth;
+
+
     Document doc;
 
     private Handler mainThreadHandler;
@@ -75,19 +80,23 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE_TWO = "@string/myPackage2";
     public static final String EXTRA_MESSAGE_THREE = "@string/myPackage3";
     public static final String EXTRA_MESSAGE_FOUR = "@string/myPackage4";
+    public static final String EXTRA_MESSAGE_FIVE = "@string/myPackage5";
 
     public static final String EXTRA_MESSAGE_TEN = "@string/myPackage10";
     public static final String EXTRA_MESSAGE_ELEVEN = "@string/myPackage11";
     public static final String EXTRA_MESSAGE_TWELVE = "@string/myPackage12";
     public static final String EXTRA_MESSAGE_THIRTEEN = "@string/myPackage13";
+    public static final String EXTRA_MESSAGE_FOURTEEN = "@string/myPackage14";
 
     public static final String EXTRA_MESSAGE_SIXTEEN = "@string/myPackage16";
     public static final String EXTRA_MESSAGE_SEVENTEEN = "@string/myPackage17";
     public static final String EXTRA_MESSAGE_EIGHTEEN = "@string/myPackage18";
     public static final String EXTRA_MESSAGE_NINETEEN = "@string/myPackage19";
+    public static final String EXTRA_MESSAGE_TWENTY = "@string/myPackage20";
+
 
     //THIS VARIABLE IS FOR THE DOG TABLE
-    public static final String EXTRA_MESSAGE_FIVE = "@string/myPackage5";
+    //public static final String EXTRA_MESSAGE_FIVE = "@string/myPackage5";
     TableLayout mTableLayout;
     TableLayout tableLayout2;
     TableLayout[] tableArray;
@@ -704,6 +713,9 @@ public class MainActivity extends AppCompatActivity {
                 intent1.putExtra(EXTRA_MESSAGE_TWO, dogTextLeft);
                 intent1.putExtra(EXTRA_MESSAGE_THREE,dogTextCenter);
                 intent1.putExtra(EXTRA_MESSAGE_FOUR,dogTextRight);
+                intent1.putExtra(EXTRA_MESSAGE_FIVE,dogWidth);
+
+
 
                 //This intent message is for the table
 
@@ -1036,6 +1048,7 @@ public class MainActivity extends AppCompatActivity {
                 intent2.putExtra(EXTRA_MESSAGE_ELEVEN, catTextLeft);
                 intent2.putExtra(EXTRA_MESSAGE_TWELVE, catTextCenter);
                 intent2.putExtra(EXTRA_MESSAGE_THIRTEEN, catTextRight);
+                intent2.putExtra(EXTRA_MESSAGE_FOURTEEN,catWidth);
 
                 //This intent message is for the table
 
@@ -1328,6 +1341,7 @@ public class MainActivity extends AppCompatActivity {
                 intent3.putExtra(EXTRA_MESSAGE_SEVENTEEN, frogTextLeft);
                 intent3.putExtra(EXTRA_MESSAGE_EIGHTEEN, frogTextCenter);
                 intent3.putExtra(EXTRA_MESSAGE_NINETEEN, frogTextRight);
+                intent3.putExtra(EXTRA_MESSAGE_TWENTY, frogWidth);
 
                 //This intent message is for the table
 
@@ -1345,7 +1359,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (Throwable e) {
                 final StringBuilder builder = new StringBuilder();
                 builder.append("Error : ").append(e.getMessage()).append("\n");
-                Log.i("HTML ERROR", "exception reading HTML");
+                //Log.i("HTML ERROR", "exception reading HTML");
 //                catch (IOException e) {
 //                final StringBuilder builder = new StringBuilder();
 //                builder.append("Error : ").append(e.getMessage()).append("\n");
@@ -1362,8 +1376,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onGlobalLayout() {
             View v = (View) findViewById(R.id.dogButton);
-            Integer x = v.getWidth();
+            x=v.getWidth();
+            int dogWidInt=x;
+            dogWidth=x+"";
+            //Integer x = v.getWidth();
             Integer y = v.getHeight();
+            int dogHiInt=y;
+            dogHeight=""+y;
             //show ImageView width and height
             final ImageView dogButton = (ImageView) findViewById(R.id.dogButton);
             Bitmap dogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
@@ -1373,7 +1392,11 @@ public class MainActivity extends AppCompatActivity {
 
             View vc=(View)findViewById(R.id.catButton);
             Integer x1 = vc.getWidth();
+            int catWidInt=x1;
+            catWidth=x1+"";
             Integer y1 = vc.getHeight();
+            int catHiInt=y1;
+            catHeight=y1+"";
             final ImageView catButton = (ImageView) findViewById(R.id.catButton);
             Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
             Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, x1, y1, true);
@@ -1381,13 +1404,38 @@ public class MainActivity extends AppCompatActivity {
 
             View vf=(View)findViewById(R.id.frogButton);
             Integer x2 = vf.getWidth();
+            int frogWidInt=x2;
+            frogWidth=x2+"";
             Integer y2 = vf.getHeight();
-            Log.i("Forg image","Width= "+x2.toString()+" Height= "+y2.toString());
+            int frogHiInt=y2;
+            frogHeight=y2+"";
+            //Log.i("Forg image","Width= "+x2.toString()+" Height= "+y2.toString());
             final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
             Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
             Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, x2, y2, true);
             //Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, x2, y2, true);
             frogButton.setImageBitmap(frogIcon2);
+
+//            if(dogWidInt>dogHiInt){
+//                dogWidth=dogHiInt+"";
+//
+//            }
+//            else{
+//                dogWidth=dogWidInt+"";
+//            }
+//            if(catWidInt>catHiInt){
+//                catWidth=catHiInt+"";
+//
+//            }
+//            else{
+//                catWidth=catWidInt+"";
+//            }
+//            if(frogWidInt>frogHiInt){
+//                frogWidth=frogHiInt+"";
+//            }
+//            else{
+//                catWidth=catWidInt+"";
+//            }
           }
     }
 

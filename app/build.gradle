@@ -15,8 +15,8 @@ android {
         applicationId "com.mydavidjerome.david.animalsinfo"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 1
-        versionName '1.1'
+        versionCode 102
+        versionName '1.2'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

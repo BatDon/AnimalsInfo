@@ -12,11 +12,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class FrogsActivity extends AppCompatActivity {
+    Integer frogWidth;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frogs);
-        new FrogTableCreator().dataIntoTable3();
+
         //dataIntoTable();
         //Log.i("something", "ok");
 
@@ -26,6 +27,11 @@ public class FrogsActivity extends AppCompatActivity {
         String message2 = intent3.getStringExtra(MainActivity.EXTRA_MESSAGE_SEVENTEEN);
         String message3 = intent3.getStringExtra(MainActivity.EXTRA_MESSAGE_EIGHTEEN);
         String message4 = intent3.getStringExtra(MainActivity.EXTRA_MESSAGE_NINETEEN);
+        frogWidth=Integer.parseInt(intent3.getStringExtra(MainActivity.EXTRA_MESSAGE_TWENTY));
+
+
+        new FrogTableCreator().dataIntoTable3();
+
         //change this message5 into table
         //String table[] = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE_FIVE);
         //TableLayout tableLayout = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE_FIVE);
@@ -83,13 +89,17 @@ public class FrogsActivity extends AppCompatActivity {
             int topRowMargin = 0;
             int rightRowMargin = 0;
             int bottomRowMargin = 0;
-            int textSize, smallTextSize, mediumTextSize, largeTextSize;
+            //int textSize, smallTextSize, mediumTextSize, largeTextSize;
 
+            //10,12,16,20sp text sizes
             //TableLayout tableLayout2 = (TableLayout) findViewById(R.id.frogsTable);
-            textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
-            smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
-            mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
-            largeTextSize = (int) getResources().getDimension(R.dimen.font_size_large);
+//            textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
+//            smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
+//            mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
+//            largeTextSize = (int) getResources().getDimension(R.dimen.font_size_large);
+
+            int mediumTextSize=(int)Math.rint(frogWidth*0.03636363636);
+            int largeTextSize=(int)Math.rint(frogWidth*0.0484848484848);
 
 //        textSize = (int) getResources().getDimension(R.dimen.font_size_verysmall);
 //        smallTextSize = (int) getResources().getDimension(R.dimen.font_size_small);
@@ -151,7 +161,7 @@ public class FrogsActivity extends AppCompatActivity {
                 if (i == 0) {
                     tvTitle.setPadding(10, 15, 0, 5);
                     //tv2.setText(String.valueOf(row.frogWeight));
-                    tvTitle.setText("Frog Name");
+                    tvTitle.setText("Name");
                     tvTitle.setTextColor(Color.parseColor("#000000"));
                     tvTitle.setBackgroundColor(Color.parseColor("#80726100"));
                     //tv.setBackgroundColor(Color.parseColor("#80a84908"));
@@ -224,7 +234,7 @@ public class FrogsActivity extends AppCompatActivity {
                 if (i == 0) {
                     tv2Title.setPadding(10, 15, 0, 5);
                     //tv2.setText(String.valueOf(row.frogWeight));
-                    tv2Title.setText("Frog Weight");
+                    tv2Title.setText("Weight");
                     tv2Title.setTextColor(Color.parseColor("#000000"));
                     tv2Title.setBackgroundColor(Color.parseColor("#80726100"));
                 } else {
@@ -285,7 +295,7 @@ public class FrogsActivity extends AppCompatActivity {
 
                 if (i == 0) {
                     //tv3.setText(String.valueOf(row.frogHeight));
-                    tv3Title.setText("Frog Length");
+                    tv3Title.setText("Length");
                     tv3Title.setTextColor(Color.parseColor("#000000"));
                     tv3Title.setBackgroundColor(Color.parseColor("#80726100"));
                 } else {
@@ -344,7 +354,7 @@ public class FrogsActivity extends AppCompatActivity {
 
                 if (i == 0) {
                     //tv4.setText(String.valueOf(row.frogLifespan));
-                    tv4Title.setText("Frog Lifespan");
+                    tv4Title.setText("Lifespan");
                     tv4Title.setTextColor(Color.parseColor("#000000"));
                     //"#E6f7f7f7"
                     //tv4.setBackgroundColor(Color.parseColor("#F2f7f7f7"));
