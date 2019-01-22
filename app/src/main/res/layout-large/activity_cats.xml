@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/catBackground"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/cat2">
+    <!--Add this to .java file to just change background-->
+    <!--dogBackground.getBackground().setAlpha(120)-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#aaffffff">
+        <TextView
+            android:id="@+id/catTitle"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            android:textColor="#145800"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/catTitle" />
+        <!--android:layout_gravity="center"-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/catsTextBox"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#145800"
+                android:paddingTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/cats" />
+            <!--android:textSize="21sp"-->
+            <TextView
+                android:id="@+id/catsTextBox2"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#145800"
+                android:paddingTop="10dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/cats" />
+            <!--android:textSize="21sp"-->
+            <TextView
+                android:id="@+id/catsTextBox3"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#145800"
+                android:paddingTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/cats" />
+            <!--android:textSize="21sp"-->
+            <!--android:layout_gravity="center"-->
+        </LinearLayout>
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<Button-->
+        <!--android:id="@+id/sortName"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="button1" />-->
+        <!--<Button-->
+        <!--android:id="@+id/sortWeight"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="button2" />-->
+        <!--<Button-->
+        <!--android:id="@+id/sortHeight"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="button3" />-->
+        <!--<Button-->
+        <!--android:id="@+id/sortLifespan"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="button4" />-->
+
+        <!--</LinearLayout>-->
+
+        <ScrollView
+            android:id="@+id/scrollCats"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TableLayout
+                android:id="@+id/catsTable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="0dp"
+                android:stretchColumns="*"
+                >
+            </TableLayout>
+
+        </ScrollView>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:background="@drawable/cat2">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--&gt;-->
+    <!--&lt;!&ndash;android:background="#4affffff"&ndash;&gt;-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/catsTitle"-->
+    <!--android:textSize="30sp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textColor="#6dfffd"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/catTitle" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/catsTextBox"-->
+
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--android:hint="@string/cats"-->
+    <!--android:textColor="#6dfffd"-->
+    <!--android:textSize="20sp"-->
+    <!--android:textStyle="bold" />-->
+    <!--&lt;!&ndash;android:paddingTop="10dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+    <!--</LinearLayout>-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/linear_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--tools:context=".CatLayout" />-->
