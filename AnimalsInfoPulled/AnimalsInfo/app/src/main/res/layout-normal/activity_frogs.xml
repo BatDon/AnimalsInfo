@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frogBackground"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/frog2">
+    <!--Add this to .java file to just change background-->
+    <!--dogBackground.getBackground().setAlpha(120)-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#4affffff">
+        <TextView
+            android:id="@+id/frogTitle"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="#4d4100"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/frogTitle" />
+        <!--android:layout_gravity="center"-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/frogsTextBox"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#4d4100"
+                android:paddingTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/frogs" />
+            <!--android:textSize="17sp"-->
+            <TextView
+                android:id="@+id/frogsTextBox2"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#4d4100"
+                android:paddingTop="10dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/frogs" />
+            <!--android:textSize="21sp"-->
+            <TextView
+                android:id="@+id/frogsTextBox3"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#4d4100"
+                android:paddingTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/frogs" />
+            <!--android:textSize="21sp"-->
+            <!--android:layout_gravity="center"-->
+        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<Button-->
+                <!--android:id="@+id/sortName"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:text="button1" />-->
+            <!--<Button-->
+                <!--android:id="@+id/sortWeight"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:text="button2" />-->
+            <!--<Button-->
+                <!--android:id="@+id/sortHeight"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:text="button3" />-->
+            <!--<Button-->
+                <!--android:id="@+id/sortLifespan"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:text="button4" />-->
+
+        <!--</LinearLayout>-->
+
+        <ScrollView
+            android:id="@+id/scrollFrogs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TableLayout
+                android:id="@+id/frogsTable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="0dp"
+                android:stretchColumns="*"
+                >
+            </TableLayout>
+
+        </ScrollView>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:background="@drawable/frog2">-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical"-->
+        <!--android:background="#60ffffff">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/frogTitle"-->
+            <!--android:textSize="30sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="#145800"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="@string/frogTitle" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/frogsTextBox"-->
+
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="#145800"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:hint="@string/frogs"/>-->
+        <!--&lt;!&ndash;android:paddingTop="10sp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+
+    <!--</LinearLayout>-->
+
+
+<!--</LinearLayout>-->
