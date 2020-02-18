@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -24,7 +25,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+
+import static com.mydavidjerome.david.animalsinfo.GetHandlerThread.DOGS_TOP_TASK;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     Document doc;
 
-    private Handler mainThreadHandler;
+
 
     private MyWorkerThread workerThread = null;
     private MyWorkerThread2 workerThread2 = null;
@@ -94,7 +98,16 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE_NINETEEN = "@string/myPackage19";
     public static final String EXTRA_MESSAGE_TWENTY = "@string/myPackage20";
 
+    public static final String CONTEXT_PASSING = "@string/contextPassing";
+    public static final String LEFT_COLUMN ="@string/leftColumn";
+    public static final String CENTER_COLUMN ="@string/centerColumn";
+    public static final String RIGHT_COLUMN ="@string/rightColumn";
 
+
+
+    int mainLeftColumn;
+    int mainCenterColumn;
+    int mainRightColumn;
     //THIS VARIABLE IS FOR THE DOG TABLE
     //public static final String EXTRA_MESSAGE_FIVE = "@string/myPackage5";
     TableLayout mTableLayout;
@@ -102,126 +115,141 @@ public class MainActivity extends AppCompatActivity {
     TableLayout[] tableArray;
 
 
+    private Handler mainThreadHandler;
+
+
+    private static final String TAG = "MainActivity";
+
+    private GetHandlerThread handlerThread = new GetHandlerThread();
+
+    private Object token = new Object();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainx720);
-        //Log.i("onCreateMethod","0000000000000000000000");
-        //String url2 = getResources().getString(R.string.url2);
+
+        handlerThread.start();
+        mainThreadHandler=new Handler();
+
+        homeViewInit();
 
 
 
-        //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
-        //mTableLayout.setStretchAllColumns(true);
+        //backgroundWork();
+    }
 
-        //DogTableCreator dtc=new DogTableCreator();
-        //dtc.dataIntoTable();
-
-//        View vf=(View)findViewById(R.id.frogButton);
-//        Integer x2 = vf.getWidth();
-//        Integer y2 = vf.getHeight();
-//        Log.i("Forg image","Width= "+(x2.toString())+" Height= "+(y2.toString());
-//        final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
-//        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
-//        Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, x2, y2, true);
-//        frogButton.setImageBitmap(frogIcon2);
-
-
-
+    public void homeViewInit(){
         ImageView v = (ImageView) findViewById(R.id.dogButton);
 
         v.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalListenerClass());
+    }
 
 
-
-        //dataIntoTable();
-
-        // Create and start the worker thread.
-        workerThread = new MyWorkerThread();
-        workerThread.start();
-        //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
-
-        workerThread2=new MyWorkerThread2();
-        workerThread2.start();
-
-        // Get run task buttons.
-        ImageButton runTaskOneButton = findViewById(R.id.dogButton);
-
-        ImageButton runTaskTwoButton = findViewById(R.id.catButton);
-
-        ImageButton runTaskThreeButton = findViewById(R.id.frogButton);
-
-//        try{
-//            for(int i=5 ; i>0 ; i--){
-//                //System.out.println("main thread: " + i);
-//                Thread.sleep(2000);
-//
-//            }
-//        }
-//        catch(InterruptedException e){
-//            Log.i("sleep","main thread interrupted");
-//        }
-
-//        try{
-//            Thread.sleep(3000);
-//        }
-//        catch (IOException e) {
-//            final StringBuilder builder = new StringBuilder();
-//            builder.append("Error : ").append(e.getMessage()).append("\n");
-//            Log.i("SLEEP ER", "exception main thread sleeping");
-//        }
-
-
-
-
-
-        // Set on click listener to each button.
-        runTaskOneButton.setOnClickListener(new View.OnClickListener()
-
-                //When button is clicked the msg.what is given a value
-        {
-            @Override
-            public void onClick(View view) {
-                // When click this button, create a message object
-                Message msg = new Message();
-                //Log.i("runTaskOneButton","AAAAAAAAAAAAAAAAAAAA");
-                msg.what = MAIN_THREAD_TASK_1;
-                // Use worker thread message Handler to put message into worker thread message queue.
-                workerThread.workerThreadHandler.sendMessage(msg);
-                //workerThread2.workerThreadHandler2.sendMessage(msg);
-            }
-        });
-
-        // Please see comments for runTaskOneButton.
-        runTaskTwoButton.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View view) {
-
-                Message msg = new Message();
-                msg.what = MAIN_THREAD_TASK_2;
-                //Log.i("runTaskTwoButton","BBBBBBBBBBBBBBBBBBBBB");
-                workerThread.workerThreadHandler.sendMessage(msg);
-            }
-        });
-        runTaskThreeButton.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View view) {
-                Message msg = new Message();
-                msg.what = MAIN_THREAD_TASK_3;
-                //Log.i("runTaskThreeButton","CCCCCCCCCCCCCCCCCCCC");
-                workerThread.workerThreadHandler.sendMessage(msg);
-            }
-        });
-
-
+    public void handleMessage(Bundle bundle) {
 
     }
+
+
+    public void dogButtonClicked(View v) {
+        Log.i("dogButtonClicked","buttoncliecked");
+        Message dogMsg = Message.obtain(handlerThread.getHandler());
+        dogMsg.what = DOGS_TOP_TASK;
+        dogMsg.arg1 = 23;
+
+        Context appContext=GlobalApplication.getAppContext();
+//
+        AbstractMap.SimpleEntry<String, Context> entry = new AbstractMap.SimpleEntry<>(CONTEXT_PASSING, appContext);
+//        Bundle bundle = new Bundle();
+//        bundle.p(CONTEXT_PASSING, appContext);
+//        msg.setData(bundle);
+
+        dogMsg.obj=entry;
+        //dogMsg.obj = "Obj String";
+        //msg.setData();
+        Log.i("dogButtonClicked","before send to target");
+
+//        handlerThread.getHandler().sendMessage(dogMsg);
+
+        dogMsg.sendToTarget();
+    }
+
+    protected void onDestroy(){
+        super.onDestroy();
+        handlerThread.quit();
+
+    }
+
+
+
+
+
+        public void backgroundWork () {
+
+
+
+
+            //dataIntoTable();
+
+            // Create and start the worker thread.
+            workerThread = new MyWorkerThread();
+            workerThread.start();
+            //mTableLayout = (TableLayout) findViewById(R.id.dogsTable);
+
+            workerThread2 = new MyWorkerThread2();
+            workerThread2.start();
+
+            // Get run task buttons.
+            ImageButton runTaskOneButton = findViewById(R.id.dogButton);
+
+            ImageButton runTaskTwoButton = findViewById(R.id.catButton);
+
+            ImageButton runTaskThreeButton = findViewById(R.id.frogButton);
+
+
+            // Set on click listener to each button.
+            runTaskOneButton.setOnClickListener(new View.OnClickListener()
+
+                    //When button is clicked the msg.what is given a value
+            {
+                @Override
+                public void onClick(View view) {
+                    // When click this button, create a message object
+                    Message msg = new Message();
+                    //Log.i("runTaskOneButton","AAAAAAAAAAAAAAAAAAAA");
+                    msg.what = MAIN_THREAD_TASK_1;
+                    // Use worker thread message Handler to put message into worker thread message queue.
+                    workerThread.workerThreadHandler.sendMessage(msg);
+                    //workerThread2.workerThreadHandler2.sendMessage(msg);
+                }
+            });
+
+            // Please see comments for runTaskOneButton.
+            runTaskTwoButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Message msg = new Message();
+                    msg.what = MAIN_THREAD_TASK_2;
+                    //Log.i("runTaskTwoButton","BBBBBBBBBBBBBBBBBBBBB");
+                    workerThread.workerThreadHandler.sendMessage(msg);
+                }
+            });
+            runTaskThreeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Message msg = new Message();
+                    msg.what = MAIN_THREAD_TASK_3;
+                    //Log.i("runTaskThreeButton","CCCCCCCCCCCCCCCCCCCC");
+                    workerThread.workerThreadHandler.sendMessage(msg);
+                }
+            });
+
+
+        }
+
 
 
     //This sends the information to the Activity to be viewed
@@ -290,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
 
             //Creates a readable HTML document by calling FormatDocument()
             ConnectionClass connection=new ConnectionClass();
-            connection.getDoc();
+ //COMMENTED OUT 2/17           // connection.getDoc();
 
             FormatDocument formattedDoc = new FormatDocument();
 //            dogTextLeft = formattedDoc.returnString();
@@ -334,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
 //                            ImageView v = (ImageView) findViewById(R.id.catButton);
 //                            String x = Integer.toString(v.getWidth());
 //                            String y = Integer.toString(v.getHeight());
-//                            Log.i("cat x and y","x= "+x+" y= "+y);
+//                            Log.i("cat_home_page x and y","x= "+x+" y= "+y);
                     } else if (msg.what == MAIN_THREAD_TASK_3) {
                         // If quit child thread looper button is clicked.
                         ribbiting.start();
@@ -343,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
 //                        ImageView v = (ImageView) findViewById(R.id.frogButton);
 //                        String x = Integer.toString(v.getWidth());
 //                        String y = Integer.toString(v.getHeight());
-//                        Log.i("frog x and y","x= "+x+" y= "+y);
+//                        Log.i("frog_home_page.png x and y","x= "+x+" y= "+y);
                         //taskStatusTextView.setText(frogText);
                     }
 
@@ -518,26 +546,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private class ConnectionClass {
-
-        private Document getDoc() {
-            try {
-
-
-                String url = getResources().getString(R.string.url);
-                //String url = "@string/url";
-                doc = Jsoup.connect(url).get();
-
-            } catch (IOException e) {
-                final StringBuilder builder = new StringBuilder();
-                builder.append("Error : ").append(e.getMessage()).append("\n");
-                //Log.i("HTML ERROR", "exception reading HTML");
-            }
-            return doc;
-
-        }
-
-    }
+//    public class ConnectionClass {
+//
+//        private Document getDoc() {
+//            try {
+//
+//
+//                String url = getResources().getString(R.string.url);
+//                //String url = "@string/url";
+//                doc = Jsoup.connect(url).get();
+//
+//            } catch (IOException e) {
+//                final StringBuilder builder = new StringBuilder();
+//                builder.append("Error : ").append(e.getMessage()).append("\n");
+//                //Log.i("HTML ERROR", "exception reading HTML");
+//            }
+//            return doc;
+//
+//        }
+//
+//    }
 
 
 
@@ -568,7 +596,7 @@ public class MainActivity extends AppCompatActivity {
                 Element e5 = doc.select("div.entry-content").first();
 
                 Element e6 = e5.child(1);
-                //Log.i("dog e6="," "+e6);
+                //Log.i("dogHomePage e6="," "+e6);
                 Elements e9 = e6.children();
                 //Element e7 = e5.child(2);
                 //Element e8 = e5.child(3);
@@ -753,13 +781,13 @@ public class MainActivity extends AppCompatActivity {
                 Elements nes =doc.select("body");
 
 //                Element e6 = e5.child(1);
-//                Log.i("dog e6="," "+e6);
+//                Log.i("dogHomePage e6="," "+e6);
 //                Element e6 = e5.child(1);
-//                Log.i("dog e6="," "+e6);
+//                Log.i("dogHomePage e6="," "+e6);
 //                Elements e9 = e6.children();
 //                Log.i("FD e6", ""+e9);
                 Elements e9 = e5.children();
-                //Log.i("dog e9="," "+e9);
+                //Log.i("dogHomePage e9="," "+e9);
                 //Elements e9 = e6.children();
                 //Log.i("FD e6", ""+e9);
                 int numberOfDogs2 = 0;
@@ -1385,7 +1413,7 @@ public class MainActivity extends AppCompatActivity {
             dogHeight=""+y;
             //show ImageView width and height
             final ImageView dogButton = (ImageView) findViewById(R.id.dogButton);
-            Bitmap dogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
+            Bitmap dogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog_home_page);
             Bitmap dogIcon2 = Bitmap.createScaledBitmap(dogIcon, x, y, true);
             dogButton.setImageBitmap(dogIcon2);
 
@@ -1398,7 +1426,7 @@ public class MainActivity extends AppCompatActivity {
             int catHiInt=y1;
             catHeight=y1+"";
             final ImageView catButton = (ImageView) findViewById(R.id.catButton);
-            Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
+            Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat_home_page);
             Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, x1, y1, true);
             catButton.setImageBitmap(catIcon2);
 
@@ -1411,7 +1439,7 @@ public class MainActivity extends AppCompatActivity {
             frogHeight=y2+"";
             //Log.i("Forg image","Width= "+x2.toString()+" Height= "+y2.toString());
             final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
-            Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
+            Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog_home_page);
             Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, x2, y2, true);
             //Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, x2, y2, true);
             frogButton.setImageBitmap(frogIcon2);
@@ -1444,13 +1472,13 @@ public class MainActivity extends AppCompatActivity {
 
             //final ImageView catButton = (ImageView) findViewById(R.id.catButton);
 
-//        Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
+//        Bitmap catIcon = BitmapFactory.decodeResource(getResources(), R.drawable.cat_home_page);
 //        Bitmap catIcon2 = Bitmap.createScaledBitmap(catIcon, 774, 348, true);
 ////        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
 //        catButton.setImageBitmap(catIcon2);
 
 //        final ImageView frogButton = (ImageView) findViewById(R.id.frogButton);
-//        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog);
+//        Bitmap frogIcon = BitmapFactory.decodeResource(getResources(), R.drawable.frog_home_page.png);
 //        Bitmap frogIcon2 = Bitmap.createScaledBitmap(frogIcon, 774, 348, true);
 ////        Bitmap catIcon2 = Bitmap.createScaledBitmap(dogIcon, newWidth, newHeight, true);
 //        frogButton.setImageBitmap(frogI

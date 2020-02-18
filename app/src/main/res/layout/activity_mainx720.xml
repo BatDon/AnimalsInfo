@@ -1,76 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#020ffd"
-    android:orientation="vertical">
+    android:background="#020ffd">
 
 
     <TextView
-        android:id="@+id/somethingText"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:text="@string/animalChoice"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:text="@string/animalChoice"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#020ffd"
-        android:id="@+id/animalBox">
+
+    <!--android:src="@drawable/dog"-->
+    <!--android:scaleType="centerCrop"-->
+
+    <!--android:scaleType="centerCrop"-->
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-        <!--android:background="#020ffd"-->
+        android:layout_height="0dp"
+        android:id="@+id/dogFrame"
+        app:layout_constraintBottom_toTopOf="@+id/catFrame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
 
         <ImageButton
-            android:src="@drawable/dog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/dogButton"
-             />
-        <!--android:src="@drawable/dog"-->
-        <!--android:scaleType="centerCrop"-->
-    </FrameLayout>
-        <!--android:scaleType="centerCrop"-->
-
-        <FrameLayout
+            android:onClick="dogButtonClicked"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:src="@drawable/dog_home_page"
+            android:contentDescription="@string/dogImageDesc" />
+    </FrameLayout>
 
-            android:layout_weight="1">
-            <!--android:background="#020ffd"-->
+    <FrameLayout
+        android:id="@+id/catFrame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/frogFrame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dogFrame">
 
         <ImageButton
 
             android:id="@+id/catButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/cat" />
-        </FrameLayout>
+            android:contentDescription="@string/catImageDesc"
+            android:src="@drawable/cat_home_page" />
+    </FrameLayout>
 
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/frogFrame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catFrame">
 
-            android:layout_weight="1">
-            <!--android:background="#020ffd"-->
         <ImageButton
 
             android:id="@+id/frogButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/frog" />
-        </FrameLayout>
-    </LinearLayout>
+            android:src="@drawable/frog_home_page"
+            android:contentDescription="@string/frogImageDesc" />
+    </FrameLayout>
+
 
     <!--<TextView
         android:layout_width="wrap_content"
@@ -82,4 +88,4 @@
         android:textStyle="bold" />-->
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

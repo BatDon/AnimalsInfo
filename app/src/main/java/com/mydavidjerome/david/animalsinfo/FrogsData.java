@@ -197,13 +197,13 @@ public class FrogsData {
 //                }
 
 //                Element e6 = e5.child(1);
-//                Log.i("dog e6="," "+e6);
+//                Log.i("dogHomePage e6="," "+e6);
 //                Element e6 = e5.child(1);
-//                Log.i("dog e6="," "+e6);
+//                Log.i("dogHomePage e6="," "+e6);
 //                Elements e9 = e6.children();
 //                Log.i("FD e6", ""+e9);
             Elements e9 = e5.children();
-            //Log.i("dog e9=", " " + e9.text());
+            //Log.i("dogHomePage e9=", " " + e9.text());
             //Elements e9 = e6.children();
             //Log.i("FD e9", "" + e9);
             int numberOfFrogs2 = 0;

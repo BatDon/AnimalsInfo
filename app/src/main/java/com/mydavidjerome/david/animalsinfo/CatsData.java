@@ -200,13 +200,13 @@ public class CatsData {
 //                }
 
 //                Element e6 = e5.child(1);
-//                Log.i("dog e6="," "+e6);
+//                Log.i("dogHomePage e6="," "+e6);
 //                Element e6 = e5.child(1);
-//                Log.i("dog e6="," "+e6);
+//                Log.i("dogHomePage e6="," "+e6);
 //                Elements e9 = e6.children();
 //                Log.i("FD e6", ""+e9);
             Elements e9 = e5.children();
-            //Log.i("cat e9=", " " + e9.text());
+            //Log.i("cat_home_page e9=", " " + e9.text());
             //Elements e9 = e6.children();
             //Log.i("FDcat e9", "" + e9);
             int numberOfCats2 = 0;

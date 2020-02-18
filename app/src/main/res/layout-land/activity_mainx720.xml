@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/somethingText"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/dogButton"
-            android:src="@drawable/dog" />
+            android:src="@drawable/dog_home_page" />
 
         <!--android:scaleType="centerCrop"-->
     </FrameLayout>
@@ -69,7 +69,7 @@
             android:id="@+id/catButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/cat" />
+            android:src="@drawable/cat_home_page" />
         </FrameLayout>
 
 
@@ -83,7 +83,7 @@
             android:id="@+id/frogButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/frog" />
+            android:src="@drawable/frog_home_page" />
         </FrameLayout>
     </LinearLayout>
 
